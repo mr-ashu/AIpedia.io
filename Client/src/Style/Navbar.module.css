@@ -1,0 +1,53 @@
+.navbar{
+  
+    position: fixed;
+    width: 100%;
+    left:0;
+    top:0;
+    bottom: 0;
+    z-index: 100;
+  
+
+}
+.iconbtn {
+  display: none;
+}
+.ltext {
+  display: block;
+}
+
+.inputbox {
+  display: none;
+}
+.linputbox {
+  display: block;
+}
+ 
+
+@media screen and (max-width: 1000px) {
+  .ltext {
+    display: none;
+  }
+  .iconbtn {
+    display: block;
+  }
+  .inputbox {
+    display: block;
+  }
+  .linputbox {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+   
+  .snav {
+    display: none;
+  }
+  .inputbox {
+    display: none;
+  }
+  .linputbox {
+    display: none;
+  }
+}

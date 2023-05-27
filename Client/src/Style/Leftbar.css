@@ -1,0 +1,55 @@
+ .sidebar{
+    position: sticky;
+     width: fit-content;
+     min-width: 50px;
+     border-right: 1px solid #CCCCCC;
+    height: 100vh;
+  
+    padding: 7px;
+    z-index: 10;
+    overflow-y: scroll;
+    
+    
+ }
+ .scroll{
+    
+    height:100vh;
+   
+ }
+ .sidebar::-webkit-scrollbar{
+    display: none;
+ }
+
+ .innerbox{
+
+   padding: 1px;
+  
+   max-width:280px ;
+   
+   margin: auto;
+   margin-top: 14px;
+   border-radius: 3px;
+   display: flex;
+   justify-content: space-between;
+ 
+   gap:10px;
+   line-height: 1;
+
+ }
+
+
+
+ @media screen and (max-width: 1000px) {
+  .innerbox{
+ 
+   gap:5px;
+   line-height: 1;
+
+ }
+ }
+ 
+ @media screen and (max-width: 450px) {
+   .sidebar{
+       display: none;
+   }
+ }

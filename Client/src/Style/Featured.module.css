@@ -1,0 +1,15 @@
+
+.featured{
+    padding: 5px;
+     width:280px;
+}
+@media screen and (max-width: 1000px) {
+    .featured{
+        display: none;
+    }
+  }
+  
+  @media screen and (max-width: 450px) {
+   
+  
+  }

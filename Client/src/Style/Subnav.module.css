@@ -1,0 +1,35 @@
+.subnav {
+  width: 100%;
+  position:sticky;
+  border-bottom: 1px solid #CCCCCC;
+  align-items: content;
+  padding: 8px;
+  font-family: "Segoe ui";
+  z-index: 90;
+}
+
+.menugrid {
+  display: grid;
+  grid-auto-flow: row;
+
+  grid-template-columns: repeat(5, 1fr);
+  overflow-y: scroll;
+
+  text-align: left;
+  gap: 0px;
+  padding: 25px;
+  
+}
+
+.sortbtn {
+  background-color: red;
+}
+
+@media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 450px) {
+  .subnav {
+    display: none;
+  }
+}
