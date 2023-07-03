@@ -1,0 +1,76 @@
+.container {
+    height: auto;
+    width: 400px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 25px;
+    margin: auto;
+    background-color: rgb(22, 26, 31);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 50px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .updateImageInput{
+    width: 100%;
+  }
+  .inputfile{
+    /* border: 2px solid red; */
+    display: inline-block;
+    height: 35px;
+    padding: 0px 10px ;
+  }
+  .updateImage{
+    /* border:2px solid red; */
+    height: 200px;
+    width: 100%;
+  }
+  .loginForm {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .updateInput {
+    height: 70px;
+    width: 100%;
+  }
+  .updateText {
+    height: 140px;
+    width: 100%;
+  }
+  
+  .inputUpdate {
+    height: 50%;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    text-align: center;
+    background-color: rgb(66, 66, 66);
+    color: rgb(193, 187, 175);
+  }
+  .tools {
+    height: 100px;
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+    background-color: rgb(66, 66, 66);
+  }
+  .updateButton {
+    background-color: rgb(10, 102, 194);
+    height: 40px;
+    width: 60%;
+    margin-top: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: white;
+  }
+  

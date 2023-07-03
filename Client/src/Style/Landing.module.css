@@ -1,5 +1,28 @@
-.landingpage{
-    height:900px
+/*  
+  ml={open ? "160px" : "64.5px"} */
+
+
+
+.openslide {
+  margin-left: 165px;
+
+}
+.closeslide {
+  margin-left: 63.5px;
+ 
 }
 
- 
+
+
+@media screen and (max-width: 450px) {
+  .openslide {
+    margin-left: 0px;
+  }
+  .closeslide {
+    margin-left: 0px;
+  }
+
+  .slide{
+    display: none;
+  }
+}

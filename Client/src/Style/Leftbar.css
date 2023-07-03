@@ -1,55 +1,58 @@
- .sidebar{
-    position: sticky;
-     width: fit-content;
-     min-width: 50px;
-     border-right: 1px solid #CCCCCC;
-    height: 100vh;
+.sidebar {
+  position:fixed;
+  left: 0;
+ 
+ 
+  bottom: 0;
+  box-sizing: border-box;
+  border-right: 1px solid #E6E6E6 ;
+  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.scroll{
+   height:100%;
+   margin-top: 120px;
   
-    padding: 7px;
-    z-index: 10;
-    overflow-y: scroll;
-    
-    
- }
- .scroll{
-    
-    height:100vh;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.innerbox {
+ 
+  height: 36px;
    
- }
- .sidebar::-webkit-scrollbar{
+ 
+ 
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+ line-height: 1;
+ 
+  
+}
+
+.itext {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+@media screen and (max-width: 1000px) {
+  .innerbox {
+    gap: 5px;
+    line-height: 1;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .sidebar {
     display: none;
- }
-
- .innerbox{
-
-   padding: 1px;
-  
-   max-width:280px ;
-   
-   margin: auto;
-   margin-top: 14px;
-   border-radius: 3px;
-   display: flex;
-   justify-content: space-between;
- 
-   gap:10px;
-   line-height: 1;
-
- }
-
-
-
- @media screen and (max-width: 1000px) {
-  .innerbox{
- 
-   gap:5px;
-   line-height: 1;
-
- }
- }
- 
- @media screen and (max-width: 450px) {
-   .sidebar{
-       display: none;
-   }
- }
+  }
+}

@@ -1,0 +1,13 @@
+.icon {
+    font-size: 10px;
+    border-radius: 50px;
+  }
+  .icon:hover {
+    font-size: 18px;
+  }
+  .Fbtn {
+    border: 1px solid red;
+  }
+  @media all and ((min-width: 100px) and (max-width: 830px)) {
+  }
+  

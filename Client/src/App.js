@@ -1,8 +1,13 @@
 import { Navbar } from "./Components/Navbar";
- 
+import "./App.css"
 import { Router } from "./Router";
-import MiniDrawer from "./Components/LeftBar";
+ 
 import { Box, useColorModeValue } from "@chakra-ui/react";
+ 
+import { Footer } from "./Components/Home/Footer";
+import Register from "./Components/dummy";
+ 
+ 
  
  
  
@@ -11,16 +16,27 @@ import { Box, useColorModeValue } from "@chakra-ui/react";
 function App() {
  
   return (
-    <>
-       <Navbar/>
-       <Box bg={useColorModeValue("white","#464444")}>
+    <Box  fontFamily="Segoe UI" >
+
+
+        <Navbar/>
+      
+       <Box bg={useColorModeValue("white","#383838")} minH="100vh" >
        <Router/>
-       </Box>
+
+       <Footer/>
+       </Box> 
+
+
+
+       {/* <Register/> */}
+
+  
+      
     
-   
        
          
-    </>
+    </Box>
   );
 }
 

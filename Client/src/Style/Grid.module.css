@@ -1,48 +1,95 @@
  
 
 
-.grid{
-    overflow-y: scroll;
-    height: 100vh;
+ 
+ 
+.gridbox {
+
+   
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+ 
+  margin: auto;
+  
 }
 
-.grid::-webkit-scrollbar{
-    display: none;
+.image {
+  height: 146px;
+  width: 100%;
 }
-.gridbox{
+.icon {
+  position: relative;
+  bottom: 30px;
+  width: 100%;
+  margin: auto;
+}
+
+.savebtn {
+  width: 113.61px;
+}
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.dec {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+.modal{
+  overflow-y:auto;
+ 
+  width:80%;
+ 
+  margin: auto;
+  margin-top:70px;
+}
+
+.modal::-webkit-scrollbar{
+  display: none;
+}
+ 
+@media (max-width: 1025px) {
+  
+
+  .gridbox {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:20px;
-    width: 100%;
-    margin: auto;
-     
-
-}
-
-.icon{
-    position: relative;
-    bottom: 50px;
-    width: 98%;
-    margin: auto;
-}
-
-
-
-@media screen and (max-width: 1000px) {
-    .gridbox{
-        
-        grid-template-columns: repeat(2,1fr);
-    
-    
-    }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+   
+    margin:auto;
   }
-  
-  @media screen and (max-width: 450px) {
-    .gridbox{
-        
-        grid-template-columns: repeat(1,1fr);
-         
+
+
+  .modal{
+ 
+   
+    width:90%;
+   
     
-    }
-  
   }
+}
+ 
+
+@media screen and (max-width: 450px) {
+  .gridbox {
+    grid-template-columns: repeat(1, 1fr);
+    margin: auto;
+  }
+  .savebtn {
+    width: 113.61px;
+  }
+
+    
+}

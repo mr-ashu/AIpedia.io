@@ -1,0 +1,100 @@
+*{
+    font-family:'Segoe UI';
+}
+
+.toolbox{
+   display: flex;
+}
+.left{
+   width: 25%;
+}
+
+.right{
+    width: 70%;
+}
+
+.tnav{
+    display: flex;
+}
+
+.rtool{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+ 
+
+.sbag{
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type:x-mandatory ;
+   
+   
+  }
+  
+  .sbag::-webkit-scrollbar {
+    display: none;
+  }
+ 
+  .rating{
+    display: flex;
+    justify-content:space-between;
+  }
+ 
+@media screen and (max-width: 920px) {
+ 
+    .toolbox{
+        display: flex;
+     }
+     .left{
+        width: 30%;
+     }
+     
+     .right{
+         width: 75%;
+     }
+ 
+
+
+}
+
+@media screen and (max-width: 450px) {
+    .toolbox{
+        display: grid;
+
+     }
+     .left{
+        width: 100%;
+     }
+     
+     .right{
+         width: 100%;
+      margin-top: 20px;
+     }
+     .tnav{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+   
+    .rtool{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .rating{
+        display: grid;
+         
+      }
+
+      .rating>Button{
+         margin-top: 20px;
+         
+      }
+
+      .rating>div{
+        margin-top: 10px;
+        
+     }
+
+}

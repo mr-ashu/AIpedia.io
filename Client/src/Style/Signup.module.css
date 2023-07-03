@@ -1,0 +1,23 @@
+.signupform{
+    width: 45%;
+}
+
+
+.gbtn{
+    padding:14px 106px 14px 106px
+}
+
+@media screen and (max-width: 1025px) {
+    .signupform{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .signupform{
+        width: 90%;
+    }
+    .gbtn{
+        padding:10px 50px 10px 50px
+    }
+}
