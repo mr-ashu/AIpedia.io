@@ -22,7 +22,15 @@ const dataSchema = new mongoose.Schema(
     works_with: [{ type: String, trim: true }],
     others_features: [{ type: String, trim: true }],
     social_media: [{ type: String, trim: true }],
-    paid: Boolean
+    paid: Boolean,
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    comment: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     versionKey: false,
