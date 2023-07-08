@@ -9,7 +9,9 @@ const getScreenshot = require("../../functions/getScreenshot");
 //@route -> /data/add
 const addDataController = asyncHandler(async (req, res) => {
   try {
+    
     const jsonData = await convertCSVtoJSON(req.file.path);
+   
 
     if (!jsonData) {
       return res
@@ -17,19 +19,26 @@ const addDataController = asyncHandler(async (req, res) => {
         .send({ error: "something went wrong with parsing csv" });
     }
 
+    // console.log(jsonData);
+    // return res.end()
+
     const modifiedJsonData = modifyJsonData(jsonData);
 
-    const { status, message } = validateObjectKeys(modifiedJsonData[0]);
+   
 
-    if (!status) {
-      deleteCSVfile(req.file.path);
-      return res.status(400).send({ error: message });
-    }
+    // const { status, message } = validateObjectKeys(modifiedJsonData[0]);
 
-    const dataWithImage = await getScreenshot(modifiedJsonData);
+    // if (!status) {
+    //   deleteCSVfile(req.file.path);
+    //   return res.status(400).send({ error: message });
+    // }
 
+    // const dataWithImage = await getScreenshot(modifiedJsonData);
+  //  p
+  // return res.send({modifiedJsonData, av : modifiedJsonData.length});
+  // return res.send(modifiedJsonData)
 
-    const uploadCSV = await dataModel.insertMany(dataWithImage);
+    const uploadCSV = await dataModel.insertMany(modifiedJsonData);
 
     if (!uploadCSV) {
       deleteCSVfile(req.file.path);
@@ -44,7 +53,7 @@ const addDataController = asyncHandler(async (req, res) => {
     console.log(error.stack);
     return res
       .status(500)
-      .send({ error });
+      .send({ error, stack : error.stack });
   }
 });
 

@@ -127,10 +127,11 @@ export const Navbar = () => {
 
     const handleOnFocus = (e) => {
 
-        setSopen(!sopen);
+        setSopen(true);
     };
 
     const handleOnBlur = () => {
+        console.log("hello");
         setSopen(false);
     };
 
@@ -147,8 +148,8 @@ export const Navbar = () => {
                                         <Search2Icon color='gray.300' />
                                     </InputLeftElement>
                                     <Input
-                                        onClick={handleOnFocus}
-                                    
+                                        onFocus={handleOnFocus}
+                                        onBlur={handleOnBlur}
                                         onChange={(e) => setInput(e.target.value)} bg={useColorModeValue("white", "#464444")} _placeholder={{ color: "grey" }} color={useColorModeValue("black", "white")} borderRadius="3px" placeholder='Search' />
                                     <InputRightElement  >
                                         <Switch size='sm' />
@@ -169,7 +170,8 @@ export const Navbar = () => {
                                     <Search2Icon color='grey' />
                                 </InputLeftElement>
                                 <Input
-                                    onClick={handleOnFocus}
+                                     onFocus={handleOnFocus}
+                                        onBlur={handleOnBlur}
                                   
                                     onChange={(e) => setInput(e.target.value)} borderColor={useColorModeValue("white", "#464444")} _placeholder={{ color: "grey" }} bg={useColorModeValue("white", "#464444")} color={useColorModeValue("black", "white")} className='input' borderRadius="3px" placeholder='Search' />
                                 <InputRightElement bg={useColorModeValue("white", "#464444")} >
@@ -308,7 +310,7 @@ export const Navbar = () => {
                 </Box>
 
 
-                <Box         onFocus={handleOnFocus}  boxShadow={sopen ?  "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px": ""}   w="330px" maxH="500px" position="absolute" left="10%" mt="30px" bg={useColorModeValue("#ffff", "#464444")} overflow="auto" className={style.searchbar}   >
+                <Box  onBlur={handleOnBlur} boxShadow={sopen ?  "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px": ""}   w="330px" maxH="500px" position="absolute" left="10%" mt="30px" bg={useColorModeValue("#ffff", "#464444")} overflow="auto" className={style.searchbar}   >
                     {
                         sopen ? <Box padding="20px"     >
 

@@ -187,7 +187,7 @@ export const SubNavbar = () => {
 
   const handlecat=(el,i)=>{
     
-       arr.push(el)
+    arr.push(el)
     localStorage.setItem("cat",JSON.stringify(arr))
        
      
@@ -251,7 +251,7 @@ export const SubNavbar = () => {
 
 
 
-
+console.log(data);
  
 
   return (

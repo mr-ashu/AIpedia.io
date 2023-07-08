@@ -33,4 +33,4 @@ app.get("/", async (req, res) => {
   res.send("hello");
 });
 
-app.listen(port, () => console.log(`Listen to the localhost:http://localhost:${port}`));
+app.listen(port, () => console.log(`Listen to the http://localhost:${port}`));

@@ -5,7 +5,7 @@ import { ToolBottom } from './ToolBottom'
 export const Overview = ({el,id}) => {
     return (
         <Box>
-            <Image width="70%" m="auto" borderRadius="5px"   src={el.image} />
+            <Image width="70%" m="auto" borderRadius="5px"   src={el.Cover_image} />
 
             <ToolBottom el={el} id={id}/>
 

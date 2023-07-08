@@ -35,7 +35,7 @@ export const Modalcomp = ({ el }) => {
         <>
             <Box border="1px solid #CFCDCD " borderRadius="3px" textAlign="left">
                 <Box >
-                    <img style={{cursor:"pointer"}} onClick={handleOpen} className={style.image} src={el.image}  alt="img"/>
+                    <img style={{cursor:"pointer"}} onClick={handleOpen} className={style.image} src={el.Cover_image}  alt="img"/>
                     <Box className={style.icon}>
                         <Flex h="fit-content" width="100%" justifyContent="flex-end"  >
                            
@@ -51,8 +51,8 @@ export const Modalcomp = ({ el }) => {
                 <Box m="10px"  >
                     <Flex mt="-25px" justifyContent="space-between" alignItems="start">
                        <Flex cursor={"pointer"} maxW="60%" onClick={handleOpen} alignItems="center" gap="7px">
-                       <Image h="20px" w="20px" src={chatgpt} />
-                       <Text className={style.title}  fontWeight="bold">{ el.title}</Text>
+                       <Image h="20px" w="20px" src={el.Logo} />
+                       <Text className={style.title}  fontWeight="bold">{ el.Title}</Text>
                        </Flex>
                        
                         <Box  alignItems="center" textAlign="center"  > 
@@ -61,7 +61,7 @@ export const Modalcomp = ({ el }) => {
                         </Box>
                     </Flex>
 
-                    <Flex   gap="10px" alignItems="center">
+                    <Flex   gap="10px" alignItems="center" mt="5px">
                     <Flex gap="5px">
                         {[...Array(5)].map((item, index) => {
                             const givenRating = index + 1;
@@ -86,12 +86,12 @@ export const Modalcomp = ({ el }) => {
                         <Text lineHeight={"15px"} fontSize="13px">(3)</Text>
                         <Flex gap="3px" border="1px solid #CCCCCC" px={1} py={"2px"} borderRadius="2px" alignItems="center">
                          <MdOutlineVerified/>
-                        <Text   fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.price}</Text>
+                        <Text   fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.Pricing}</Text>
                         </Flex>
                     </Flex>
 
                     <Text className={style.dec} mt="10px" fontSize="15px" lineHeight="24px" fontWeight="400"  >
-                        {el.description}
+                        {el.Description}
                     </Text>
                     <Flex alignItems="center" lineHeight="24px" fontSize="12px" mt="10px" gap="5px">
                         <Text  fontWeight="600">
@@ -102,7 +102,7 @@ export const Modalcomp = ({ el }) => {
 
                     <Flex mt="25px" justifyContent="space-evenly" alignItems="center" mb="15px" w="100%" gap="10px">
                          <Save id={el._id}/>
-                        <Link to={el.links} target="_blank">  <Button color="white" className={style.savebtn} borderRadius="5px" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" _hover={{ bg: "" }} bg="#3B89B6"> <Image src={visit} /><Text> Visit</Text></Button></Link>
+                        <Link to={el.URL} target="_blank">  <Button color="white" className={style.savebtn} borderRadius="5px" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" _hover={{ bg: "" }} bg="#3B89B6"> <Image src={visit} /><Text> Visit</Text></Button></Link>
                     </Flex>
                 </Box>
 

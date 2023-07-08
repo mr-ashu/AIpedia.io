@@ -30,10 +30,10 @@ export const Telement = ({ el, id }) => {
 
                     <Box className={tool.left} justifyContent="center" textAlign="center" alignItems="center">
                         <Box w="fit-content" padding="20px" border="1px solid #E6E6E6" margin="auto" borderRadius="5px" mt="10px" >
-                            <Image boxSize="80px" src={gana} />
+                            <Image boxSize="80px" src={el.Logo} />
                         </Box>
                         <Box mt="20px">
-                            <Link to={el.links} target="_blank">
+                            <Link to={el.URL} target="_blank">
                                 <Button _hover={{ bg: "" }} color="white" borderRadius="5px" fontSize="14px" fontWeight="400" w="150px" gap="7px" alignItems="center" h="36px" bg="#3B89B6">
                                     <BsBoxArrowUpRight /> Visit
                                 </Button>
@@ -60,12 +60,12 @@ export const Telement = ({ el, id }) => {
 
                             <Flex w="fit-content" gap="3px" border="1px solid #CCCCCC" px={1} py={"2px"} borderRadius="2px" alignItems="center">
                                 <MdOutlineVerified />
-                                <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.price}</Text>
+                                <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.Pricing}</Text>
                             </Flex>
 
-                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Price amount:</Text>
+                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Price amount: </Text>
                             <Flex lineHeight="24px" fontWeight="400" fontSize={"15px"}>
-                                <Text  >starting price: </Text><Text fontWeight="700"> $90/mo</Text>
+                                <Text  >starting price: </Text><Text fontWeight="700"></Text>
 
                             </Flex>
 
@@ -76,7 +76,7 @@ export const Telement = ({ el, id }) => {
                             </Flex>
 
 
-                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Integration:</Text>
+                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Works with:</Text>
                             <Flex gap="5px"><Image src={vscode} /> <Text> VS Code</Text></Flex>
 
                             <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Other features:</Text>
@@ -85,11 +85,11 @@ export const Telement = ({ el, id }) => {
                                 <Flex alignItems="center"> <RiOpenSourceFill /> Open source</Flex>
                             </Flex>
 
-                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Category:</Text>
+                            <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">Category: </Text>
 
-                            <Button bg="rgba(118, 161, 191, 0.3)" mt="15px" borderRadius={"50px"} w="83px" height="24px" padding="3px" textAlign="center" fontSize="12px" fontWeight="400">
-                                Video editing
-                            </Button>
+                            <Box>
+                            {el.Category.map((e)=><Text  bg="rgba(118, 161, 191, 0.3)" mt="15px" borderRadius={"50px"} w="83px" height="24px" padding="3px" textAlign="center" fontSize="12px" fontWeight="400">{e}</Text>)}
+                            </Box>
 
 
                             <Text mt="20px" fontSize="14px" lineHeight="24px" fontWeight="600">
@@ -110,7 +110,7 @@ export const Telement = ({ el, id }) => {
 
                         <Box w="90%" m="auto" >
                             <Flex justifyContent="space-between" alignItems="center">
-                                <Text fontSize="24px" lineHeight="24px" fontWeight="600">{el.title}</Text>
+                                <Text fontSize="24px" lineHeight="24px" fontWeight="600">{el.Title}</Text>
                                 <Flex gap="10px" alignItems="center"  >
                                     <Text>{el.likes} People liked this</Text>
                                     <Box border="1px solid #E6E6E6" padding="8px" borderRadius="3px" justifyContent="center">
@@ -150,7 +150,7 @@ export const Telement = ({ el, id }) => {
 
 
                             <Text mt="20px" fontSize="16px" fontWeight="600" lineHeight="24px"  >
-                                {el.description}
+                                {el.Description}
                             </Text>
 
                             <Tabcomp el={el} id={id} />

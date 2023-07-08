@@ -75,13 +75,7 @@ let data = [
     },
 ]
 export const ToolBottom = ({ el ,id}) => {
-    var settings = {
-        dots: true,
-  
-        slidesToShow: 2,
-        slidesToScroll: 2
-
-    };
+   
 
     return (
         <Box mt="20px" mb="50px" >
@@ -89,12 +83,12 @@ export const ToolBottom = ({ el ,id}) => {
 
 
             <Text fontSize="16px" lineHeight="24px" fontWeight="600" mt="20px">
-                What is {el.title} ?
+                What is {el.Title} ?
 
             </Text>
 
             <Text fontSize="15px" fontWeight="400" lineHeight="24px">
-                {el.description}
+                {el.Description}
             </Text>
 
             {/* --------------------------------------- */}
@@ -127,13 +121,13 @@ export const ToolBottom = ({ el ,id}) => {
                 <Box w="70%" ml="20px" fontSize="16px" fontWeight="400" lineHeight="24px">
 
 
-                    {
+                    {/* {
                         el.features.map((e) => (
                             <ul >
                                 <li>{e}</li>
                             </ul>
                         ))
-                    }
+                    } */}
 
 
                 </Box>

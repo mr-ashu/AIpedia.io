@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "../Style/Collection.module.css"
 
 import { Curated } from '../Components/Collection/Curated'
@@ -8,10 +8,29 @@ import { MyCollection } from '../Components/Collection/MyCollection'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsGrid } from 'react-icons/bs'
 import { Overall } from '../Components/Top10/Overall'
+import axios from 'axios'
 
 
 const nlist = ["OVERALL", "IMAGE", "WRITING", "AI BOT", "3D"]
 export const Top10 = () => {
+
+   const [data,setdata] =useState([])
+
+   const getData=()=>{
+     
+    axios.get(`${process.env.REACT_APP_API}/data/top-ten/category`,{
+      Category:"AIArtgallery"
+    })
+    .then((res)=>{
+      console.log(res);
+    })
+   }
+
+
+   useEffect(()=>{
+        // getData()
+   },[])
+
   return (
     <Box w="90%" margin="auto" paddingTop="70px" fontFamily="Segoe UI">
       <Text width="160px" height="40px" fontWeight="600" fontSize={"32px"} lineHeight="40px">TOP 10</Text>

@@ -35,10 +35,10 @@ export const ListModal = ({ el }) => {
 
             <Box border="1px solid #CFCDCD" borderRadius="3px" textAlign="left" mb="30px"  >
                 <Flex ml="20px" gap="10px" alignItems="center" height="100%">
-                    <Image cursor={"pointer"}  onClick={handleOpen} width="80px" height="78px" src={chatgpt} />
+                    <Image cursor={"pointer"}  onClick={handleOpen} width="80px" height="78px" src={el.Logo} />
                     <Stack w="100%" m="10px">
                         <Flex justifyContent="space-between" alignItems="center">
-                            <Text fontWeight="bold" cursor={"pointer"} onClick={handleOpen}>{el.title}</Text>
+                            <Text fontWeight="bold" cursor={"pointer"} onClick={handleOpen}>{el.Title}</Text>
 
                             <Box className={style.shide}>
                                 <Flex mr="30px" h="fit-content" w="fit-content" justifyContent="space-between" gap="80px" alignItems="center">
@@ -47,7 +47,7 @@ export const ListModal = ({ el }) => {
                                         <ShareModel url={url} />
 
                                     </Box>
-                                    <Link to={el.links} target={'_blank'}>
+                                    <Link to={el.URL} target={'_blank'}>
                                         <Button _hover={{ bg: "" }} color="white" className={style.savebtn} borderRadius="5px" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" bg="#3B89B6">
                                             <Image src={visit} /><Text> Visit</Text>
                                         </Button>
@@ -87,7 +87,7 @@ export const ListModal = ({ el }) => {
                         </Box>
 
                         <Text w="90%" className={style.dec} fontSize="15px" textAlign="left" fontWeight="400"  >
-                            {el.description}
+                            {el.Description}
                         </Text>
 
                       
