@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, Stack, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 
 import React, { useEffect, useState } from 'react'
 import { Rightbar } from '../Components/Top10/Rghtbar'
@@ -49,7 +49,7 @@ export const MycollectionSingle = () => {
 
     return (
         <>
-            <Stack w="99%">
+            <Stack >
                 <Flex>
 
                     <Stack justifyContent="center">

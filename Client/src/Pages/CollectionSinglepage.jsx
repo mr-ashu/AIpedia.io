@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
  
 import { LIstcomp } from '../Components/Collection/Listcomp'
 import { Box } from '@mui/material'
-import { Avatar, Button, Flex, Stack, Text } from '@chakra-ui/react'
+import { Avatar, Button, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { Rightbar } from '../Components/Top10/Rghtbar'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ListModal } from '../Components/ListModal'
-import { ElderlySharp } from '@mui/icons-material'
+import { useSelector } from 'react-redux'
+ 
 
 const getData = ({id}) => {
     return axios.get(`${process.env.REACT_APP_API}/myspace/public/get/${id}`)
@@ -18,6 +19,8 @@ const getData = ({id}) => {
 export const CollectionSinglepage = () => {
    
     let { id } = useParams()
+ 
+
 
 
     const [loading, setloading] = useState(true)
@@ -37,9 +40,9 @@ export const CollectionSinglepage = () => {
 
     }, [id])
   
- console.log(data);
+ 
     return (
-        <Stack w="99%"> 
+        <Stack bg={useColorModeValue("var(--landing-page, #FFF)", "#2C2C2C")} > 
         <Flex>
 
             <Stack justifyContent="center">
@@ -51,9 +54,9 @@ export const CollectionSinglepage = () => {
                     <Button color="white" bg="#3B89B6" fontWeight="600" fontSize="14px" lineHeight="24px"><AiOutlineHeart/> Like</Button>
                     </Flex>
 
-                    <Box borderBottom="1px solid #737373" py={1} paddingBottom="15px">
+                    <Box borderBottom="1px" borderColor={useColorModeValue("#E6E6E6","#444")} py={1} paddingBottom="20px">
                         <Flex mt="10px" gap="5px" alignItems="center">
-                            <Avatar size="" src={data[0]?.userID.image}/>
+                            <Avatar size="sm" src={data[0]?.userID.image}/>
                             <Text>{data[0]?.userID.name}</Text>
                         </Flex>
 

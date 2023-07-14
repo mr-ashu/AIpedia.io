@@ -3,18 +3,15 @@ import style from "../../Style/Grid.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import notification from "../Toast";
-import { Avatar, Box, Button, Divider, Flex, FormControl, Input, Menu, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Text, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, Divider, Flex, FormControl, Input, Menu, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { setMyspaceName } from "../../Redux/action";
-import { HiPencil } from "react-icons/hi";
-import { AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons";
+import { CheckIcon } from "@chakra-ui/icons";
+import { HiOutlineBookmark } from "react-icons/hi";
 
 
-
-const Save = ({id}) => {
+const Save = ({ id, el }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [inputName, setInputName] = useState(false);
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [library, setLibrary] =  useState("");
     const [newLibrary, setNewLibrary] = useState("");
     const [allLibrary, setAllLibrary] = useState([]);
     const userData = useSelector((state) => state.userReducer.loginData);
@@ -62,19 +59,21 @@ const Save = ({id}) => {
 
             getData();
         }
+
     }, [reload]);
 
-    const handleLibrarySubmit = async (e) => {
-        e.preventDefault();
+    const handleLibrarySubmit = async (lid) => {
+
         try {
             const payload = {
                 videoID: id,
-                spaceID: library,
+                spaceID: lid,
             };
+
             let token = userData.data;
             const res = await axios.post(
                 `${process.env.REACT_APP_API}/myspace/add`,
-                  payload,
+                payload,
                 { headers: { token } }
             );
             notification("success", res.data.msg);
@@ -82,44 +81,38 @@ const Save = ({id}) => {
             notification("error", err.response.data.errors);
         }
     };
-    const handleChange = (event) => {
-        setLibrary(event.target.value);
-    };
-    const handlech = () => {
-        notification("success");
-    };
+
+
+
     return (
         <>
 
 
-            <Button onClick={onOpen} className={style.savebtn} borderRadius="5px" border="1px solid #CCCCCC" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" background={"transparent"}>Save</Button>
+            <Button onClick={onOpen} className={style.savebtn} borderRadius="5px" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} fontSize="14px" fontWeight="400" gap="5px" h="29.68px" background={"transparent"}><HiOutlineBookmark /> Collect</Button>
             <Modal isCentered blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent w="fit-content">
 
                     <ModalBody >
                         <Box padding="20px"  >
-                            <Flex alignItems="center" gap="10px" m="10px">
-                                <Avatar />
-                                <Text fontSize="16px" lineHeight="24px" fontWeight="700">ChatGPT</Text>
+                            <Flex alignItems="center" gap="15px" m="10px" ml="0px">
+                                <Avatar src={el.Logo} />
+                                <Text fontSize="16px" lineHeight="24px" fontWeight="700">{el.Title}</Text>
                             </Flex>
 
                             <Text mt="15px" fontSize="24px" lineHeight="32px" fontWeight="400">Save to</Text>
 
                             <Box h="200px" overflow="auto" fontWeight="400"  >
+                                {allLibrary?.map((ele, i) => (
 
-                                <Box mt="15px">
-                                    <Text fontSize="16px" lineHeight="24px">mi </Text>
-                                    <Text fontSize="14px" lineHeight="24px">Personal best ofr video editing</Text>
-                                </Box>
-                                <Box mt="15px">
-                                    <Text fontSize="16px" lineHeight="24px">Another one</Text>
-                                    <Text fontSize="14px" lineHeight="24px">Personal best ofr video editing</Text>
-                                </Box>
-                                <Box mt="15px">
-                                    <Text fontSize="16px" lineHeight="24px">Productivity </Text>
-                                    <Text fontSize="14px" lineHeight="24px">Personal best ofr video editing</Text>
-                                </Box>
+                                    <Box cursor="pointer" onClick={() => handleLibrarySubmit(ele._id)} mt="15px" key={i} value={ele._id}>
+                                        <Text fontSize="16px" lineHeight="24px"> {ele.space_name}</Text>
+                                        <Text fontSize="14px" lineHeight="24px">Personal best of video editing</Text>
+                                    </Box>
+
+                                ))}
+
+
 
                             </Box>
                             <Divider mt="10px" border="1px solid #D9E1EC" />
@@ -138,36 +131,6 @@ const Save = ({id}) => {
                                     />
 
                                     <Button color="white" mt="10px" onClick={handleCreate} borderRadius="4px" bg="#3B89B6" _hover={{ bg: "" }}>  <CheckIcon /></Button>
-
-
-
-                                    <FormControl>
-                                        <Select
-                                            mt="10px"
-
-                                            value={library}
-                                            onChange={handleChange}
-                                        >
-                                            <Menu>
-                                                <option value="">
-                                                    <em
-
-                                                    >
-                                                        None
-                                                    </em>
-                                                </option>
-
-                                                {allLibrary?.map((ele,i) => (
-                                                    <option key={i} value={ele._id} >
-                                                        {ele.space_name}
-                                                    </option>
-                                                ))}
-                                            </Menu>
-                                        </Select>
-                                    </FormControl>
-
-
-                                    <Button color="white" mt="10px" onClick={handleLibrarySubmit} borderRadius="4px" bg="#3B89B6" _hover={{ bg: "" }}>Add</Button>
 
 
                                 </Box>

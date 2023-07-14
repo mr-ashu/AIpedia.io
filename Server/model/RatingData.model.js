@@ -10,7 +10,6 @@ const ratingSchema = mongoose.Schema({
     },
     rating : {
         type : Number,
-        trim : true,
         required : true
     }
 },{

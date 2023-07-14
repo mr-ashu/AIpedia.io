@@ -116,7 +116,7 @@ export const Navbar = () => {
 
         if (input.length >= 2) {
             getData({ input }).then((res) => {
-                setData(res.data)
+                setData(res.data.data)
             })
         }
         else {
@@ -131,7 +131,7 @@ export const Navbar = () => {
     };
 
     const handleOnBlur = () => {
-        console.log("hello");
+       
         setSopen(false);
     };
 
@@ -321,9 +321,9 @@ export const Navbar = () => {
                                     sdata?.map((el, i) => (
                                         <Link key={i} to={`/tool/${el._id}`} onClick={() => setSopen(false)}>
                                             <Flex gap="15px" mb="20px" alignItems="center">
-                                                <Avatar src={el.image} />
+                                                <Avatar src={el.Logo} />
                                                 <Text>
-                                                    {el.title}
+                                                    {el.Title}
                                                 </Text>
 
 

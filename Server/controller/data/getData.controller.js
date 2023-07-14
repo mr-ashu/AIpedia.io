@@ -1,12 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const { dataModel } = require("../../model/data");
+const { query } = require("express");
 
-//route /data/get/?search='text'&page=1&price=Freemium
+//route /data/get/?search='text'&page=1& Pricing=Freemium
 const getDataController = asyncHandler(async (req, res) => {
   const { search, page = 1, sort } = req.query;
-  const { price, integration, subcategory } = req.body;//arrey form through body
+  const { Pricing, others_features,  works_with,  Category } = req.body;//arrey form through body
  // const subcatQuery = subcategory.split(",");
- 
+
+  
   let limit = 9;
 
   try {
@@ -18,34 +20,44 @@ const getDataController = asyncHandler(async (req, res) => {
         ...query,
         ...{
           $or: [
-            { title: { $regex: search, $options: 'i' } },
-            { category: { $regex: search, $options: 'i' }  },
-            { subcategory: { $regex: search, $options: 'i' }  },
+            { Title: { $regex: search, $options: 'i' } },
+            { Category: { $regex: search, $options: 'i' }  },
+            { Tagline: { $regex: search, $options: 'i' }  },
           ],
         },
       };
     }
 
-    if (price) {
-      query = { ...query, ...{ price: { $in: price } } };
+    if (Pricing) {
+      query = { ...query, ...{  Pricing: { $in:  Pricing } } };
     }
 
-    if(subcategory){
+    if(Category){
       
       query = {
         ...query,
-        subcategory : {$in : subcategory}
+        Category : {$in : Category}
       }
 
     }
 
 
 
-    if (integration) {
-      query = { ...query, ...{ integration: { $in: integration } } };
+    if (  works_with) {
+      query = { ...query, ...{   works_with: { $in:   works_with } } };
+    }
+
+    if ( others_features) {
+      query = { ...query, ...{   others_features: { $in:   others_features } } };
     }
 
     let data = dataModel.find(query);
+    let t=await dataModel.find(query).count()
+
+ 
+
+ 
+    
 
     let sortQuery = {};
     if (sort == "a-z") {
@@ -60,23 +72,18 @@ const getDataController = asyncHandler(async (req, res) => {
       data = data.sort(sortQuery);
     }
 
-    // if (sort) {
-    //   console.log(sort, "empty");
-    //   let data = await dataModel
-    //     .find(query)
-    //     .sort(sortQuery)
-    //     .limit(limit)
-    //     .skip((page - 1) * limit);
-    //   return res.send(data);
-    // } else {
-    //   let data = await dataModel
-    //     .find(query)
-    //     .limit(limit)
-    //     .skip((page - 1) * limit);
+   
     data = data.limit(limit).skip((page - 1) * limit);
     data = await data;
+    const response = {
+      status: "sucess",
+      result: t,
+      page: Math.ceil(t/limit),
+      data: data,
+       
+    };
 
-      return res.send(data);
+      return res.send(response);
 
   } catch (error) {
     return res.status(500).send({ error });

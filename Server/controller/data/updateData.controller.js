@@ -1,62 +1,46 @@
 const asyncHandler = require("express-async-handler");
 const { dataModel } = require("../../model/data");
 
-//route -> /data/update/:id
+//route -> /data/update
 const updateDataController = asyncHandler(async (req, res) => {
-  const { id } = req.params;
 
-  const {
-    category,
-    subcategory,
-    title,
-    links,
-    description,
-    price,
-    discounCode,
-    features,
-    image,
-  } = req.body;
-
-  if (!title || !links || !description || !price || !features || !image) {
-    return res.status(404).send({ error: "Please include all fields" });
-  }
-
-  //send array of string in stringify format for all arrays from frontend
-  const parsedCategory = JSON.parse(category);
-  const parsedSubcategory = JSON.parse(subcategory);
-  const parsedFeatures = JSON.parse(features);
-
+  console.log(req.body);
   try {
-    const data = await dataModel.findById(id);
-
-    if (!data) {
-      return res.status(404).send({ error: "data not found" });
-    }
-
-    const updateRes = await dataModel.findByIdAndUpdate(id, {
-      category: parsedCategory,
-      subcategory: parsedSubcategory,
-      title,
-      links,
-      description,
-      price,
-      discounCode,
-      features: parsedFeatures,
-      image,
+    const dataToUpdate = req.body;
+ 
+    const sortingParameter = req.body.sortBy;
+ 
+    dataToUpdate.sort((a, b) => {
+      if (a[sortingParameter] < b[sortingParameter]) return -1;
+      if (a[sortingParameter] > b[sortingParameter]) return 1;
+      return 0;
     });
+ 
+    const updatePromises = dataToUpdate.map(async (data, index) => {
+      const { _id, ...updatedData } = data;
+ 
+      const result = await dataModel.updateOne({ _id }, { $set: { ...updatedData, position: index } });
 
-    if (!updateRes) {
-      return res.status(500).send({ error: "Somthing went wrong in updating" });
-    }
+      return result.nModified;
+    });
+ 
+    const updateResults = await Promise.all(updatePromises);
+ 
+    const updatedCount = updateResults.reduce((total, nModified) => total + nModified, 0);
 
-    const newData = await dataModel.findOne(updateRes._id);
+    
+    const updatedData = await dataModel.find();
 
-    return res.status(202).send(newData);
+    res.json({msg:"Sucessfully update", updatedCount, updatedData });
   } catch (error) {
-    console.log(error.stack);
-    console.log(error);
+    console.error('Error updating documents:', error);
+    res.status(500).json({ error: 'Failed to update documents' });
   }
+ 
 });
+
+
+
 
 module.exports = {
   updateDataController,

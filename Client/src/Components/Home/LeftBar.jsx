@@ -5,24 +5,24 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import excel from "../../Utils/Spreadsheet_icon.svg"
 import chatgpt from "../../Utils/ChatGPT.svg"
 import vscode from "../../Utils/Vs code.svg"
-import discord from "../../Utils/Discord.svg"
+ 
 import figma from "../../Utils/Figma.svg"
 import github from "../../Utils/Github.svg"
 import mobile from "../../Utils/Mobile app.svg"
 import slack from "../../Utils/Slack.svg"
 import browser from "../../Utils/Browser Extension.svg"
 import Wordpress from "../../Utils/Wordpress.svg"
-import { SiMicrosoftexcel } from 'react-icons/si';
-import { Box, Button, Divider, Flex, Image, Input, Text, background, useColorModeValue } from '@chakra-ui/react'
-import { GiStopwatch } from 'react-icons/gi';
+ 
+import { Box, Button, Divider, Flex, Image,  Text, background, useColorModeValue } from '@chakra-ui/react'
+ 
 import { MdDeleteOutline, MdOutlineVerified } from 'react-icons/md';
 import { AiFillApi, AiFillDollarCircle, AiFillGift } from 'react-icons/ai';
 import { DiOpensource } from 'react-icons/di';
 import { BsClockHistory, BsTagFill } from 'react-icons/bs';
+ 
 
 
-
-export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => {
+export const Leftbar = ({ open, setCount, setUserInfo, setPageName, setFilterLoader }) => {
 
 
 
@@ -33,11 +33,11 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
   const data = [
     {
       logo: excel,
-      name: "Sheet/Excel"
+      name: "Spreadsheet"
     },
     {
       logo: chatgpt,
-      name: "Sheet/Excel"
+      name: "Chatgpt"
     },
     {
       logo: vscode,
@@ -65,7 +65,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
     },
     {
       logo: browser,
-      name: "Browser extension"
+      name: "Browser Extension"
     },
 
   ]
@@ -77,7 +77,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
     },
     {
       logo: <BsClockHistory size={18} />,
-      name: "Freetrail"
+      name: "Free trial"
     }
     ,
     {
@@ -108,37 +108,47 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
   ]
 
-
-
+ 
+ 
   const handleFilterchange = (e) => {
-
-    const { value, checked, name } = e.target;
-
-    if (checked && name === "integration") {
-
+    
+    let { value, checked, name } = e.target;
+  
+    if(checked && value){
+      setCount((pre)=>pre+1)
+    }
+    if(!checked){
+      setCount((pre)=>pre-1)
+    }
+    
+   
+    if (checked && name === "works_with") {
+ 
       setUserInfo((prev) => {
+        
         return {
+          
           ...prev,
-          integration: [...prev.integration, value]
+          works_with: [...prev.works_with, value]
         }
       })
     }
-    else if (checked && name === "price") {
+    else if (checked && name === "Pricing") {
 
       setUserInfo((prev) => {
         return {
           ...prev,
-          price: [...prev.price, value]
+          Pricing: [...prev.Pricing, value]
         }
       })
     }
 
-    else if (checked && name === "other") {
+    else if (checked && name === "others_features") {
 
       setUserInfo((prev) => {
         return {
           ...prev,
-          price: [...prev.price, value]
+          others_features: [...prev.others_features, value]
         }
       })
     }
@@ -146,20 +156,25 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
       setUserInfo((prev) => {
         return {
-          integration: prev.integration.filter((ele) => ele !== value),
-          other: prev.price.filter((ele) => ele !== value),
-          price: prev.price.filter((ele) => ele !== value)
+          works_with: prev.works_with.filter((ele) => ele !== value),
+          others_features: prev.others_features.filter((ele) => ele !== value),
+          Pricing: prev.Pricing.filter((ele) => ele !== value)
         }
       })
 
     }
     setPageName("filter")
     setFilterLoader((prev) => !prev)
+  
+ 
+ 
+  
+   
   }
-
+ 
 
   return (
-    <Box className='sidebar' w={open ? "165px" : "64.5px"} >
+    <Box bg={useColorModeValue("#F8F8F8", "#2C2C2C")} className='sidebar' w={open ? "165px" : "64.5px"} borderRight="1px" borderColor={useColorModeValue("#E6E6E6","#444")} >
       <Box className='scroll' paddingRight={open ? "15px" : "0"} paddingLeft={open ? "15px" : "0"} >
         <Flex alignItems="center" justifyContent={open ? "left" : "center"}>
           <Text maxW={open ? "" : "60%"} mt="10px" className="itext" fontSize="12px" fontWeight="400">
@@ -188,7 +203,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
               </Flex>
 
-              {open ? <input type="checkbox" name="integration" value={el.name} onChange={handleFilterchange} /> : ""}
+              {open ? <input className='checkbox' type="checkbox" name="works_with" value={el.name} onChange={handleFilterchange} /> : ""}
 
 
 
@@ -200,7 +215,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
           ))
         }
 
-        <Divider orientation='horizontal' border="1px solid #E6E6E6" w="98%" backgroundColor="grey" m="auto" mt="15px" />
+        <Divider orientation='horizontal' border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} w="98%" backgroundColor="grey" m="auto" mt="15px" />
 
         <Box>
           <Flex alignItems="center" justifyContent={open ? "left" : "center"}>
@@ -223,7 +238,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
                 px={1}  >
 
 
-                <Flex background={open ? "rgba(0, 41, 78, 0.1)" : ""} px="6px" borderRadius="3px" alignItems="center" gap="10px" mb="10px" >
+                <Flex   px="6px"   alignItems="center" gap="10px" mb="10px" >
                   <Box>
                     {el.logo}
                   </Box>
@@ -233,13 +248,13 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
                 </Flex>
 
-                {open ? <input name="price" value={el.name} onChange={handleFilterchange} type="checkbox" /> : ""}
+                {open ? <input className='checkbox'name="Pricing" value={el.name} onChange={handleFilterchange} type="checkbox" /> : ""}
 
               </Flex>
             ))
           }
         </Box>
-        <Divider orientation='horizontal' border="1px solid #E6E6E6 " w="98%" backgroundColor="grey" m="auto" mt="15px" />
+        <Divider orientation='horizontal' border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} w="98%" backgroundColor="grey" m="auto" mt="15px" />
         <Box>
 
           <Flex alignItems="center" justifyContent={open ? "left" : "center"}>
@@ -262,7 +277,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
                 px={1}  >
 
 
-                <Flex bg={el.name == "deal" ? "black" : ""} color={el.name == "deal" ? "white" : ""} borderRadius={el.name == "deal" ? "5px" : "3px"} paddingRight={open ? "25px" : ""} px={2} py={1} alignItems="center" mb="5px">
+                <Flex bg={el.name === "deal" ? "black" : ""} color={el.name == "deal" ? "white" : ""} borderRadius={el.name == "deal" ? "5px" : "3px"} paddingRight={open ? "25px" : ""} px={2} py={1} alignItems="center" mb="5px">
                   <Box >{el.logo}</Box>
                   {
                     open ? <Text >{el.name}</Text> : ""
@@ -270,7 +285,7 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
                 </Flex>
 
-                {open ? <input name="other" value={el.name} onChange={handleFilterchange} type="checkbox" /> : ""}
+                {open ? <input className='checkbox'name="others_features" value={el.name} onChange={handleFilterchange} type="checkbox" /> : ""}
 
 
 
@@ -288,7 +303,19 @@ export const Leftbar = ({ open, setUserInfo, setPageName, setFilterLoader }) => 
 
 
         <Flex mt="px" w="100%" color="black" alignItems="center" justifyContent="center">
-          <Button padding="10px" gap="7px" bg="white" borderRadius={open ? "50px" : "7px"} mt="10px" boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" >
+          <Button onClick={ 
+             ()=>{
+              var x = document.getElementsByClassName("checkbox");
+              for(var i=0; i<x.length; i++) {
+                x[i].checked = false;
+               } 
+                window.location.reload();
+               
+              
+             }
+
+           } 
+           padding="10px" gap="7px" bg="white" borderRadius={open ? "50px" : "7px"} mt="10px" boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px" >
             <MdDeleteOutline size="18px" />
             {
               open ? "Clear" : ""

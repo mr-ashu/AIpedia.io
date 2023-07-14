@@ -1,12 +1,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import style from "../../Style/Sleder.module.css"
-import { Box, Flex, Image, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Image, Stack, Text,   useColorModeValue } from "@chakra-ui/react";
 import s1 from "../../Utils/s1.jpg"
 import s2 from "../../Utils/s2.jpg"
 import s3 from "../../Utils/s3.jpg"
 import s4 from "../../Utils/s4.jpg"
-import s5 from "../../Utils/s5.svg"
+ 
 
 const data = [s1, s2, s3, s4];
 const delay = 4500;
@@ -46,7 +46,7 @@ function Slideshow() {
 
       >
 
-        <Box h="96px" mb="20px" textAlign="left" padding="20px" bg={useColorModeValue("linear-gradient(91.96deg, rgba(59, 137, 182, 0.2) 48.35%, rgba(255, 255, 255, 0) 85.25%, rgba(255, 255, 255, 0.2) 85.25%)", "linear-gradient(91.96deg, rgba(59, 137, 182, 0.2) 48.35%, rgba(255, 255, 255, 0) 85.25%, #383838 85.25%)")} mt="10px">
+        <Box h="96px" mb="20px" textAlign="left" padding="20px" bg={useColorModeValue("linear-gradient(91.96deg, rgba(59, 137, 182, 0.2) 48.35%, rgba(255, 255, 255, 0) 85.25%, rgba(255, 255, 255, 0.2) 85.25%)", "linear-gradient(91.96deg, rgba(59, 137, 182, 0.2) 48.35%, rgba(255, 255, 255, 0) 85.25%, #2C2C2C 85.25%)")} mt="10px">
           <Text fontSize="23px" fontWeight="700" lineHight="32px">Welcome to AI ZONE </Text>
           <Text fontSize="16px" fontWeight="400" lineHight="24px">The Ultimate One-Stop Source for AI Tools </Text>
         </Box>

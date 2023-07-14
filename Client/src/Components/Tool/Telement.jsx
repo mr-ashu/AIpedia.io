@@ -17,9 +17,11 @@ import { MdOutlineVerified } from 'react-icons/md'
 
 export const Telement = ({ el, id }) => {
 
+    console.log(el);
+
 
     return (
-        <Box bg={useColorModeValue("white", "#464444")}>
+        <Box >
 
 
 
@@ -114,7 +116,7 @@ export const Telement = ({ el, id }) => {
                                 <Flex gap="10px" alignItems="center"  >
                                     <Text>{el.likes} People liked this</Text>
                                     <Box border="1px solid #E6E6E6" padding="8px" borderRadius="3px" justifyContent="center">
-                                        <BsFillHeartFill />
+                                        <BsFillHeartFill style={{color:"tomato"}} />
                                     </Box>
 
                                 </Flex>
@@ -131,7 +133,7 @@ export const Telement = ({ el, id }) => {
 
                                                     value={givenRating}
                                                     color={
-                                                        givenRating < 3 || givenRating === 3
+                                                        givenRating <= el.rating
                                                             ? "#3B89B6"
                                                             : "rgb(192,192,192)"
                                                     }
@@ -150,7 +152,7 @@ export const Telement = ({ el, id }) => {
 
 
                             <Text mt="20px" fontSize="16px" fontWeight="600" lineHeight="24px"  >
-                                {el.Description}
+                                {el.Tagline}
                             </Text>
 
                             <Tabcomp el={el} id={id} />

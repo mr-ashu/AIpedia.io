@@ -1,25 +1,14 @@
 import React, { useState } from 'react';
 import {
-    Progress,
+  
     Box,
     ButtonGroup,
     Button,
-    Heading,
-    Flex,
-    FormControl,
-    GridItem,
-    FormLabel,
-    Input,
-
-    SimpleGrid,
-    InputLeftAddon,
-    InputGroup,
-    Textarea,
-    FormHelperText,
-    InputRightElement,
+  
+    Flex, 
+ 
     Text,
-    Divider,
-    Image,
+ 
     Stack,
 } from '@chakra-ui/react';
 import style from "../../Style/Submit.module.css"

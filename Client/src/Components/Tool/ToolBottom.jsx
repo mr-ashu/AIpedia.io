@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Flex, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Avatar, Box, Divider, Flex, Image, ListItem, Stack, Text, UnorderedList, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import fb from '../../Utils/Facebook-logo.png';
 import insta from '../../Utils/instagram.png';
@@ -74,8 +74,8 @@ let data = [
         desc: "Transform anything on your website intCXXCX"
     },
 ]
-export const ToolBottom = ({ el ,id}) => {
-   
+export const ToolBottom = ({ el, id }) => {
+
 
     return (
         <Box mt="20px" mb="50px" >
@@ -93,15 +93,15 @@ export const ToolBottom = ({ el ,id}) => {
 
             {/* --------------------------------------- */}
 
-            <Stack border="1px solid"   w="80%" m="auto" mt="20px">
+            <Stack border="1px solid" w="80%" m="auto" mt="20px">
 
 
 
 
 
-              <Box  >
-             
-              </Box>
+                <Box  >
+
+                </Box>
 
 
 
@@ -112,26 +112,26 @@ export const ToolBottom = ({ el ,id}) => {
 
 
 
-            <Box >
+            {/* <Stack w="60%"  >
                 <Text mt="15px" fontSize="16px" fontWeight="600" lineHeight="24px">
                     Features
 
                 </Text>
 
-                <Box w="70%" ml="20px" fontSize="16px" fontWeight="400" lineHeight="24px">
+                <Box  ml="20px" fontSize="16px" fontWeight="400" lineHeight="24px">
 
+                    <UnorderedList w="40%">
+                        {
+                            el.key_features?.map((e) => (
 
-                    {/* {
-                        el.features.map((e) => (
-                            <ul >
-                                <li>{e}</li>
-                            </ul>
-                        ))
-                    } */}
+                                <ListItem>{e}</ListItem>
 
+                            ))
+                        }
+                    </UnorderedList>
 
                 </Box>
-            </Box>
+            </Stack> */}
             <Divider border="1px solid #E6E6E6" mt="20px" />
             <Box>
                 <Box w="100%" m="auto" borderRadius="3px">
@@ -175,7 +175,7 @@ export const ToolBottom = ({ el ,id}) => {
 
             <Divider border="1px solid #CCCCCC" mt="20px" />
 
-            <Comment el={el} id={id}/>
+            <Comment el={el} id={id} />
         </Box>
     )
 }

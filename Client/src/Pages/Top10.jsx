@@ -14,22 +14,22 @@ import axios from 'axios'
 const nlist = ["OVERALL", "IMAGE", "WRITING", "AI BOT", "3D"]
 export const Top10 = () => {
 
-   const [data,setdata] =useState([])
+  const [data, setdata] = useState([])
 
-   const getData=()=>{
-     
-    axios.get(`${process.env.REACT_APP_API}/data/top-ten/category`,{
-      Category:"AIArtgallery"
+  const getData = () => {
+
+    axios.get(`${process.env.REACT_APP_API}/data/top-ten/category`, {
+      Category: "AIArtgallery"
     })
-    .then((res)=>{
-      console.log(res);
-    })
-   }
+      .then((res) => {
+        console.log(res);
+      })
+  }
 
 
-   useEffect(()=>{
-        // getData()
-   },[])
+  useEffect(() => {
+    // getData()
+  }, [])
 
   return (
     <Box w="90%" margin="auto" paddingTop="70px" fontFamily="Segoe UI">

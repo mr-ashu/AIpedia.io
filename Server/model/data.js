@@ -25,12 +25,21 @@ const dataSchema = new mongoose.Schema(
     paid: Boolean,
     likes: {
       type: Number,
-      default: 0,
+      default: Math.floor(Math.random() * 500),
     },
     comment: {
       type: Number,
       default: 0,
     },
+    rating:{
+      type: Number,
+      default: Math.floor(Math.random() * 5)
+    },
+    featured:{
+      type: Boolean,
+      default:false
+    }
+
   },
   {
     versionKey: false,

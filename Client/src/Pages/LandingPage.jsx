@@ -1,42 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { SubNavbar } from '../Components/Home/SubNavbar'
-import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, Input, Stack, useColorModeValue, useDisclosure } from '@chakra-ui/react'
+import React from 'react'
+
+import { Flex, Stack, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import style from "../Style/Landing.module.css"
 import { Leftbar } from '../Components/Home/LeftBar'
-import { Featured } from '../Components/Home/Featured'
-import { LIstView, ListView } from '../Components/Home/LIstPage'
+
+import { LIstView } from '../Components/Home/LIstPage'
 import { GridPage } from '../Components/Home/GridPage'
 import { Box } from '@mui/material'
 import Slideshow from '../Components/Home/Crousel'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
+
+import { LandingRight } from '../Components/LandingRight'
 
 
-export const LandingPage = ({ list, open,setUserInfo,setPageName,setFilterLoader,data,showLoader,setDeleteLoading }) => {
+export const LandingPage = ({ setCount, list, open, setUserInfo, setPageName, setFilterLoader, data, showLoader, setDeleteLoading, userinfo }) => {
 
- 
+
   return (
-    <Stack className={style.landingpage} w="99%" m="auto">
+    <Stack  w="100%">
 
       <Flex color={useColorModeValue("#444444", "#CCCCCC")} justifyContent="space-between">
         <Stack w="fit-content"  >
           <Leftbar open={open}
             setUserInfo={setUserInfo}
             setPageName={setPageName}
-            setFilterLoader={setFilterLoader} />
+            setFilterLoader={setFilterLoader}
+            setCount={setCount}
+          />
         </Stack>
 
 
 
-        <Stack    className={open ? style.openslide : style.closeslide} w="100%"   >
-
-
-
-
-          <Stack   w="92%" m="auto" mt="50px">
-           <Box  className={style.slide}>
-               <Slideshow />
-           </Box>
+        <Stack className={open ? style.openslide : style.closeslide} w="100%"   >
+           <Stack w="92%" m="auto" mt="50px">
+            <Box className={style.slide}>
+              <Slideshow />
+            </Box>
 
 
             {
@@ -44,25 +42,13 @@ export const LandingPage = ({ list, open,setUserInfo,setPageName,setFilterLoader
             }
 
           </Stack>
+         </Stack>
 
+        <Box mt="50px">
+          <LandingRight />
+        </Box>
 
-
-
-
-        </Stack>
-
-        <Stack>
-          <Box mt="50px">
-            <Featured />
-          </Box>
-        </Stack>
-
-
-
-
-
-
-      </Flex>
+       </Flex>
     </Stack>
   )
 }

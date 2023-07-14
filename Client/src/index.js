@@ -13,13 +13,15 @@ import { ToastContainer } from 'react-toastify';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const defaultTheme = createTheme();
  
-  
+   
     const theme= extendTheme({
  
       styles: {
-        global: () => ({
+        global:(props) => ({
           body: {
-            bg:"",
+            bg: props.colorMode === 'dark' ? '#2C2C2C' : 'var(--landing-page, #FFF)',
+ 
+            
           },
         }),
       },

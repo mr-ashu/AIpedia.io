@@ -5,11 +5,11 @@ import dummy from "../../Utils/dummy.jpeg";
 import style from "../../Style/Grid.module.css";
 
 import { Avatar, Box, Button, Flex, Image, Modal, Text } from '@chakra-ui/react';
-
-import { Modalcomp } from '../Modal';
+ 
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { Modalcomp } from '../Modal';
   
 export const Gridcomp = () => {
 
@@ -33,7 +33,7 @@ export const Gridcomp = () => {
 
                 { headers: { token } }
             );
-
+          console.log(res);
             setData(res.data.data)
 
         } catch (err) {

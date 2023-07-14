@@ -1,9 +1,12 @@
 body{
-     background:"";
+     height: 100%;
   }
 
+  body::-webkit-scrollbar{
+    display: none;
+    
+  }
 .App {
      
-  background:"";
   }
  

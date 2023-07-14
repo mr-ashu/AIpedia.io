@@ -1,41 +1,28 @@
 import { Navbar } from "./Components/Navbar";
 import "./App.css"
 import { Router } from "./Router";
- 
-import { Box, useColorModeValue } from "@chakra-ui/react";
- 
+import { Box} from "@chakra-ui/react";
 import { Footer } from "./Components/Home/Footer";
-import Register from "./Components/dummy";
- 
- 
- 
- 
- 
+import { useSelector } from "react-redux";
+import Dashboard from "./Admin/Pages/Dashboard";
 
 
 function App() {
  
-  return (
-    <Box  fontFamily="Segoe UI" >
-
-
-        <Navbar/>
-      
-       <Box bg={useColorModeValue("white","#383838")} minH="100vh" >
-       <Router/>
-
-       <Footer/>
-       </Box> 
-
-
-
-       {/* <Register/> */}
+  const { userReducer } = useSelector((store) => store)
 
   
-      
-    
-       
-         
+
+  if (userReducer.isAuth.isAdmin) {
+    return <Dashboard />
+  }
+  return (
+    <Box fontFamily="Segoe UI" className="app">
+      <Navbar />
+      <Box>
+        <Router />
+        <Footer />
+      </Box>
     </Box>
   );
 }

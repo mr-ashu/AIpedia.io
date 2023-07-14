@@ -7,90 +7,13 @@ import fimg from "../Utils/micon.svg";
 import collect from '../Utils/collec.svg'
 
 import { Telement } from '../Components/Tool/Telement';
-import { Tranding } from '../Components/Tool/Tranding';
+import { Tranding } from '../Components/Tranding';
 import { useParams } from 'react-router-dom';
+import { LandingRight } from '../Components/LandingRight';
 
 
 
-let fdata = [
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-]
-
-
-let triview = [
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX",
-
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX",
-
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX",
-
-    }
-
-]
-
-let coll = [
-    {
-        icon: collect,
-        icon2: coll2,
-        title: "Meeting sorting",
-        desc: "Looking to give your terminal a much dsff dfffosoa",
-        created: "Curated by AI Pedia",
-        tool: 5
-    },
-    {
-        icon: collect,
-        icon2: coll2,
-        title: "Meeting sorting",
-        desc: "Looking to give your terminal a much dsff dfffosoa",
-        created: "Curated by AI Pedia",
-        tool: 5
-    },
-    {
-        icon: collect,
-        icon2: coll2,
-        title: "Meeting sorting",
-        desc: "Looking to give your terminal a much dsff dfffosoa",
-        created: "Curated by AI Pedia",
-        tool: 5
-    },
-
-
-]
+ 
 
 const getData = ({id}) => {
     return axios.get(`http://localhost:9000/data/single/get/${id}`)
@@ -120,10 +43,10 @@ export const Tool = () => {
     }, [id])
 
  
-
+   
   
     return (
-        <Box bg={useColorModeValue("white", "#464444")} py="40px">
+        <Box   py="40px">
 
 
             <Flex justifyContent="space-between" w="98%" m="auto">
@@ -135,7 +58,7 @@ export const Tool = () => {
                     
                 </Box>
                 <Box>
-                    <Tranding tranding={fdata} top3={triview} collection={coll} />
+                    <LandingRight/>
                 </Box>
 
 

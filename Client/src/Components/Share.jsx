@@ -25,7 +25,7 @@ export default function ShareModel({ url }) {
   
   return (
     <>
-      <BiShareAlt style={{ fontSize: "14px", cursor: "pointer" ,color:"black"}} onClick={onOpen} />
+      <BiShareAlt style={{ fontSize: "14px", cursor: "pointer"  }} onClick={onOpen} />
       <Modal
         blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}
         isCentered={Center}

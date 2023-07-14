@@ -9,14 +9,16 @@ import collection from "../Utils/Collection.svg"
 import Modal from '@mui/material/Modal';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Telement } from './Tool/Telement';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ShareModel from './Share';
 import { Likes } from './Likes';
 import { MdOutlineVerified } from 'react-icons/md';
 import { FaStar } from 'react-icons/fa';
+import Save from './Home/Save';
 
 
 export const ListModal = ({ el }) => {
+
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
@@ -27,23 +29,23 @@ export const ListModal = ({ el }) => {
 
     let url = window.location.href + `tool/${el._id}`;
 
- 
+
 
 
     return (
         <>
 
-            <Box border="1px solid #CFCDCD" borderRadius="3px" textAlign="left" mb="30px"  >
+            <Box border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} borderRadius="3px" textAlign="left" mb="30px" py="10px" >
                 <Flex ml="20px" gap="10px" alignItems="center" height="100%">
-                    <Image cursor={"pointer"}  onClick={handleOpen} width="80px" height="78px" src={el.Logo} />
+                    <Image cursor={"pointer"} onClick={handleOpen} boxSize="80px" borderRadius="5px" src={el.Logo} />
                     <Stack w="100%" m="10px">
                         <Flex justifyContent="space-between" alignItems="center">
                             <Text fontWeight="bold" cursor={"pointer"} onClick={handleOpen}>{el.Title}</Text>
 
                             <Box className={style.shide}>
-                                <Flex mr="30px" h="fit-content" w="fit-content" justifyContent="space-between" gap="80px" alignItems="center">
+                                <Flex mr="30px" h="fit-content" w="fit-content" justifyContent="space-between" gap="70px" alignItems="center">
 
-                                    <Box mr="5px"  >
+                                    <Box mr="5px" >
                                         <ShareModel url={url} />
 
                                     </Box>
@@ -60,69 +62,73 @@ export const ListModal = ({ el }) => {
 
                         <Box className={style.shide}>
                             <Flex gap="10px" alignItems="center">
-                            <Flex gap="7px">
-                        {[...Array(5)].map((item, index) => {
-                            const givenRating = index + 1;
-                            return (
-                                <Box>
-                                    <FaStar
-                                        value={givenRating}
-                                        color={
-                                            givenRating < 3 || givenRating === 3
-                                                ? "#3B89B6"
-                                                : "rgb(192,192,192)"
-                                        }
-                                    />
-                                </Box>
+                                <Flex gap="7px">
+                                    {[...Array(5)].map((item, index) => {
+                                        const givenRating = index + 1;
+                                        return (
+                                            <Box>
+                                                <FaStar
+                                                    value={givenRating}
+                                                    color={
+                                                        givenRating <= el.rating
+                                                            ? "#3B89B6"
+                                                            : "rgb(192,192,192)"
+                                                    }
+                                                />
+                                            </Box>
 
-                            );
-                        })}
-                    </Flex>
-                                <Text lineHeight={"15px"} fontSize="13px">(3)</Text>
-                                <Flex gap="3px" border="1px solid #CCCCCC" px={1} py={"2px"} borderRadius="2px" alignItems="center">
+                                        );
+                                    })}
+                                </Flex>
+                                <Text lineHeight={"15px"} fontSize="13px">({el.rating})</Text>
+                                <Flex gap="7px" borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} pl="8px" alignItems="center">
                                     <MdOutlineVerified />
-                                    <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.price}</Text>
+                                    <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.Pricing}</Text>
                                 </Flex>
                             </Flex>
                         </Box>
 
-                        <Text w="90%" className={style.dec} fontSize="15px" textAlign="left" fontWeight="400"  >
-                            {el.Description}
+                        <Text className={style.dec} fontSize="15px" textAlign="left" fontWeight="400"    >
+                            {el.Tagline}
                         </Text>
 
-                      
 
-                         <Box className={style.lhide}>
-                         <Flex gap="7px">
-                        {[...Array(5)].map((item, index) => {
-                            const givenRating = index + 1;
-                            return (
-                                <Box>
-                                    <FaStar
-                                        value={givenRating}
-                                        color={
-                                            givenRating < 3 || givenRating === 3
-                                                ? "#3B89B6"
-                                                : "rgb(192,192,192)"
-                                        }
-                                    />
-                                </Box>
 
-                            );
-                        })}
-                    </Flex>
-                         </Box>
-                        <Flex justifyContent="space-between" alignItems="center" w="100%">
-                            <Flex alignItems="center" lineHeight="24px" fontSize="12px" mt="10px" gap="5px">
-                                <Text fontWeight="600">
-                                    Tags:
+                        <Box className={style.lhide}>
+                            <Flex gap="7px">
+                                {[...Array(5)].map((item, index) => {
+                                    const givenRating = index + 1;
+                                    return (
+                                        <Box>
+                                            <FaStar
+                                                value={givenRating}
+                                                color={
+                                                    givenRating <= el.rating
+                                                        ? "#3B89B6"
+                                                        : "rgb(192,192,192)"
+                                                }
+                                            />
+                                        </Box>
+
+                                    );
+                                })}
+                            </Flex>
+                        </Box>
+                        <Flex justifyContent="space-between" alignItems="center" w="100%" mt="15px">
+                            <Flex alignItems="center"   gap="5px" fontSize="12px" fontWeight="400" lineHeight="20px">
+
+
+                                <Text textAlign="center" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px"   >{el.Category[0]}</Text>
+                                <Text display={el.Category.length > 1 ? "block" : "none"} fontSize="12px" fontWeight="400" lineHeight="20px" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px">
+                                    + {el.Category.length - 1}
                                 </Text>
-                                <Text fontStyle="italic" fontWeight="400">Video editing, Upscale, Feee</Text>
+
+
                             </Flex>
 
                             <Box className={style.shide}>
-                                <Flex mr="30px" justifyContent="space-between" alignItems="center" w="fit-content" gap="80px"  >
-                                    <Button className={style.savebtn} borderRadius="5px" border="1px solid #CCCCCC" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" background={"transparent"}><Image src={collection} />Save</Button>
+                                <Flex mr="30px" justifyContent="space-between" alignItems="center" w="fit-content" gap="70px"  >
+                                    <Save el={el} />
                                     <Flex alignItems="center" gap="7px"> <Likes el={el} /> {el.likes}</Flex>
                                 </Flex>
                             </Box>
@@ -134,7 +140,7 @@ export const ListModal = ({ el }) => {
 
 
 
-                    <Box className={style.lhide} borderLeft="1px solid #CCCCCC " justifyContent="center" alignItems="center">
+                    <Box className={style.lhide} borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} justifyContent="center" alignItems="center">
 
                         <Flex height="160px" flexDirection="column" justifyContent="space-evenly" ml="30px" mr="30px">
                             <BsBoxArrowUpRight />
@@ -162,10 +168,10 @@ export const ListModal = ({ el }) => {
                 onClose={handleClose}
 
             >
-                <Box bg={useColorModeValue("white", "#464444")} overflow="auto" sx={{ width: "fit-content" }}>
+                <Box overflow="auto" sx={{ width: "fit-content" }}>
                     <Flex justifyContent="space-between" w="90%" alignItems="center" margin="auto" mt="20px" mb={"20px"}>
                         <CloseIcon cursor={"pointer"} onClick={handleClose} />
-                        <Link   to={`/tool/${el._id}`}><Text cursor={"pointer"}  border="1px solid" padding="3px" px={2} borderRadius="5px">Open in new tab</Text></Link>
+                        <Link to={`/tool/${el._id}`}><Text cursor={"pointer"} border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} padding="3px" px={2} borderRadius="5px">Open in new tab</Text></Link>
                     </Flex>
 
 

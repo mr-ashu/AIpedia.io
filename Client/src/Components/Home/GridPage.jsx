@@ -6,7 +6,7 @@ import style from "../../Style/Grid.module.css";
 
 import { Avatar, Button, CircularProgress, Flex, Image, Stack, Text } from '@chakra-ui/react';
 
-import { Featured } from './Featured';
+import { Featured } from '../Featured';
 import { Link } from 'react-router-dom';
 import Slideshow from './Crousel';
 import { Modalcomp } from '../Modal';

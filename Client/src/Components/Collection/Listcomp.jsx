@@ -10,7 +10,7 @@ import star from "../../Utils/Star.svg"
 import collection from "../../Utils/Collection.svg"
 import { Avatar, Button, Flex, Image, Stack, Text } from '@chakra-ui/react';
 import { Crousel } from '../Home/Crousel';
-import { Featured } from '../Home/Featured';
+import { Featured } from '../Featured';
 import { Link } from 'react-router-dom';
 import { ListModal } from '../ListModal';
 import { useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ export const LIstcomp = () => {
 
             setData(res.data.data)
 
-
+            console.log(res.data.data);
 
             
           

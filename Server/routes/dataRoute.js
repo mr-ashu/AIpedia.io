@@ -51,7 +51,7 @@ const {
 
 dataRouter.route("/get/subcategory/all").get(getAllSubCategoryController);
 dataRouter.route("/add").post(upload.single("csvFile"), addDataController);
-dataRouter.route("/update/:id").patch(verifyAdmin, updateDataController);
+dataRouter.route("/update").patch(updateDataController);
 dataRouter.route("/update/:id/add-like").patch(verifyToken, likeDataController);
 dataRouter.route("/delete/:id").delete(deleteDataController);
 dataRouter.route("/get").post(getDataController);

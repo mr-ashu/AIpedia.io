@@ -16,15 +16,15 @@
     width: 35%;
 }
  
+/* ;{useColorModeValue("#E6E6E6","#444")} */
 .cgrid > div {
   height: 255px;
    
   padding-left: 40px;
   width: 100%;
-
-  background: ();
-  /* background: rgba(59, 137, 182, 0.1); */
-  border: 1px solid #e6e6e6;
+ 
+  background: rgba(59, 137, 182, 0.1);
+  
   border-radius: 5px;
 }
 

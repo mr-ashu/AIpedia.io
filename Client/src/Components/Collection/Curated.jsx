@@ -1,7 +1,7 @@
 import { SearchIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Flex, Input, InputGroup, InputLeftElement, Text, useColorModeValue } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import img from "../../Utils/pimg.svg"
+ 
 import cicon1 from "../../Utils/cicon1.svg"
 import cicon2 from "../../Utils/cicon2.svg"
 import style from '../../Style/Collection.module.css';
@@ -80,7 +80,7 @@ export const Curated = () => {
         <InputLeftElement>
           <SearchIcon />
         </InputLeftElement>
-        <Input border="1px solid" placeholder='Search' />
+        <Input border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} placeholder='Search' />
       </InputGroup>
 
      
@@ -89,7 +89,7 @@ export const Curated = () => {
         {
           data?.map((el,i) => (
           
-           <Box key={i} py={3} background="rgba(59, 137, 182, 0.1)" >
+           <Box key={i} py={3} background="rgba(59, 137, 182, 0.1)"  >
            <Link to={`/collection/${el._id}`}>
               <Text fontSize="18px" fontWeight="600">{el.space_name}</Text>
               <Flex mt="15px" gap="10px" alignItems="center" width="fit-content"  >
@@ -105,9 +105,9 @@ export const Curated = () => {
                 <img src={cicon1} />
               </Box>
 
-              <Flex mt="20px" w="fit-content" gap="7px" alignItems="center"  >
-                <Avatar size={"sm"} src={el.pimg} />
-                <Text w="fit-content" fontSize="11px" fontWeight="400">{el.name}</Text>
+              <Flex mt="20px" w="fit-content" gap="7px" alignItems="center">
+                <Avatar size={"sm"} src={el.userID.image} />
+                <Text w="fit-content" fontSize="11px" fontWeight="400">{el.userID.name}</Text>
               </Flex>
 
               </Link>
