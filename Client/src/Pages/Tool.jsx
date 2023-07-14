@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import tool from "../Style/Tool.module.css"
-import { Box, Button, Flex, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+ 
+import { Box,   Flex,   Text, useColorModeValue } from '@chakra-ui/react'
 import axios from "axios"
-import coll2 from "../Utils/collec (2).svg";
-import fimg from "../Utils/micon.svg";
-import collect from '../Utils/collec.svg'
-
+ 
 import { Telement } from '../Components/Tool/Telement';
-import { Tranding } from '../Components/Tranding';
+ 
 import { useParams } from 'react-router-dom';
 import { LandingRight } from '../Components/LandingRight';
 

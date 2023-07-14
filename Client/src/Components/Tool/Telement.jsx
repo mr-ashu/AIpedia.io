@@ -1,31 +1,28 @@
 import React from 'react'
 import tool from "../../Style/Tool.module.css"
 import { Box, Button, Flex, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react'
-import star from "../../Utils/Star.svg"
-import toolimg from "../../Utils/toolimg.svg"
+ 
 import vscode from "../../Utils/Vs code.svg"
-import { BsBoxArrowUpRight, BsFillHeartFill, BsFillSave2Fill, BsFillSaveFill, BsFillShareFill } from 'react-icons/bs';
-import { AiFillApi, AiOutlineShareAlt } from 'react-icons/ai';
+import { BsBoxArrowUpRight, BsFillHeartFill,  BsFillSaveFill } from 'react-icons/bs';
+import { AiFillApi,   } from 'react-icons/ai';
 import { RiOpenSourceFill } from 'react-icons/ri'
-import { ToolBottom } from './ToolBottom';
+ 
 import { Link } from 'react-router-dom'
 import { Tabcomp } from './Tab'
-import gana from "../../Utils/gana.svg"
+ 
 import { FaStar } from 'react-icons/fa'
 import { MdOutlineVerified } from 'react-icons/md'
 
 
 export const Telement = ({ el, id }) => {
-
-    console.log(el);
-
+ 
 
     return (
-        <Box >
+        <Box bg={useColorModeValue("var(--landing-page, #FFF)", "#2C2C2C")}>
 
 
 
-            <Stack  >
+            <Stack>
 
                 <Box className={tool.toolbox} justifyContent="space-between">
 

@@ -163,12 +163,12 @@ export const ListModal = ({ el }) => {
             <Modal
 
                 className={style.modal}
-
+               
                 open={open}
                 onClose={handleClose}
 
             >
-                <Box overflow="auto" sx={{ width: "fit-content" }}>
+                <Box  bg={useColorModeValue("var(--landing-page, #FFF)", "#2C2C2C")} overflow="auto" sx={{ width: "fit-content" }}>
                     <Flex justifyContent="space-between" w="90%" alignItems="center" margin="auto" mt="20px" mb={"20px"}>
                         <CloseIcon cursor={"pointer"} onClick={handleClose} />
                         <Link to={`/tool/${el._id}`}><Text cursor={"pointer"} border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} padding="3px" px={2} borderRadius="5px">Open in new tab</Text></Link>
