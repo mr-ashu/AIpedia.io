@@ -1,4 +1,4 @@
-import {  Box, Divider, Flex, Image, Text, useColorModeValue, } from '@chakra-ui/react'
+import { Box, Divider, Flex, Image, Text, useColorModeValue, } from '@chakra-ui/react'
 
 import React from 'react'
 import style from "../Style/Featured.module.css";
@@ -38,27 +38,27 @@ export const CurtedCollection = () => {
     return (
         <div>
             <Box className={style.featured}>
-             
+
 
                 <Box>
-                    <Flex textTransform="uppercase"  alignItems="center" mb="20px" gap="5px" mt="20px" fontWeight="600" fontSize="16px"  >  <Text>Curated collections</Text><HiOutlineBookmark size={20}/> </Flex>
+                    <Flex textTransform="uppercase" alignItems="center" gap="8px" mt="30px" fontWeight="600" fontSize="14px" lineHeight="20px"  >  <Text>Curated collections</Text><HiOutlineBookmark size={20} /> </Flex>
                     {
                         coll?.map((el, i) => (
-                            <Box key={i}>
+                            <Box mt="30px" key={i}>
 
-                                <Flex alignItems="center" gap="10px" paddingBottom="20px">
+                                <Flex alignItems="center" gap="10px">
                                     <Box className={style.grid_icon}>
-                                        <Image   src={el.icon2} />
-                                        <Image   src={el.icon} />
-                                        <Image  src={el.icon2} />
-                                        <Image   src={el.icon} />
+                                        <Image src={el.icon2} />
+                                        <Image src={el.icon} />
+                                        <Image src={el.icon2} />
+                                        <Image src={el.icon} />
                                     </Box>
 
 
                                     <Box>
 
-                                        <Text fontSize="14px" fontWeight="600" color="#22222" >{el.title}</Text>
-                                        <Flex alignItems="center" gap="3px" fontSize="10px" fontWeight="400" mt="5px" mb="5px">
+                                        <Text fontSize="13px" fontWeight="600" color="#22222" lineHeight="24px" >{el.title}</Text>
+                                        <Flex alignItems="center" gap="3px" fontSize="10px" fontWeight="400" lineHeight="20px">
                                             <Text >{el.created} </Text>
                                             | <Text color="#3B89B6">{el.tool} tools</Text>
                                         </Flex>
@@ -75,7 +75,7 @@ export const CurtedCollection = () => {
                         ))
                     }
 
-                    <Divider  border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} />
+                    <Divider border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} mt="30px" />
 
                 </Box>
 

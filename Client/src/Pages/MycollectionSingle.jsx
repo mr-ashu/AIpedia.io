@@ -9,6 +9,7 @@ import { ListModal } from '../Components/ListModal'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { LandingRight } from '../Components/LandingRight'
 
 
 const getData = ({id,token}) => {
@@ -93,9 +94,7 @@ export const MycollectionSingle = () => {
                     </Stack>
 
 
-                    <Stack>
-                        <Rightbar />
-                    </Stack>
+                     <LandingRight/>
 
                 </Flex>
 

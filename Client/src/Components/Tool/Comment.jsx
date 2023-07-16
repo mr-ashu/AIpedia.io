@@ -1,18 +1,13 @@
-import { StarIcon } from '@chakra-ui/icons'
-import { Avatar, Box, Button, Divider, Flex, FormLabel, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, Select, Text, Textarea, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button, Divider, Flex, FormLabel, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, Select, Text, Textarea, css, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillLike } from "react-icons/ai"
-import dateFormat from 'dateformat'
 import { FaStar } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import notification from '../Toast';
 import moment from 'moment/moment';
 import style from "../../Style/Tool.module.css"
-import logo from "../../Utils/LOGO.svg"
-let star = [
 
-]
 
 
 
@@ -56,7 +51,7 @@ export const Comment = ({ el, id }) => {
                     onClose();
                 })
             }
-            else{
+            else {
                 notification("error", "Login first!");
             }
 
@@ -75,7 +70,7 @@ export const Comment = ({ el, id }) => {
 
 
         try {
-            let res = await axios.patch(
+            await axios.patch(
                 `${process.env.REACT_APP_API}/data/update/${id}/add-like/comment`,
                 null,
                 { headers: { token } }
@@ -101,7 +96,7 @@ export const Comment = ({ el, id }) => {
         let payload = { rating: Number(rate) };
         try {
             let token = userData.data;
-            let res = await axios.post(
+            await axios.post(
                 `${process.env.REACT_APP_API}/data/rating`,
                 payload,
                 { headers: { token } }
@@ -117,19 +112,8 @@ export const Comment = ({ el, id }) => {
     return (
         <Box mt="40px">
 
-            <Box className={style.rating} w="90%" alignItems="center" m="auto">
-                <Flex alignItems="center" gap="70px">
-                    <Image src={logo} />
 
-                </Flex>
-
-                <Button borderRadius="7px" color="white" padding="14px, 17px, 14px, 17px" bg="#3B89B6" _hover={{ bg: "none" }}>Advertise this tool</Button>
-
-            </Box>
-
-
-            <Divider mt="40px" border="1px solid #CCCCCC" />
-            <Box border="1px solid #CCCCCC" mt="20px" px={8} py={2} borderRadius="5px">
+            <Box border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} mt="20px" px={"20px"} py={"14px"} borderRadius="10px">
                 <Box className={style.rating} alignItems="center">
                     <Box>
                         <Text fontSize="16px" fontWeight="600" >What do you think about The Collect Button?</Text>
@@ -153,8 +137,8 @@ export const Comment = ({ el, id }) => {
                                         value={givenRating}
                                         color={
                                             givenRating < rate || givenRating === rate
-                                                ? "#3B89B6"
-                                                : "rgb(192,192,192)"
+                                                ? "#ECBA67"
+                                                : "#E6E6E6"
                                         }
                                     />
                                 </Box>
@@ -176,7 +160,7 @@ export const Comment = ({ el, id }) => {
                         </Text>
 
                         <Text fontSize="14px" fontWeight="400" lineHeight="24px">
-                            594 reviews
+                            {reviewData.length} reviews
                         </Text>
                     </Flex>
 
@@ -191,8 +175,8 @@ export const Comment = ({ el, id }) => {
                                             value={givenRating}
                                             color={
                                                 givenRating <= 5
-                                                    ? "#3B89B6"
-                                                    : "rgb(192,192,192)"
+                                                    ? "#ECBA67"
+                                                    : "#E6E6E6"
                                             }
                                         />
                                     </Box>
@@ -210,8 +194,8 @@ export const Comment = ({ el, id }) => {
                                             value={givenRating}
                                             color={
                                                 givenRating <= 4
-                                                    ? "#3B89B6"
-                                                    : "rgb(192,192,192)"
+                                                    ? "#ECBA67"
+                                                    : "#E6E6E6"
                                             }
                                         />
                                     </Box>
@@ -229,8 +213,8 @@ export const Comment = ({ el, id }) => {
                                             value={givenRating}
                                             color={
                                                 givenRating <= 3
-                                                    ? "#3B89B6"
-                                                    : "rgb(192,192,192)"
+                                                    ? "#ECBA67"
+                                                    : "#E6E6E6"
                                             }
                                         />
                                     </Box>
@@ -248,8 +232,8 @@ export const Comment = ({ el, id }) => {
                                             value={givenRating}
                                             color={
                                                 givenRating <= 2
-                                                    ? "#3B89B6"
-                                                    : "rgb(192,192,192)"
+                                                    ? "#ECBA67"
+                                                    : "#E6E6E6"
                                             }
                                         />
                                     </Box>
@@ -267,8 +251,8 @@ export const Comment = ({ el, id }) => {
                                             value={givenRating}
                                             color={
                                                 givenRating === 1
-                                                    ? "#3B89B6"
-                                                    : "rgb(192,192,192)"
+                                                    ? "#ECBA67"
+                                                    : "#E6E6E6"
                                             }
                                         />
                                     </Box>
@@ -341,26 +325,36 @@ export const Comment = ({ el, id }) => {
 
 
 
-            <Box bg="#F3F5FA" padding="25px" paddingBottom="50px" borderRadius="5px" color="black">
-                <Flex alignItems="center" justifyContent="end">
+            <Box 
+                m="auto"
+                border="1px"
+                borderColor={useColorModeValue("#E6E6E6", "#444")}
+                bg={useColorModeValue("rgba(248, 248, 248, 0.97)", "transparent")}
+                px="33px"
+                py="20px"
+                paddingBottom="50px"
+                borderRadius="10px"
+                mt="50px"  
+                >
+                <Flex className={style.riviewfilter} mt="20px" mb="20px" alignItems="center" justifyContent="space-between">
+
+                    <Text fontSize="23px" lineHeight="32px" fontWeight="700">{reviewData.length} Reviews</Text>
 
 
 
 
 
-
-
-                    <Flex gap="10px">
+                    <Flex gap="13px">
                         <Select border="1px solid #B8B7B7" color="#B8B7B7" w="111px" h="29px" placeholder="Most recent "> </Select>
                         <Select border="1px solid #B8B7B7" color="#B8B7B7" w="111px" h="29px" placeholder="Any rating "> </Select>
                     </Flex>
                 </Flex>
 
-                <Text mt="20px" mb="20px" fontSize="23px" lineHeight="32px" fontWeight="700">{reviewData.length} Reviews</Text>
+
 
 
                 {/* maping----------------------------- */}
-                <Box>
+                <Box mt="25px">
 
                     {
                         reviewData?.map((ele) => (
@@ -370,14 +364,13 @@ export const Comment = ({ el, id }) => {
                                         <Avatar src={ele.userID?.image} />
 
                                         <Box>
-                                            <Text fontSize="16px" fontWeight="600" lineHeight="24px">{ele.userID?.name}</Text>
-                                            <Text fontSize="14px" fontWeight="400" lineHeight="24px">@aleksandra14</Text>
+                                            <Text fontSize="15px" fontWeight="600" lineHeight="24px">{ele.userID?.name}</Text>
+                                            <Text fontSize="15px" fontWeight="400" lineHeight="24px">@aleksandra14</Text>
                                         </Box>
                                     </Flex>
-                                    <Flex alignItems="center" gap="10px">
-                                        <Text fontSize="20px">{ele.likes}</Text>
-                                        <AiFillLike size={24} onClick={() => handleLike(ele._id)} />
-                                    </Flex>
+
+                                    <AiFillLike size={23} onClick={() => handleLike(ele._id)} />
+
                                 </Flex>
 
                                 <Flex mt="15px" mb="10px" gap="7px">
@@ -391,8 +384,8 @@ export const Comment = ({ el, id }) => {
 
                                                     color={
                                                         givenRating <= ele.rating
-                                                            ? "orange"
-                                                            : "rgb(192,192,192)"
+                                                            ? "#ECBA67"
+                                                            : "#E6E6E6"
                                                     }
                                                 />
                                             </Box>
@@ -401,10 +394,10 @@ export const Comment = ({ el, id }) => {
                                     })}
                                 </Flex>
 
-                                <Text fontSize="15px" fontWeight="400" lineHeight="28px" >{ele.message} </Text>
-                                <Flex alignItems="center" gap="60px" fontSize="12px" lineHeight="20px" fontWeight="400">
+                                <Text fontSize="15px" fontWeight="400" lineHeight="28px" mt="15px" >{ele.message} </Text>
+                                <Flex alignItems="center" gap="153px" fontSize="12px" lineHeight="20px" fontWeight="400">
                                     <Text>{moment(el.createdAt).format("MMM Do")}</Text>
-                                    <Text>...</Text>
+                                    <Text fontSize="15px" letterSpacing="2px" fontWeight="bold">...</Text>
                                 </Flex>
                             </Box>
                         ))

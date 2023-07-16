@@ -38,6 +38,10 @@ const dataSchema = new mongoose.Schema(
     featured:{
       type: Boolean,
       default:false
+    },
+    highlighted:{
+      type: Boolean,
+      default:false
     }
 
   },

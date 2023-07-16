@@ -6,8 +6,7 @@ import { BiSearch } from 'react-icons/bi'
 import { UpDownIcon } from '@chakra-ui/icons'
 import { MdOutlineFileUpload } from 'react-icons/md'
 import { FcUpload } from 'react-icons/fc'
-import notification from '../../Components/Toast'
-import { CsvModal } from './csvModal'
+
 import { FaGripLinesVertical, FaWpforms } from 'react-icons/fa'
 
 export const ToolManages = () => {
@@ -244,7 +243,7 @@ export const ToolManages = () => {
 
                 </MenuList>
               </Menu></Th>
-              <Th color="white">work with <Menu color="black">
+              <Th color="white">works with <Menu color="black">
                 <MenuButton >
                   <UpDownIcon />
                 </MenuButton>
@@ -298,7 +297,20 @@ export const ToolManages = () => {
                   <MenuItem>Mark as Draft</MenuItem>
 
                 </MenuList>
-              </Menu></Th>
+              </Menu>
+              </Th>
+              <Th color="white">higligeted <Menu color="black">
+                <MenuButton >
+                  <UpDownIcon />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Download</MenuItem>
+                  <MenuItem>Create a Copy</MenuItem>
+                  <MenuItem>Mark as Draft</MenuItem>
+
+                </MenuList>
+              </Menu>
+              </Th>
               <Th color="white">note </Th>
               <Th color="white">dashboard  </Th>
               <Th color="white">action  </Th>
@@ -314,16 +326,16 @@ export const ToolManages = () => {
               data?.map((el, i) => (
                 <Tr key={i}>
                   <Td>{i + 1}</Td>
-                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="Title" value={el.Title} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
+                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="Title" value={el.Title} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
                   <Td>
                     <Switch type='checkbox' defaultChecked={el.isActive ? true : false} name='isActive' onChange={(event) => handleChange(event, el._id)} />
                   </Td>
                   <Td>
                     <Box>
                       {
-                        click ? <Textarea onChange={(event) => handleChange(event, el._id)} name="Logo" value={el.Logo} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /> :
+                        click ? <Textarea onChange={(event) => handleChange(event, el._id)} name="Logo" value={el.Logo} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /> :
                           <>
-                            <Image borderRadius="5px"  minW="80px" h="80px" src={el.Logo} />
+                            <Image borderRadius="5px" minW="80px" h="80px" src={el.Logo} />
                             <Flex justifyContent="end" mt="8px">
                               <AiOutlineEdit cursor="pointer" onClick={() => setclick(true)} />
                             </Flex>
@@ -339,7 +351,7 @@ export const ToolManages = () => {
                   <Td>
 
                     {
-                      click ? <Textarea onChange={(event) => handleChange(event, el._id)} name="Cover_image" value={el.Cover_image} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /> :
+                      click ? <Textarea onChange={(event) => handleChange(event, el._id)} name="Cover_image" value={el.Cover_image} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /> :
                         <>
                           <Image borderRadius="5px" minW="230px" h="120px" src={el.Cover_image} />
                           <Flex justifyContent="end" mt="8px">
@@ -350,26 +362,33 @@ export const ToolManages = () => {
                     }
                   </Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="URL" value={el.URL} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" placeholder={el.URL} /></Td>
-                  <Td> <Textarea onChange={(event) => handleChange(event, el._id)} name="Tagline" value={el.Tagline} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Description" value={el.Description} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
+                  <Td> <Textarea onChange={(event) => handleChange(event, el._id)} name="Tagline" value={el.Tagline} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Description" value={el.Description} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="Title" value={el.Title} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" placeholder={el.Title} /></Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="Pricing" value={el.Pricing} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" placeholder={el.Pricing} /></Td>
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Category" value={el.Category} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Category" value={el.Category} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="Support" value={el.Support} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" placeholder={el.Support} /></Td>
 
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Galary_image" value={el.Galary_image} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"    /></Td>
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Youtube_embed" value={el.Youtube_embed} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="key_features" value={el.key_features} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
-                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="price_amount" value={el.price_amount} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"  /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Galary_image" value={el.Galary_image} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="Youtube_embed" value={el.Youtube_embed} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="key_features" value={el.key_features} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="price_amount" value={el.price_amount} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
 
-                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="works_with" value={el.works_with} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /> </Td>
-                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="others_features" value={el.others_features} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"  /></Td>
-                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="social_media" value={el.social_media} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>
-                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="likes" value={el.likes} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"  /></Td>
+                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="works_with" value={el.works_with} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /> </Td>
+                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="others_features" value={el.others_features} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Textarea onChange={(event) => handleChange(event, el._id)} name="social_media" value={el.social_media} css={{ '&::-webkit-scrollbar': { display: "none" } }} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
+                  <Td><Input onChange={(event) => handleChange(event, el._id)} name="likes" value={el.likes} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
                   <Td>
 
 
                     <Switch type='checkbox' defaultChecked={el.featured ? true : false} name='featured' onChange={(event) => handleChange(event, el._id)} />
+
+
+                  </Td>
+                  <Td>
+
+
+                    <Switch type='checkbox' defaultChecked={el.highlighted ? true : false} name='highlighted' onChange={(event) => handleChange(event, el._id)} />
 
 
                   </Td>

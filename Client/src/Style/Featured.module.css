@@ -5,7 +5,15 @@
 
   text-align: left;
 }
-
+.desc1 {
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .desc {
   
   overflow: hidden;
@@ -23,15 +31,16 @@
   gap: 0;
   border-radius: 5px;
   width: 63px;
+  padding: 5px 0px ;
   margin: auto;
   align-items: center;
   background: rgba(59, 137, 182, 0.1);;
   justify-content: center;
-  padding: 5px;
+   
 }
 .grid_icon > img {
-  width: 100%;
-  height: 31px;
+  width: 18px;
+  height: 19px;
 }
 
 @media screen and (max-width: 1025px) {

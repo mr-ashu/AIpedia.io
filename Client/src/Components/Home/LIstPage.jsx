@@ -24,7 +24,7 @@ export const LIstView = ({ data, showLoader }) => {
                     data?.map((el,i) => (
 
                         <Box key={i}>
-                            <ListModal el={el} />
+                            <ListModal el={el} i={i} />
                         </Box>
 
 

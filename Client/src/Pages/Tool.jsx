@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
  
-import { Box,   Flex,   Text, useColorModeValue } from '@chakra-ui/react'
+import { Box,   Flex,   Stack,   Text, useColorModeValue } from '@chakra-ui/react'
 import axios from "axios"
  
 import { Telement } from '../Components/Tool/Telement';
- 
+import style from "../Style/Tool.module.css"
 import { useParams } from 'react-router-dom';
 import { LandingRight } from '../Components/LandingRight';
+ 
 
 
 
@@ -43,31 +44,24 @@ export const Tool = () => {
    
   
     return (
-        <Box   py="40px">
+        <Box  py="40px">
 
 
-            <Flex justifyContent="space-between" w="98%" m="auto">
-                <Box>
+            <Flex justifyContent="space-between" className={style.leftscroll} >
+                <Stack>
 
                  {
                     loading? <Text>Loading...</Text>:<Telement id={id} el={data}/>
                  }
                     
-                </Box>
-                <Box>
+                </Stack>
+                <Stack>
                     <LandingRight/>
-                </Box>
+                </Stack>
 
 
             </Flex>
-
-
-
-
-
-
-
-
+ 
         </Box>
     )
 }

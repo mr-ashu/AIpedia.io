@@ -10,10 +10,10 @@ export const Like = ({ grid }) => {
   return (
     <Box>
     
-        {
+        {/* {
         grid ? <Gridcomp   /> : <LIstcomp  />
     
-    }
+    } */}
    
     </Box>
   )

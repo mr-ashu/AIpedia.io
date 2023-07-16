@@ -33,7 +33,7 @@ export const GridPage = ({data,showLoader}) => {
                     data?.map((el,i) => (
 
                         <Box key={i}>
-                            <Modalcomp el={el} />
+                            <Modalcomp el={el} i={i}/>
                         </Box>
 
                     ))

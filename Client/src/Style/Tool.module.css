@@ -4,15 +4,33 @@
 
 .toolbox{
    display: flex;
+   gap:80px;
+   margin-left: 60px;
+   margin-right: 60px;
+ 
 }
-.left{
-   width: 25%;
+.list{
+    width:600px
 }
 
-.right{
-    width: 70%;
-}
+.leftscroll{
+   gap:50px
+  
 
+}
+ 
+.tscroll::-webkit-scrollbar{
+    display: none
+};
+
+.imagescroll{
+    
+}
+ 
+.imagescroll::-webkit-scrollbar{
+    display: none
+};
+ 
 .tnav{
     display: flex;
 }
@@ -20,9 +38,12 @@
 .rtool{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    gap:30px
 }
 
- 
+.tnav{
+    max-width: 100%;
+}
 
 .sbag{
     position: relative;
@@ -41,40 +62,64 @@
     display: flex;
     justify-content:space-between;
   }
- 
-@media screen and (max-width: 920px) {
- 
+  @media screen and (max-width: 1025px) {
+    
+   
     .toolbox{
-        display: flex;
-     }
-     .left{
-        width: 30%;
-     }
+       display: flex;
+       gap:20px;
+       margin-left: 40px;
+       margin-right: 0px;
      
-     .right{
-         width: 75%;
-     }
- 
-
-
+    }
+    .list{
+       width:400px
+   }
+   .tnav{
+    max-width: 400px;
+}
 }
 
-@media screen and (max-width: 450px) {
+  @media screen and (max-width: 1000px) {
+    
+   
     .toolbox{
-        display: grid;
-
-     }
-     .left{
-        width: 100%;
-     }
+       display: flex;
+       gap:60px;
+       margin-left: 50px;
+       margin-right: 50px;
      
+    }
+    .list{
+       width:400px
+   }
+   .tnav{
+    max-width: 400px;
+}
+}
+ 
+ 
+
+@media screen and (max-width: 450px) {
+    
+    .leftscroll{
+        gap:0px
+       
+     
+     }
      .right{
-         width: 100%;
+      
       margin-top: 20px;
      }
      .tnav{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
+        width: 300px;
+    }
+    
+    .left{
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        text-align: center;
     }
    
     .rtool{
@@ -82,8 +127,10 @@
         grid-template-columns: repeat(1,1fr);
     }
 
-    .rating{
-        display: grid;
+    .riviewfilter{
+       flex-direction: column;
+       gap:25px;
+         
          
       }
 
@@ -96,5 +143,16 @@
         margin-top: 10px;
         
      }
+
+     .toolbox{
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+      
+       
+     }
+     .list{
+        width:320px
+    }
 
 }
