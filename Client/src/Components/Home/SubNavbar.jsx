@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BsGrid } from 'react-icons/bs';
-
+import { MdOutlineCategory } from 'react-icons/md';
 import { ImList2 } from 'react-icons/im'
 import style from "../../Style/Subnav.module.css"
 import { Box, Button, Divider, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue } from '@chakra-ui/react'
@@ -15,123 +15,6 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { TbAdjustmentsHorizontal } from 'react-icons/tb';
 
 
-let image = [
-  "Image editing", "Image generator", "Background removal", "Buy-Sell AI Image", "Image generator", "Image editing", "2D-to-3D", "Image-to-code", "AI Art gallery", "Ad creative", "Image-To-Video", "Background removal", "Logo Design", "Product design", "Design tool", "NFTs", " Anime"
-
-
-]
-
-let audio = [
-  "Audio sample", "Audio editing ", "Text-to-speech", "Dubbing/Translator", "Voice generator", "Podcast", "Audio/Video Transcription"
-]
-let td = [
-  "3D modeling", "VR/AR", "2D-to-3D", "Motion capture"
-]
-
-let writing = [
-  "Content creating",
-  "Writing tool",
-  "Copywriting",
-  "Story generator",
-  "Education",
-  "Learning tool",
-  "Books",
-  "Formula generator",
-  "Search engine",
-  "Content creation"
-
-]
-
-
-let video = [
-  "Video creation",
-  "Video editing",
-  "Reel/TikTok/Shorts",
-  "Image-To-Video",
-  "Motion capture",
-  "Live Streaming"
-]
-
-
-let business = [
-  "Sales",
-  "Marketing",
-  "SEO",
-  "Career",
-  "Resume/CV",
-  "Data management",
-  "Task management",
-  "Risk Management",
-  "Quality management",
-  "Customer service",
-  "Data analysis",
-  "Analytics",
-  "Startup",
-  "Human Resource",
-  "Legal assistant",
-  "Finance",
-  "Productivity",
-
-
-]
-
-let b2 = [
-  "Presentation",
-  "Networking",
-  "Email Assistant",
-  "Chatbot builder",
-  "Affiliate",
-  "SEO",
-  "Business idea",
-  "Email Assistant",
-  "Research",
-  "E-commerce"
-]
-
-let bot = [
-  "AI Model",
-  "Chatbot",
-  "AI Detector",
-  "Virtual assistant"
-]
-
-let developer = [
-  "Code assistant",
-  "No-code/Low-code",
-  "UI/UX Design",
-  "Web/App Development",
-  "Chatbot builder"
-]
-
-let other = [
-  "AI Community",
-  "Famous figure",
-  "Fun",
-  "Children",
-  "Prompt",
-  "Gift ideas",
-  "Name generator",
-  "Self Improvement",
-  "Experiment",
-
-
-]
-
-let o2 = [
-  "Apps store",
-  "Sports",
-  "Quiz",
-  "Messaging",
-  "Health",
-  "Social Media",
-  "Recipe / Food",
-  "Science"
-]
-
-
-
-let arr = []
-
 export const SubNavbar = () => {
   const [list, setlist] = useState(false);
   let [count, setCount] = useState(0)
@@ -142,7 +25,7 @@ export const SubNavbar = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   let [data, setData] = useState([]);
   let [page, setPage] = useState(1);
-
+  const [cat, setcatlist] = useState([]);
   const [Category, setcat] = useState([]);
 
   const [pageName, setPageName] = useState("");
@@ -181,7 +64,7 @@ export const SubNavbar = () => {
 
     try {
       let res = await axios.post(
-        `${process.env.REACT_APP_API}/data/get?sort=${sort}&page=${page}&limit=9`,
+        `${process.env.REACT_APP_API}/data/get?sort=${sort}&page=${page}`,
         payload
       );
 
@@ -194,30 +77,22 @@ export const SubNavbar = () => {
   };
 
 
-  const handlecat = (el, i) => {
+  const getCat = () => {
+    axios.get(`${process.env.REACT_APP_API}/cat/get`)
+      .then((res) => {
+        setcatlist(res.data)
 
-
-    arr.push(el)
-    localStorage.setItem("cat", JSON.stringify(arr))
-
-
+      })
   }
-
-  const removeItem = (el, i) => {
-
-    arr.splice(i, 1)
-
-    localStorage.setItem("cat", JSON.stringify(arr))
-
-
-  }
-
-
   useEffect(() => {
-    let x = JSON.parse(localStorage.getItem("cat")) || []
-    setcat(x)
+    getCat()
 
-  }, [Category])
+
+  }, [])
+
+
+
+
 
 
 
@@ -260,9 +135,23 @@ export const SubNavbar = () => {
   }, []);
 
 
+  const handleCat = (el, i) => {
 
+    setcat((pre) => [...pre, el])
+    setPageName("filter")
+    setFilterLoader((prev) => !prev)
+  }
 
+  const removeItem = (el, i) => {
 
+    Category.splice(i, 1)
+
+    setPageName("filter")
+    setFilterLoader((prev) => !prev)
+
+  }
+
+ 
 
   return (
     <div  >
@@ -273,57 +162,50 @@ export const SubNavbar = () => {
         <Flex justifyContent="space-between" alignItems="center"  >
           <Flex alignItems="center" gap="20px"  >
 
-            <Flex alignItems="center" justifyContent="space-between" w={open ? "148px" : ""} ml="12px" h="100%">
+            <Flex position="relative" fontWeight="400" alignItems="center" justifyContent={open ? "space-between" : "center"} w={open ? "142px" : ""} ml="15px" h="100%">
 
-              <TbAdjustmentsHorizontal cursor="pointer" onClick={() => setopen(!open)} size={22} />
+              <Box>
+                <TbAdjustmentsHorizontal cursor="pointer" onClick={() => setopen(!open)} size={20} />
 
-
-
-
-              {
-                open ?
-                  <Flex onClick={() => setopen(!open)} cursor="pointer" gap="22px" justifyContent="space-between" h="100%">
-                    <Text fontFamily="Segoe UI" fontWeight="600" letterSpacing="4px">Filter</Text>
-
-
-                    <Text mt="0px" w="15px" h="15px" alignItems="center" textAlign="center" justifyContent="center" fontSize="10px" bg="#3B89B6" color="white" borderRadius="100%" >{count}</Text>
-
-
-
-                  </Flex> : ""
-              }
+              </Box>
+              {open ? <Text onClick={() => setopen(!open)} cursor="pointer" fontSize="14px" lineHeight="24px" fontFamily="Segoe UI" fontWeight="600" letterSpacing="2.59px" textTransform="uppercase" >Filters</Text> : ""}
+              {open ? <Text mb="10px" w="15px" h="15px" alignItems="center" textAlign="center" justifyContent="center" fontSize="10px" bg="#3B89B6" color="white" borderRadius="100%" >{count}</Text> : ""}
             </Flex>
 
 
 
-            <Box ml={open ? "" : "40px"} >
+            <Box ml={open ? "23px" : "44px"} >
               <Menu bg={useColorModeValue("white", "#464444")}>
                 <MenuButton
-                  px={4}
-                  py={1}
+                  px={3}
+                  py="3px"
 
-                  borderRadius='2px'
+                  borderRadius='4px'
                   borderWidth='1px'
                   _hover={{ bg: "" }}
+                  fontSize="14px"
+                  lineHeight="24px"
+                  fontWeight="400"
 
                 >
-                  Category <ChevronDownIcon />
+
+                  <Flex alignItems="center" gap="5px"><MdOutlineCategory /> Category <ChevronDownIcon /></Flex>
                 </MenuButton>
                 <MenuList bg={useColorModeValue("white", "#2C2C2C")} className={style.menulist} overflow="auto" whiteSpace="nowrap"  >
 
-                  <Flex>
+                  <Flex fontSize="13px">
 
                     <Box>
                       <MenuItem bg="" fontWeight="bold">Image</MenuItem>
                       {
 
-                        image.map((el, i) => (
+                        cat?.filter((e) => e.Title === "Image").map((el, i) => (
                           <Box key={i} >
 
                             <MenuItem bg=""
-                              onClick={() => handlecat(el, i)}
+                              onClick={() => handleCat(el.Category, i)}
 
-                            >{el}</MenuItem>
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -337,9 +219,13 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">Audio</MenuItem>
                       {
 
-                        audio.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Audio & Music").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -350,9 +236,13 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">3D</MenuItem>
                       {
 
-                        td.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "3D").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -364,9 +254,13 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">Writing</MenuItem>
                       {
 
-                        writing.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Writing").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -377,9 +271,13 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">Video</MenuItem>
                       {
 
-                        video.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Video").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -392,37 +290,37 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">Business</MenuItem>
                       {
 
-                        business.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Business").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
                         ))
 
                       }
+
+                      <Divider w="90%" m="auto" mt="10px" mb="10px" border="1px solid" />
                     </Box>
 
                     <Box>
 
-                      {
 
-                        b2.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
 
-                          </Box>
-
-                        ))
-
-                      }
-                      <Divider w="90%" m="auto" mt="10px" mb="10px" border="1px solid" />
                       <MenuItem bg="" fontWeight="bold">AI BOT</MenuItem>
                       {
 
-                        bot.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "AI Bot").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -436,36 +334,34 @@ export const SubNavbar = () => {
                       <MenuItem bg="" fontWeight="bold">Developer tools</MenuItem>
                       {
 
-                        developer.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Developer Tools").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
                         ))
 
                       }
-                      <Divider w="90%" m="auto" mt="10px" mb="10px" border="1px solid" />
-                      <MenuItem bg="" fontWeight="bold">Other</MenuItem>
-                      {
 
-                        other.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
 
-                          </Box>
-
-                        ))
-
-                      }
                     </Box>
 
                     <Box>
+                      <MenuItem bg="" fontWeight="bold">Other</MenuItem>
                       {
 
-                        o2.map((el, i) => (
-                          <Box key={i} >
-                            <MenuItem onClick={() => handlecat(el, i)} bg="">{el}</MenuItem>
+                        cat?.filter((e) => e.Title === "Miscellaneous").map((el, i) => (
+                          <Box key={i}>
+
+                            <MenuItem bg=""
+                              onClick={() => handleCat(el.Category, i)}
+
+                            >{el.Category}</MenuItem>
 
                           </Box>
 
@@ -473,7 +369,6 @@ export const SubNavbar = () => {
 
                       }
                     </Box>
-
 
                   </Flex>
 
@@ -488,10 +383,13 @@ export const SubNavbar = () => {
               <Flex position="relative" alignItems="center" gap="15px" h="100%" overflowX={"scroll"} whiteSpace={"nowrap"} className={style.xscroll}>
                 {
                   Category?.map((el, i) => (
-                    <Flex cursor="pointer" py={1} px={2} justifyContent="center" borderRadius="10px" alignItems="center" gap="10px" bg="rgba(118, 161, 191, 0.3)">
-                      <Text>{el}</Text>
-                      <AiOutlineClose onClick={() => removeItem(el, i)} />
-                    </Flex>
+
+
+
+                    <Flex px={2} py="2.5px" height="fit-content" borderRadius='10px' borderWidth='1px' alignItems="center" justifyContent="space-between" textAlign="center" gap="5px"><Text fontStyle="12px" fontWeight="400" lineHeight="24px"> {el} </Text>  <AiOutlineClose size={10} cursor="pointer" onClick={() => removeItem(el, i)} />  </Flex>
+
+
+
                   ))
                 }
               </Flex>
@@ -505,7 +403,7 @@ export const SubNavbar = () => {
               <ImList2 fontWeight="300" />
 
             </Button>
-
+            {/* .smallbox */}
             <Button bg="" cursor="pointer" onClick={() => setlist(false)}>
               <BsGrid />
             </Button>
@@ -526,7 +424,19 @@ export const SubNavbar = () => {
           </Flex>
         </Flex>
       </Box>
+
       <Box >
+        <Box className={style.smallbox} alignItems="center" >
+          <Button bg="" cursor="pointer" onClick={() => setlist(true)}>
+            <ImList2 fontWeight="300" />
+
+          </Button>
+
+          <Button bg="" cursor="pointer" onClick={() => setlist(false)}>
+            <BsGrid />
+          </Button>
+
+        </Box>
         <LandingPage setCount={setCount} open={open} list={list} userinfo={userinfo} showLoader={showLoader} data={data} setUserInfo={setUserInfo} setPageName={setPageName} setFilterLoader={setFilterLoader} />
       </Box>
 

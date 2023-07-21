@@ -16,7 +16,7 @@ import {
 import axios from "axios"
 import style from "../../Style/Signup.module.css"
  
-import {  useEffect, useState } from 'react';
+import { useState } from 'react';
 import notification from '../Toast';
 import {   useSelector } from "react-redux";
  
@@ -115,8 +115,8 @@ export default function ProfileForm() {
 
           <Text mt="20px" mb="15px" fontSize="20px" fontWeight="600" lineHeight="20px" textAlign="left">Account setting</Text>
           <Box>
-            <Flex alignItems="center" justifyContent="space-between">
-              <Image boxSize="120px" src={reavatar} />
+            <Flex className={style.profilePic} alignItems="center" justifyContent="space-between">
+              <Image boxSize="120px" borderRadius="5px" src={reavatar} />
               <Box justifyContent="center">
 
 

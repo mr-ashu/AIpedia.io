@@ -1,41 +1,36 @@
 import {
-    Progress,
+
     Box,
-    ButtonGroup,
-    Button,
-    Heading,
+
     Flex,
     FormControl,
-    GridItem,
+
     FormLabel,
     Input,
 
-    SimpleGrid,
-    InputLeftAddon,
     InputGroup,
     Textarea,
-    FormHelperText,
-    InputRightElement,
+
     Text,
-    Divider,
+
     Image,
-    Stack,
+
 } from '@chakra-ui/react';
 import { DiOpensource } from 'react-icons/di';
-import { AiFillApi, AiFillDollarCircle, AiFillUnlock } from 'react-icons/ai';
+import { AiFillApi } from 'react-icons/ai';
 import Select from 'react-select';
 import style from "../../Style/Submit.module.css"
 import excel from "../../Utils/Spreadsheet_icon.svg"
 import chatgpt from "../../Utils/ChatGPT.svg"
 import vscode from "../../Utils/Vs code.svg"
-import discord from "../../Utils/Discord.svg"
+
 import figma from "../../Utils/Figma.svg"
 import github from "../../Utils/Github.svg"
 import mobile from "../../Utils/Mobile app.svg"
 import slack from "../../Utils/Slack.svg"
 import browser from "../../Utils/Browser Extension.svg"
 import Wordpress from "../../Utils/Wordpress.svg"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 let data = [
     {
@@ -44,7 +39,7 @@ let data = [
     },
     {
         logo: chatgpt,
-        name: "Sheet/Excel"
+        name: "ChatGPT(Plugin)"
     },
     {
         logo: vscode,
@@ -90,27 +85,46 @@ let otherdata = [
 
 ]
 
-export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,tagline,description,key_feature,social_media, handlechange, categories,setCategories, setIntegration, underCategories, setOthers }) => {
-   
-         let [c,setc]=useState([])
- 
+export const Form1 = ({ works_with, others_features, setkey_features, URL, Title, Tagline, Description, key_features, social_media, setSocial_media, handlechange, Category, setCategory, setworks_with, underCategory, setothers_features }) => {
 
-    
+    let [c, setc] = useState([])
+
+    const handleCheckboxChange = (e, name) => {
+        const { name: checkboxName } = e.target;
+        if (checkboxName === "others_features")
+            if (e.target.checked) {
+
+                setothers_features([...others_features, name]);
+            } else {
+
+                setothers_features(others_features.filter((item) => item !== name));
+            }
+        else if(checkboxName === "works_with") {
+            if (e.target.checked) {
+
+                setworks_with([...works_with, name]);
+            } else {
+
+                setworks_with(works_with.filter((item) => item !== name));
+            }
+        }
+    };
+
     return (
         <Box w="100%">
 
             <FormControl mt="15px"  >
                 <FormLabel >
-                    Link to the tool
+                    Tool URL
                 </FormLabel>
                 <Input
-                    value={tool_url}
-                    name="tool_url"
+                    value={URL}
+                    name="URL"
                     onChange={handlechange}
                     borderRadius="4px" w="100%" />
             </FormControl>
 
-            <FormControl mt="15px"   >
+            {/* <FormControl mt="15px"   >
                 <FormLabel htmlFor="email"  >
                     Affiliate dashboard link
                 </FormLabel>
@@ -121,7 +135,7 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                     borderRadius="4px" />
 
-            </FormControl>
+            </FormControl> */}
 
             <FormControl mt="15px">
 
@@ -134,8 +148,8 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                 <Input
 
-                    value={tool_name}
-                    name="tool_name"
+                    value={Title}
+                    name="Title"
                     onChange={handlechange}
                     borderRadius="4px" placeholder="AI Pedia " />
             </FormControl>
@@ -151,8 +165,8 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
                 </Flex>
                 <InputGroup  >
                     <Input
-                        value={tagline}
-                        name="tagline"
+                        value={Tagline}
+                        name="Tagline"
                         onChange={handlechange}
                         borderRadius="4px" placeholder='Make your tool stand out with a snappy tagline that captures its essence' />
 
@@ -169,8 +183,8 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                     type="textArea"
                     rows={5}
-                    value={description}
-                    name="description"
+                    value={Description}
+                    name="Description"
                     onChange={handlechange}
                     borderRadius="4px" placeholder="Description of the tool" />
 
@@ -184,60 +198,72 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                     type="textArea"
                     rows={5}
-                    value={key_feature}
-                    name="key_feature"
-                    onChange={handlechange}
+                    value={key_features.join('\n')}
+                    name="key_features"
+                    onChange={(e) => setkey_features(e.target.value.split('\n'))}
 
-                    borderRadius="4px" placeholder="Write key features your tool provides to the users in 5 points" />
+                    borderRadius="4px"
+                    placeholder="Write key features your tool provides to the users in 5 points
+                              
+                            •  
+                            •  
+                            •  
+                              "
+
+                />
 
             </FormControl>
             <FormControl mt="15px"  >
                 <FormLabel    >
                     Social Media Link
                 </FormLabel>
-                <Input
-                    type='text'
-                    value={social_media}
+                <Textarea
+                    type='textArea'
+                    rows={4}
+                    value={social_media.join('\n')}
                     name="social_media"
-                    onChange={handlechange}
+                    onChange={(e) => setSocial_media(e.target.value.split('\n'))}
 
-                    borderRadius="4px" placeholder="https://facebook.com" />
+                    borderRadius="4px"
+                    placeholder="Social media url
+                            •  
+                              " />
 
             </FormControl>
 
             <FormControl mt="15px" >
                 <FormLabel   >
-                    Select categories (Max 2 categories)
+                    Select category (Max 2 Category)
                 </FormLabel>
 
                 <Select
                     value={c}
-                    
+
                     closeMenuOnSelect={false}
                     isMulti
-                    options={underCategories}
+                    options={underCategory}
                     onChange={(e) => {
                         setc(e)
-                        e.map((el)=>{
-                           return setCategories([...categories,el.value])
+                        e.map((el) => {
+                            return setCategory([...Category, el.value])
                         })
-                      
+
                     }}
-                   isOptionDisabled={() => categories.length >= 2}
-      
+                    isOptionDisabled={() => Category.length >= 2}
+
                 />
 
             </FormControl>
             <FormControl mt="15px" >
                 <FormLabel   >
-                    Integration
+                    Works with
                 </FormLabel>
                 <Box className={style.integration}>
                     {
-                        data?.map((el,i) => (
+                        data?.map((el, i) => (
                             <Flex
 
-                               key={i}
+                                key={i}
                                 justifyContent="space-between"
                                 border="1.3px solid #CCCCCC"
                                 alignItems="center"
@@ -256,7 +282,12 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                                 </Flex>
 
-                                <input value={el.name} onChange={(e) => setIntegration([...integration,e.target.value])} type="checkbox" />
+                                <input
+                                    name='works_with'
+                                    checked={works_with.includes(el.name)}
+                                    onChange={(e) => handleCheckboxChange(e, el.name)}
+
+                                    type="checkbox" />
 
 
                             </Flex>
@@ -274,9 +305,9 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
                 <Box display="flex" gap="20px">
 
                     {
-                        otherdata?.map((el,i) => (
+                        otherdata?.map((el, i) => (
                             <Flex
-                              key={i}
+                                key={i}
                                 alignItems="center"
                                 justifyContent="space-between"
                                 border="1.3px solid #CCCCCC"
@@ -296,7 +327,12 @@ export  const Form1 = ({  integration,other,tool_url,dashboard_link,tool_name,ta
 
                                 </Flex>
 
-                                <input value={el.name}  onChange={(e) => setOthers([...other,e.target.value])} type="checkbox" />
+                                <input
+                                    name='others_features'
+                                    checked={others_features.includes(el.name)}
+                                    onChange={(e) => handleCheckboxChange(e, el.name)}
+
+                                    type="checkbox" />
 
                             </Flex>
                         ))

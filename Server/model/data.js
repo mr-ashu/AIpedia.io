@@ -2,31 +2,30 @@ const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema(
   {
-    URL: { type: String, trim: true },
-    Title: { type: String, trim: true },
-    Tagline: { type: String, trim: true },
-    Description: { type: String, trim: true },
-    Tags: [{ type: String, trim: true }],
-    Pricing: { type: String, trim: true },
-    Category: [{ type: String, trim: true }],
-    Support: { type: String, trim: true },
-    Logo: { type: String, trim: true },
-    Cover_image: { type: String, trim: true },
-    Galary_image: [{ type: String, trim: true }],
-    Youtube_embed: { type: String, trim: true },
-    Note: [{ type: String, trim: true }],
-    Dashboard: [{ type: String, trim: true }],
+   
+    URL: { type: String},
+    Title: { type: String},
+    Tagline: { type: String},
+    Description: { type: String},
+    Tags: [{ type: String}],
+    Pricing: { type: String},
+    Category: [{ type: String}],
+    Support: { type: String},
+    Logo: { type: String},
+    Cover_image: { type: String},
+    Galary_image: [{ type: String}],
+    Youtube_embed: { type: String},
+    Note: [{ type: String}],
+    Dashboard: [{ type: String}],
     isActive: Boolean,
-    key_features: [{ type: String, trim: true }],
-    price_amount: { type: String, trim: true },
-    works_with: [{ type: String, trim: true }],
-    others_features: [{ type: String, trim: true }],
-    social_media: [{ type: String, trim: true }],
+    key_features: [{ type: String}],
+    price_amount: { type: String},
+    works_with: [{ type: String}],
+    others_features: [{ type: String}],
+    social_media: [{ type: String}],
     paid: Boolean,
-    likes: {
-      type: Number,
-      default: Math.floor(Math.random() * 500),
-    },
+    likes: Number,
+   
     comment: {
       type: Number,
       default: 0,
@@ -34,7 +33,7 @@ const dataSchema = new mongoose.Schema(
     rating:{
       type: Number,
       default: Math.floor(Math.random() * 5)
-    },
+  },
     featured:{
       type: Boolean,
       default:false
@@ -42,7 +41,16 @@ const dataSchema = new mongoose.Schema(
     highlighted:{
       type: Boolean,
       default:false
+    },
+    verify:{
+      type: Boolean,
+      default:false
+    },
+    tool_own:{
+      type: Boolean,
+      default:false
     }
+
 
   },
   {

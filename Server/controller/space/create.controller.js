@@ -11,7 +11,7 @@ const createController = asyncHandler(async (req, res) =>{
           return res.status(400).json({ errors: errors.array()[0].msg });
         }
 
-        const create = await spaceModel.create({userID, space_name});
+        const create = await spaceModel.create({userID,...req.body});
         return res.send({msg : "Successfully Created space"});
     } catch (error) {
         return res.status(500).send({error : "Internal error!"})

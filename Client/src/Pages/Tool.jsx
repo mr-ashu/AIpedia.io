@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
  
-import { Box,   Flex,   Stack,   Text, useColorModeValue } from '@chakra-ui/react'
+import { Box,   Flex,   Stack,   Text  } from '@chakra-ui/react'
 import axios from "axios"
  
 import { Telement } from '../Components/Tool/Telement';
@@ -48,7 +48,7 @@ export const Tool = () => {
 
 
             <Flex justifyContent="space-between" className={style.leftscroll} >
-                <Stack>
+                <Stack mt="30px">
 
                  {
                     loading? <Text>Loading...</Text>:<Telement id={id} el={data}/>

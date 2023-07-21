@@ -12,6 +12,11 @@
  
 }
 
+.landingbox{
+  margin: auto;
+  margin-top: 50px;
+  
+}
 
 
 @media screen and (max-width: 450px) {
@@ -24,5 +29,11 @@
 
   .slide{
     display: none;
+  }
+
+  .landingbox{
+    margin: auto;
+    margin-top:0px;
+    
   }
 }

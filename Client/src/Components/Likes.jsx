@@ -19,7 +19,7 @@ export const Likes = ({el}) => {
       try {
         let token = userData.data;
         const id = el._id;
-        const res = await axios.patch(
+          await axios.patch(
           `http://localhost:9000/data/update/${id}/add-like`,
           null,
           { headers: { token } }

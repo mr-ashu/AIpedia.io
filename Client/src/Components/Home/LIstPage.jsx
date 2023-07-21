@@ -1,10 +1,6 @@
-import { Box, Modal } from '@mui/material'
-import React, { useEffect } from 'react'
-
-import style from "../../Style/List.module.css";
-
+import { Box } from '@mui/material'
+import React from 'react'
 import { CircularProgress, Stack } from '@chakra-ui/react';
-
 import { ListModal } from '../ListModal';
 
 export const LIstView = ({ data, showLoader }) => {
@@ -13,22 +9,16 @@ export const LIstView = ({ data, showLoader }) => {
 
     return (
 
-        <Stack   >
+        <Stack>
+        
 
-              <Box className={style.listbox}   >
-
-
-
-
+            <Box>
                 {
-                    data?.map((el,i) => (
+                    data?.filter((e)=>e.verify).map((el, i) => (
 
                         <Box key={i}>
                             <ListModal el={el} i={i} />
                         </Box>
-
-
-
 
                     ))
                 }

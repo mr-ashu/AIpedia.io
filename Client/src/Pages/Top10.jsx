@@ -1,74 +1,59 @@
-import { Box, Button, Flex, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import style from "../Style/Collection.module.css"
-
-import { Curated } from '../Components/Collection/Curated'
-import { Like } from '../Components/Collection/like'
-import { MyCollection } from '../Components/Collection/MyCollection'
-import { AiOutlineUnorderedList } from 'react-icons/ai'
-import { BsGrid } from 'react-icons/bs'
+import { Box, Flex, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
+import React from 'react'
+import style from "../Style/Tool.module.css" 
 import { Overall } from '../Components/Top10/Overall'
-import axios from 'axios'
+import { LandingRight } from '../Components/LandingRight'
+import { MdOutlineEqualizer } from 'react-icons/md'
 
 
-const nlist = ["OVERALL", "IMAGE", "WRITING", "AI BOT", "3D"]
+const nlist = ["Overall", "Image", "Developers tools", "AI BOT", "3D", "Business", "Video"]
+
 export const Top10 = () => {
-
-  const [data, setdata] = useState([])
-
-  const getData = () => {
-
-    axios.get(`${process.env.REACT_APP_API}/data/top-ten/category`, {
-      Category: "AIArtgallery"
-    })
-      .then((res) => {
-        console.log(res);
-      })
-  }
-
-
-  useEffect(() => {
-    // getData()
-  }, [])
-
   return (
-    <Box w="90%" margin="auto" paddingTop="70px" fontFamily="Segoe UI">
-      <Text width="160px" height="40px" fontWeight="600" fontSize={"32px"} lineHeight="40px">TOP 10</Text>
 
+    <Flex>
+      <Stack w="100%" fontFamily="Segoe UI">
 
-      <Tabs mt="20px" position="sticky"       >
-        <TabList fontSize="16px" fontWeight="600" lineHeight={"24px"}>
-          {
-            nlist?.map((el) => (
-              <Tab fontSize="16px" fontWeight="600" lineHeight={"24px"}>{el}</Tab>
-            ))
-          }
+        <Box w="80%" margin="auto" mt="70px">
+          <Flex alignItems="center" gap="5px" height="40px" fontWeight="600" fontSize={"32px"} lineHeight="40px"><MdOutlineEqualizer />TOP 10</Flex>
 
+          <Text fontSize="16px" lineHeight="24px" fontWeight="400" mt="20px" textAlign="justify">
+            Our Top 10 Page showcases the most coveted and influential AI tools, carefully curated by our advanced algorithm. Utilizing a comprehensive calculation based on factors such as views, likes, reviews, and more, we present you with a definitive list of the industry's top-performing AI tools.
+          </Text>
 
-
-
-        </TabList>
-
-
-
-        <TabPanels >
-
-          <TabPanel>
-            <Overall />
-          </TabPanel>
-          <TabPanel>
+          <Tabs mt="20px">
+            <TabList overflow="auto" className={style.tscroll} >
+              {
+                nlist?.map((el) => (
+                  <Tab  textTransform="uppercase" fontSize="14px" fontWeight="600" lineHeight={"20px"}>{el}</Tab>
+                ))
+              }
+            </TabList>
 
 
 
+            <TabPanels >
 
-          </TabPanel>
+                 <TabPanel><Overall /></TabPanel>
+                 <TabPanel> </TabPanel>
+                 <TabPanel> </TabPanel>
+                 <TabPanel> </TabPanel>
+                 <TabPanel> </TabPanel>
 
-          <TabPanel>
-            <MyCollection />
-          </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
 
-        </TabPanels>
-      </Tabs>
-    </Box>
+
+
+
+
+      </Stack>
+      <Box>
+        <LandingRight />
+      </Box>
+
+    </Flex>
+
   )
 }

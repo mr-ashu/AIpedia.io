@@ -20,7 +20,7 @@ import axios from 'axios';
 import { Form1 } from '../../Components/Submit/Form1';
 import { Form2 } from '../../Components/Submit/Form2';
 import { Form3 } from '../../Components/Submit/Form3';
-import { Form4 } from '../../Components/Submit/Form4';
+ 
 import notification from '../../Components/Toast';
 
 
@@ -28,7 +28,7 @@ import notification from '../../Components/Toast';
 
 
 
-let underCategories = [
+let underCategory = [
     { value: "3D modeling", label: "3D modeling" },
     { value: "Content creating", label: "Content creating" },
     { value: "Writing tool", label: "Writing tool" },
@@ -129,34 +129,34 @@ let underCategories = [
     //     {value: "Productivity",
 ];
 export default function Multistep() {
-    const toast = useToast();
+ 
     const [step, setStep] = useState(1);
 
 
 
-    const [integration, setIntegration] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [other, setothers] = useState([])
-    const [thumbnail, setthumbnail] = useState("")
-    const [cover_image, setcoverimg] = useState("")
-    const [gallery, setgallery] = useState([])
+    const [works_with, setworks_with] = useState([]);
+    const [Category, setCategory] = useState([]);
+    const [others_features, setothers_features] = useState([])
+    const [Logo, setLogo] = useState("")
+    const [Cover_image, setCover_image] = useState("")
+    const [Galary_image, setGalary_image] = useState([])
     const [tool_own, setTool] = useState(true)
+    const [verify,setverify]=useState(true)
+    const [social_media ,setSocial_media]=useState([])
+    const [Tags,setTag]=useState([])
+    const [key_features,setkey_features]=useState([])
 
+ 
 
     const [data, setData] = useState({
-        tool_url: "",
-        dashboard_link: "",
-        tool_name: "",
-        tagline: "",
-        description: "",
-        key_feature: "",
-        social_media: "",
-        prices: "",
+        URL: "",
+        Title: "",
+        Tagline: "",
+        Description: "",
+        Pricing: "",
         price_amount: "",
-        promo_code: "",
-        offer: "",
-        expire_date: "",
-        youtube_url: "",
+        Youtube_embed: "",
+        isCSVFile: false
 
 
 
@@ -180,30 +180,49 @@ export default function Multistep() {
     };
 
 
-
+   
 
     const handleSubmitTool = async () => {
+        let payload = {
+            ...data,
+            works_with,
+            Category,
+            others_features,
+            Logo,
+            Cover_image,
+            Galary_image,
+            tool_own,
+            verify,
+            social_media,
+            Tags,
+            key_features
+    
+    
+        };
+    
+    
+        console.log(payload);
+       
+       
         try {
-            let payload = {
-                ...data,
-                integration,
-                categories,
-                other,
-                thumbnail,
-                cover_image,
-                gallery,
-                tool_own
-
-            };
+           
             const token = userData.data;
             console.log(payload);
-            const { data: res } = await axios.post(
-                `${process.env.REACT_APP_API}/submit/add`,
-                payload,
-                { headers: { token } }
-            );
+               axios.post(
+                `${process.env.REACT_APP_API}/data/add`,
+                payload,{
+                    headers: {
+                      "Content-Type": "application/json",
+                    }
+                }
+                
+            )
+            .then((res)=>{
+                console.log(res);
+                notification("success", res);
+            })
 
-            notification("success", res.msg);
+             
         } catch (error) {
 
         }
@@ -245,26 +264,33 @@ export default function Multistep() {
 
                         {step === 1 ? <Form1
                             handlechange={handlechange}
-                            integration={integration}
-                            other={other}
-                            categories={categories}
+                            works_with={works_with}
+                            others_features={others_features}
+                            Category={Category}
                             {...data}
-                            setCategories={setCategories}
-                            setIntegration={setIntegration}
-                            setOthers={setothers}
-                            underCategories={underCategories}
+                            key_features={key_features}
+                           setkey_features={setkey_features}
+                            setCategory={setCategory}
+                            social_media={social_media}
+                            setSocial_media={setSocial_media}
+                            setworks_with={setworks_with}
+                            setothers_features={setothers_features}
+                            underCategory={underCategory}
 
                         /> : step === 2 ? <Form2
                             handlechange={handlechange}
                             {...data}
 
+                            Tags={Tags}
+                            setTag={setTag}
+
                         /> :<Form3
-                            setcoverimg={setcoverimg}
-                            setgallery={setgallery}
-                            setthumbnail={setthumbnail}
-                            thumbnail={thumbnail}
-                            gallery={gallery}
-                            cover_image={cover_image}
+                            setCover_image={setCover_image}
+                            setGalary_image={setGalary_image}
+                            setLogo={setLogo}
+                            Logo={Logo}
+                            Galary_image={Galary_image}
+                            Cover_image={Cover_image}
                             handlechange={handlechange}
                             {...data}
                         />}

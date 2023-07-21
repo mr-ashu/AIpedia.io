@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
- 
-import { LIstcomp } from '../Components/Collection/Listcomp'
 import { Box } from '@mui/material'
 import { Avatar, Button, Flex, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import { AiOutlineHeart } from 'react-icons/ai'
-import { Rightbar } from '../Components/Top10/Rghtbar'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ListModal } from '../Components/ListModal'
-import { useSelector } from 'react-redux'
 import { LandingRight } from '../Components/LandingRight'
  
 

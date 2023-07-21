@@ -20,4 +20,9 @@
     .gbtn{
         padding:10px 50px 10px 50px
     }
+
+    .profilePic{
+        flex-direction: column;
+        gap:20px;
+    }
 }

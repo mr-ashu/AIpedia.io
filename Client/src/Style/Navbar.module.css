@@ -2,12 +2,15 @@
   
     position:sticky;
     width: 100%;
+    
     left:0;
     top:0;
- 
-    z-index: 100;
+     z-index: 100;
   
 
+}
+.searchhide{
+  display: none;
 }
 .iconbtn {
   display: none;
@@ -23,6 +26,12 @@
   display: block;
 }
  
+.searchbar{
+  width: 330px;
+  left:10%;
+  margin-top: 5px;
+
+}
 .searchbar::-webkit-scrollbar{
    display: none;
 }
@@ -40,6 +49,12 @@
   .linputbox {
     display: none;
   }
+
+  .searchbar{
+  
+    margin: auto;
+    
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -52,5 +67,17 @@
   }
   .linputbox {
     display: none;
+  }
+
+  .searchhide{
+    display: block;
+   
+  }
+
+  .searchbar{
+    width:80%;
+ 
+    margin: auto;
+    
   }
 }

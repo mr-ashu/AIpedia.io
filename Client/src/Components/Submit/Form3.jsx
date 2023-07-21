@@ -17,7 +17,7 @@ import {
 import axios from 'axios';
  
 
-export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,setcoverimg,handlechange,youtube_url}) => {
+export const Form3 = ({Logo, Cover_image, Galary_image, setLogo,setGalary_image,setCover_image,handlechange,Youtube_embed}) => {
     
  
     
@@ -38,7 +38,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
           dataImg
         );
     
-        setthumbnail(data.url);
+        setLogo(data.url);
       
       };
 
@@ -60,13 +60,13 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
           dataImg
         );
     
-        setcoverimg(data.url);
+        setCover_image(data.url);
        
       
       };
 
 
-      const addgallery = async (event) => {
+      const addGalary_image = async (event) => {
       
         let image = event.target.files[0];
       
@@ -82,7 +82,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
           dataImg
         );
     
-        setgallery([...gallery,data.url]);
+        setGalary_image([...Galary_image,data.url]);
       
  
       
@@ -95,10 +95,10 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
         <>
 
             <Box>
-                <Text fontSize="18px" lineHeight="24.5px" fontWeight="400">Thumbnail</Text>
+                <Text fontSize="18px" lineHeight="24.5px" fontWeight="400">Logo</Text>
                 <Flex mt="15px" gap="30px">
                     <Box w="103px" h="103px" borderRadius="3px" border="1px dotted" >
-                        <Image boxSize={"103px"} src={thumbnail} w="100%"/>
+                        <Image boxSize={"103px"} src={Logo} w="100%"/>
                     </Box>
                     <Box textAlign="center">
                         <Box>
@@ -131,12 +131,12 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
                     </Box>
                 </Flex>
 
-                <Text mt="15px" fontSize="12px" lineHeight="20px" fontWeight="400">Recommended size:100x100| JPG, PNG, GIF. Max size: 1.50MB</Text>
+                <Text mt="15px" fontSize="12px" lineHeight="20px" fontWeight="400">Recommended size:80x80| JPG, PNG, GIF. Max size: 1.50MB</Text>
                 <Divider mt="30px" mb="30px" border="1px solid" />
                 <Text mb="15px" fontSize="18px" lineHeight="24.5px" fontWeight="400">Cover image</Text>
                 <Text mt="15px" fontSize="12px" lineHeight="20px" fontWeight="400">This image will be used as preview of your tool</Text>
 
-                <Stack  backgroundImage={cover_image} backgroundSize="100%" alignItems="center" justifyContent="center" textAlign="center" border="1px dotted" width="70%" height="200px" >
+                <Stack  backgroundImage={Cover_image} backgroundSize="100%" alignItems="center" justifyContent="center" textAlign="center" border="1px dotted" width="70%" height="200px" >
                     <Box  >
                         
 
@@ -166,12 +166,12 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
 
                 <Divider mt="30px" mb="30px" border="1px solid" />
 
-                <Text fontSize="18px" lineHeight="24.5px" fontWeight="400">Gallery</Text>
+                <Text fontSize="18px" lineHeight="24.5px" fontWeight="400">Galary_image</Text>
 
                 <Text fontSize="14px" lineHeight="32px" fontWeight="400">Upload up to 3 images showcasing your tool's features and benefits.</Text>
 
                 <Flex gap="10px">
-                    <Stack  backgroundImage={gallery[0]} backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
+                    <Stack backgroundImage={Galary_image[0]}  backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
 
 
                         <FormLabel
@@ -188,7 +188,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
                             type="file"
                             id="gfile"
                             display={"none"}
-                            onChange={addgallery}
+                            onChange={addGalary_image}
                         />
 
 
@@ -197,13 +197,14 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
 
 
                     </Stack>
-                    <Stack  backgroundImage={gallery[1]} backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
+                    <Stack backgroundImage={Galary_image[1]}  backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
 
 
                         <FormLabel
 
                             textAlign={"center"}
                             htmlFor="gfile"
+                            onChange={addGalary_image}
                         >
 
                             <Text py="5px" px="10px" borderRadius="3px" > +Upload</Text>
@@ -214,6 +215,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
                             type="file"
                             id="gfile"
                             display={"none"}
+                            onChange={addGalary_image}
                          
                         />
 
@@ -223,7 +225,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
 
 
                     </Stack>
-                    <Stack  backgroundImage={gallery[2]} backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
+                    <Stack  backgroundImage={Galary_image[2]}  backgroundSize="100%" mt="10px" alignItems="center" justifyContent="center" textAlign="center" width="154px" height="110px" border="1px dotted">
 
 
                         <FormLabel
@@ -262,7 +264,7 @@ export const Form3 = ({thumbnail, cover_image, gallery, setthumbnail,setgallery,
                     <FormLabel fontSize="14px" lineHeight="24px" fontWeight="400">
                         Link to the video
                     </FormLabel>
-                    <Input name="youtube_url" value={youtube_url} onChange={handlechange}/>
+                    <Input name="Youtube_embed" value={Youtube_embed} onChange={handlechange}/>
 
                 </FormControl>
             </Box>

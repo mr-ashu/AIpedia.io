@@ -5,7 +5,7 @@ import App from './App';
 import { Provider} from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider as Emotion10ThemeProvider } from '@emotion/react';
-import { ChakraProvider, extendTheme, useColorModeValue } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import store from './Redux/store';

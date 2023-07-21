@@ -29,7 +29,7 @@ export const ImageBackground = ({ imageUrl }) => {
                 colorCounts[color] = (colorCounts[color] || 0) + 1;
                 if (colorCounts[color] > maxCount) {
                     maxCount = colorCounts[color];
-                    dominantColor = `rgb(${color},.5)`;
+                    dominantColor = `rgb(${color},.2)`;
                 }
             }
 

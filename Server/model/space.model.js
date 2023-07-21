@@ -6,6 +6,7 @@ const spaceSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "signup"
     },
+    tool:[{type:String}],
     space_name : {
         type : String,
         required : true,

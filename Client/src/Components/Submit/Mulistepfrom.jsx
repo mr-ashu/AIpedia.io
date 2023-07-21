@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import {
-  
+
     Box,
     ButtonGroup,
     Button,
-  
-    Flex, 
- 
+
+    Flex,
+
     Text,
- 
+
     Stack,
 } from '@chakra-ui/react';
 import style from "../../Style/Submit.module.css"
@@ -151,42 +151,41 @@ let underCategories = [
     //     {value: "Productivity",
 ];
 export default function Multistep() {
-    const toast = useToast();
     const [step, setStep] = useState(1);
 
-   
 
-    const [integration, setIntegration] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [other, setothers] = useState([])
-    const [ thumbnail,setthumbnail ] = useState("")
-    const [ cover_image,setcoverimg ] = useState("")
-    const [gallery, setgallery] = useState([])
-    const [ tool_own,  setTool] = useState(false)
 
-   
+    const [works_with, setworks_with] = useState([]);
+    const [Category, setCategory] = useState([]);
+    const [others_features, setothers_features] = useState([])
+    const [Logo, setLogo] = useState("")
+    const [Cover_image, setCover_image] = useState("")
+    const [Galary_image, setGalary_image] = useState([])
+    const [tool_own, setTool] = useState(false)
+ 
+    const [social_media, setSocial_media] = useState([])
+    const [Tags, setTag] = useState([])
+    const [key_features, setkey_features] = useState([])
+
+
+
     const [data, setData] = useState({
-        tool_url: "",
-        dashboard_link: "",
-        tool_name: "",
-        tagline: "",
-        description: "",
-        key_feature: "",
-        social_media: "",
-        prices: "",
+        URL: "",
+        Title: "",
+        Tagline: "",
+        Description: "",
+        Pricing: "",
         price_amount: "",
-        promo_code: "",
-        offer: "",
-        expire_date: "",
-        youtube_url: "",
-      
+        Youtube_embed: "",
+        isCSVFile: false
+
 
 
     });
 
 
-   
- 
+
+
 
 
 
@@ -194,43 +193,57 @@ export default function Multistep() {
 
 
     const handlechange = (e) => {
-        
+
         setData({
             ...data,
             [e.target.name]: e.target.value,
         });
     };
+    let payload = {
+        ...data,
+        works_with,
+        Category,
+        others_features,
+        Logo,
+        Cover_image,
+        Galary_image,
+        tool_own,
+
+        social_media,
+        Tags,
+        key_features
 
 
+    };
+
+
+ 
+console.log(payload);
 
 
     const handleSubmitTool = async () => {
+     
+
+
         try {
-            let payload = {
-                ...data,
-                integration,
-                categories,
-                other,
-                thumbnail,
-                cover_image,
-                gallery,
-                tool_own
 
-            };
             const token = userData.data;
-            console.log(payload);
-            const { data: res } = await axios.post(
-                `${process.env.REACT_APP_API}/submit/add`,
-                payload,
-                { headers: { token } }
-            );
+       
+            axios.post(
+                `${process.env.REACT_APP_API}/data/add`,
+                payload
 
-            notification("success", res.msg);
+            )
+                .then((res) => {
+                    console.log(res);
+                    notification("success", res.data.msg);
+                })
+
+
         } catch (error) {
 
         }
     };
-
 
     return (
 
@@ -255,9 +268,9 @@ export default function Multistep() {
                         cursor="pointer"
                         p="5px"
                         borderRadius="3px"
-                        color={step == 4 ? "white" : ""}
+                        color={step === 4 ? "white" : ""}
 
-                        bg={step == 4 ? "#3B89B6" : ""} >Finish</Text>
+                        bg={step === 4 ? "#3B89B6" : ""} >Finish</Text>
                 </Box>
             </Stack>
             <Stack className={style.right} fontSize="20px" fontWeight="400"  >
@@ -265,34 +278,42 @@ export default function Multistep() {
 
                 >
 
-                    {step === 1 ? <Form1 
-                    handlechange={handlechange} 
-                    integration={integration} 
-                    other={other} 
-                    categories={categories}   
-                    {...data} 
-                    setCategories={setCategories} 
-                    setIntegration={setIntegration} 
-                    setOthers={setothers} 
-                    underCategories={underCategories} 
+                    {step === 1 ? <Form1
 
-                    /> : step === 2 ? <Form2 
-                     handlechange={handlechange}
-                    {...data}
+                        handlechange={handlechange}
+                        works_with={works_with}
+                        others_features={others_features}
+                        Category={Category}
+                        {...data}
+                        key_features={key_features}
+                        setkey_features={setkey_features}
+                        setCategory={setCategory}
+                        social_media={social_media}
+                        setSocial_media={setSocial_media}
+                        setworks_with={setworks_with}
+                        setothers_features={setothers_features}
+                        underCategory={underCategories}
 
-                    /> : step === 3 ? <Form3 
-                         setcoverimg={setcoverimg}
-                         setgallery={setgallery}
-                         setthumbnail={setthumbnail}
-                         thumbnail={thumbnail}
-                          gallery={gallery}
-                         cover_image={cover_image}
-                         handlechange={handlechange}
-                         {...data}
-                    /> : <Form4 
+                    /> : step === 2 ? <Form2
+                        handlechange={handlechange}
+                        {...data}
 
-                    tool_own={tool_own}
-                    setTool={setTool}
+                        Tags={Tags}
+                        setTag={setTag}
+
+                    /> : step === 3 ? <Form3
+                        setCover_image={setCover_image}
+                        setGalary_image={setGalary_image}
+                        setLogo={setLogo}
+                        Logo={Logo}
+                        Galary_image={Galary_image}
+                        Cover_image={Cover_image}
+                        handlechange={handlechange}
+                        {...data}
+                    /> : <Form4
+
+                        tool_own={tool_own}
+                        setTool={setTool}
                     />}
                     <ButtonGroup mt="5%" w="100%">
                         <Flex w="100%" justifyContent="space-between">

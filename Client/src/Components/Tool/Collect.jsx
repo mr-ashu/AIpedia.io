@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import style from "../../Style/Grid.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import notification from "../Toast";
-import { Avatar, Box, Button, Divider, Flex, FormControl, Input, Menu, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, Divider, Flex, Input,  Modal, ModalBody,ModalContent, ModalOverlay,   Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { setMyspaceName } from "../../Redux/action";
 import { CheckIcon } from "@chakra-ui/icons";
 import { HiOutlineBookmark } from "react-icons/hi";

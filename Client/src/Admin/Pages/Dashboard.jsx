@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import {
   IconButton,
- 
+
   Box,
   CloseButton,
   Flex,
   HStack,
   VStack,
   Icon,
- 
+
   Drawer,
   DrawerContent,
   Text,
@@ -22,26 +22,26 @@ import {
   Stack,
   Image,
   Avatar,
- 
+
 } from "@chakra-ui/react";
 import { FiMenu, FiChevronDown } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import logo from "../../Utils/LOGO.svg"
- 
+
 import { CiUser } from "react-icons/ci";
 import { VscDashboard, VscFeedback, VscFileSubmodule, VscHome } from "react-icons/vsc";
- 
- 
+
+
 import { BiCategory } from "react-icons/bi";
 import {
   MdHighlightAlt,
   MdOutlineManageAccounts,
   MdOutlineManageHistory,
 } from "react-icons/md";
- 
+
 import { FaToolbox } from "react-icons/fa";
- 
+
 import { AdminRoutes } from "./Routes";
 import { BsCardImage, BsFillCollectionFill, BsReverseLayoutTextSidebarReverse } from "react-icons/bs";
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -59,8 +59,8 @@ const NAV_ITEMS = [
     label: <Link to="/imageslide">Image Slide</Link>,
     icon: <BsCardImage size={25} />,
   },
- 
- 
+
+
   {
     label: "Tools",
     icon: <FaToolbox size={25} />,
@@ -81,22 +81,22 @@ const NAV_ITEMS = [
     ],
   },
 
- 
+
   {
     label: <Link to="/submission">Submission and Creators portal
     </Link>,
- 
+
     icon: <VscFileSubmodule size={25} />,
   },
   {
     label: <Link to="/sidebar">Side bar</Link>,
     icon: <BsReverseLayoutTextSidebarReverse size={25} />,
-  
+
   },
   {
     label: <Link to="/collection">Collection</Link>,
     icon: <BsFillCollectionFill size={25} />,
- 
+
   },
   {
     label: <Link to="/user_manage">User Management</Link>,
@@ -110,8 +110,8 @@ const NAV_ITEMS = [
     label: <Link to="/report">Analytics and Report</Link>,
     icon: <HiOutlineDocumentReport size={25} />,
   },
- 
-  
+
+
 ];
 
 
@@ -140,9 +140,9 @@ export default function Dashboard() {
         onOverlayClick={onClose}
         size="xs"
 
-        
+
       >
-        <DrawerContent overflow="auto"         bg="#0C0C0D">
+        <DrawerContent overflow="auto" bg="#0C0C0D">
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
@@ -150,16 +150,16 @@ export default function Dashboard() {
       {/* mobile nav */}
       <MobileNav onOpen={onOpen} page={page} setPage={setPage} />
 
-      <Box ml={{ base:0, md: "350px" }} p="4" pb="4"  mt="60px"  >
-        <Box width="100%"  bg="white" color="black">
-          <AdminRoutes/>
+      <Box ml={{ base: 0, md: "350px" }} p="4" pb="4" mt="60px"  >
+        <Box width="100%" bg="white" color="black">
+          <AdminRoutes />
         </Box>
       </Box>
     </Box>
   );
 }
 
-const SidebarContent = ({ onClose,page,setPage, ...rest }) => {
+const SidebarContent = ({ onClose, page, setPage, ...rest }) => {
   return (
     <Box
       overflow="auto"
@@ -174,17 +174,17 @@ const SidebarContent = ({ onClose,page,setPage, ...rest }) => {
       }}
       {...rest}
     >
-     
-        <Flex justifyContent="flex-end"   alignItems="center">
-        
+
+      <Flex justifyContent="flex-end" alignItems="center">
+
         <CloseButton color="white" display={{ base: "flex", md: "none" }} onClick={onClose} />
-     
-        </Flex>
+
+      </Flex>
 
       <Box>
         {NAV_ITEMS.map((navItem, i) => (
           <Box
-          key={i}
+            key={i}
             w="100%"
             m="auto"
             mb="10px"
@@ -192,7 +192,7 @@ const SidebarContent = ({ onClose,page,setPage, ...rest }) => {
             borderRadius="5px"
             alignItems="center"
           >
-            <MobileNavItem  page={page} setPage={setPage} {...navItem} i={i} />
+            <MobileNavItem page={page} setPage={setPage} {...navItem} i={i} />
           </Box>
         ))}
       </Box>
@@ -200,10 +200,10 @@ const SidebarContent = ({ onClose,page,setPage, ...rest }) => {
   );
 };
 
-const MobileNavItem = ({ label, icon, page,setPage,children, href, i }) => {
+const MobileNavItem = ({ label, icon, page, setPage, children, href, i }) => {
   const { isOpen, onToggle } = useDisclosure();
   const [bgActive, setBgActive] = useState(false);
- 
+
   return (
     <>
       <Stack
@@ -215,7 +215,7 @@ const MobileNavItem = ({ label, icon, page,setPage,children, href, i }) => {
       >
         <Box
           width="100%"
-        
+
           h={isOpen ? "" : "60px"}
           justifyContent="space-between"
           alignItems="center"
@@ -223,27 +223,27 @@ const MobileNavItem = ({ label, icon, page,setPage,children, href, i }) => {
           onFocus={() => {
             setBgActive(!bgActive);
           }}
-          onBlur={()=>{
+          onBlur={() => {
             setBgActive(false);
           }}
           bg={bgActive ? "#E50813" : "#1C1C1E"}
           borderLeft={bgActive ? "5px solid white" : ""}
           cursor="pointer"
- 
+
         >
           <Flex
-        
+
             w="90%"
             h="60px"
             margin="auto"
             alignItems="center"
             justifyContent="space-between"
           >
-            <Flex    alignItems="center" gap="13px">
+            <Flex alignItems="center" gap="13px">
               <Box m="auto" color="white"  >
                 {icon}
               </Box>
-              <Text   fontWeight={600}>{label}</Text>
+              <Text fontWeight={600}>{label}</Text>
             </Flex>
             {children && (
               <Icon
@@ -274,7 +274,7 @@ const MobileNavItem = ({ label, icon, page,setPage,children, href, i }) => {
                   gap="10px"
                   color={bgActive ? "#E50813" : ""}
                 >
-                 
+
                   <span>{child.icon}</span>
                   <Text>{child.label}</Text>
                 </Flex>
@@ -287,13 +287,13 @@ const MobileNavItem = ({ label, icon, page,setPage,children, href, i }) => {
   );
 };
 
-const MobileNav = ({ onOpen,page, ...rest }) => {
+const MobileNav = ({ onOpen, page, ...rest }) => {
+   const navigate=useNavigate()
+  const userData = useSelector((store) => store.userReducer.isAuth)
 
-  const userData =useSelector((store)=>store.userReducer.isAuth)
-  
   return (
     <Flex
-   
+
       px={{ base: 4, md: 4 }}
       height="60px"
       bg="#1C1C1E"
@@ -303,47 +303,54 @@ const MobileNav = ({ onOpen,page, ...rest }) => {
       top="0"
       left="0"
       alignItems="center"
-    
+
       justifyContent="space-between"
       {...rest}
     >
 
-        <IconButton
-          display={{ base: "flex", md: "none" }}
-          onClick={onOpen}
-          variant="outline"
-          color="white"
-          _hover={{color:"white",bg:"none"}}
-          aria-label="open menu"
-          icon={<FiMenu />}
-        />
-    
-    <Link to="/">
-    <Image   src={logo}  alt="My-screen=logo" />
-    </Link>
-   
-   
-     
+      <IconButton
+        display={{ base: "flex", md: "none" }}
+        onClick={onOpen}
+        variant="outline"
+        color="white"
+        _hover={{ color: "white", bg: "none" }}
+        aria-label="open menu"
+        icon={<FiMenu />}
+      />
+
+      <Link to="/">
+        <Image src={logo} alt="My-screen=logo" />
+      </Link>
+
+
+
 
       <HStack spacing={{ base: "0", md: "6" }}>
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
               py={2}
-          
+
               _focus={{ boxShadow: "none" }}
             >
-           
-                 <Avatar size={"md"} src={userData.image}  />
- 
-         
+
+              <Avatar size={"md"} src={userData.image} />
+
+
             </MenuButton>
             <MenuList>
               <MenuItem></MenuItem>
               <MenuItem>Profile</MenuItem>
               <MenuItem>Settings</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={() => {
+
+                localStorage.removeItem("UserData");
+               
+                window.location.reload();
+                  return navigate("/")
+
+              }}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

@@ -2,25 +2,29 @@ import {
  
     Box,
     Flex,
-    FormControl,
-    FormLabel,
     Input,
     Text,
     Divider,
+    FormControl,
+    FormLabel,
+    Textarea,
    
 } from '@chakra-ui/react';
 import {   AiFillDollarCircle, AiFillUnlock } from 'react-icons/ai';
  
 import { BsClockHistory, BsFillGiftFill } from 'react-icons/bs';
 
-export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expire_date}) => {
+export const Form2 = ({handlechange,Pricing, price_amount,Tags,setTag }) => {
+    
+    
+    
     return (
 
 
         <Box >
             <Text fontWeight="400" lineHeight="24px" fontSize="20px">Price</Text>
             <Flex gap="20px" mt="20px" >
-                <Box w="fit-content"><input   value={"Free"} name="prices"  onChange={handlechange} type='checkBox' /></Box>
+                <Box w="fit-content"><input   value={"Free"} name="Pricing"  onChange={handlechange} type='checkBox' /></Box>
                 <Box>
                     <Flex alignItems="center" py={1} fontSize="13px" lineHeight="16px" fontWeight="400" w="fit-content" px={2} borderRadius="3px" bg="rgba(0, 41, 78, 0.2)" gap="5px">
                         <BsFillGiftFill />
@@ -32,7 +36,7 @@ export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expir
 
             </Flex>
             <Flex gap="20px" mt="15px"  >
-                <Box w="fit-content"><input type='checkBox' value={"Freetrial"} name="prices"  onChange={handlechange} /></Box>
+                <Box w="fit-content"><input type='checkBox' value={ "Freetrial" } name="Pricing"  onChange={handlechange} /></Box>
                 <Box>
                     <Flex alignItems="center" py={1} fontSize="13px" lineHeight="16px" fontWeight="400" w="fit-content" px={2} borderRadius="3px" bg="rgba(0, 41, 78, 0.2)" gap="5px">
                         <BsClockHistory />
@@ -43,7 +47,7 @@ export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expir
 
             </Flex>
             <Flex gap="20px" mt="15px" >
-                <Box><input type='checkBox' value={"Freemium"} name="prices"  onChange={handlechange} /></Box>
+                <Box><input type='checkBox' value={ "Freemium" }   name="Pricing"  onChange={handlechange} /></Box>
                 <Box>
                     <Flex alignItems="center" py={1} fontSize="13px" lineHeight="16px" fontWeight="400" w="fit-content" px={2} borderRadius="3px" bg="rgba(0, 41, 78, 0.2)" gap="5px">
                         <AiFillUnlock />
@@ -54,7 +58,7 @@ export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expir
 
             </Flex>
             <Flex gap="20px" mt="15px" >
-                <Box w="fit-content"><input   value={"Paid"} name="prices"  onChange={handlechange} type='checkBox' /></Box>
+                <Box w="fit-content"><input   value={ "Paid" }  name="Pricing"  onChange={handlechange} type='checkBox' /></Box>
                 <Box>
                     <Flex alignItems="center" py={1} fontSize="13px" lineHeight="16px" fontWeight="400" w="fit-content" px={2} borderRadius="3px" bg="rgba(0, 41, 78, 0.2)" gap="5px">
                         <AiFillDollarCircle />
@@ -75,8 +79,26 @@ export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expir
             </Flex>
 
             <Divider mt="30px" mb="30px" border="1px solid" />
+            <FormControl mt="30px" >
+                <Flex alignItems="center" justifyContent="space-between">
+                    <FormLabel  >
+                         Tags
+                    </FormLabel>
+                    <Text fontSize="14px" fontWeight="400">250 characters max</Text>
+                </Flex>
+                <Textarea
 
-            <Text fontSize="20px" fontWeight="400" lineHeight="24px">Deals</Text>
+                    type="textArea"
+                    rows={5}
+                 
+                    value={Tags.join('\n')}
+                    name="Tags"
+                    onChange={(e) => setTag(e.target.value.split('\n'))}
+
+                    borderRadius="4px" placeholder="Tags for your tool" />
+
+            </FormControl>
+            {/* <Text fontSize="20px" fontWeight="400" lineHeight="24px">Deals</Text>
 
             <Flex gap="20px" mt="20px" fontSize="14px" fontWeight="400" lineHeight="24px" alignItems="center">
                 <FormControl mt="15px" >
@@ -105,7 +127,7 @@ export const Form2 = ({prices,handlechange,  price_amount,promo_code,offer,expir
                 </FormLabel>
                 <Input name='expire_date' value={expire_date} onChange={handlechange} borderRadius="3px" placeholder="Expiration Date" />
 
-            </FormControl>
+            </FormControl> */}
 
 
 

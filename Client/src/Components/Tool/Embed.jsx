@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, Image } from '@chakra-ui/react'
+import { Box, Button, Divider, Flex, Image, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 
 import style from "../../Style/Tool.module.css"
@@ -17,7 +17,7 @@ export const Embed = () => {
             </Box>
 
 
-            <Divider mt="40px" border="1px solid #CCCCCC" />
+            <Divider mt="40px" border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} />
 
         </>
     )

@@ -90,34 +90,8 @@ const submitSchema = mongoose.Schema({
 });
 
 
-const validate = (data) => {
-    const schema = Joi.object({
-        tool_url: Joi.string(),
-        dashboard_link: Joi.string(),
-        tool_name: Joi.string(),
-        tagline: Joi.string(),
-        description: Joi.string(),
-        key_feature: Joi.string() ,
-        social_media: Joi.string() ,
-        categories: Joi.array() ,
-        integration: Joi.array() ,
-        other: Joi.array(),
-        
-        prices: Joi.string(),
-        price_amount: Joi.number(),
-        promo_code:Joi.string(),
-        offer:Joi.string() ,
-        expire_date:Joi.string(),
-        thumbnail: Joi.string(),
-        cover_image: Joi.string(),
-        gallery: Joi.array(),
-        youtube_url: Joi.string(),
-
-        tool_own: Joi.boolean(),
-    });
-    return schema.validate(data);
-};
+ ;
 const submitModel = mongoose.model("submit", submitSchema);
-module.exports = {submitModel,validate}
+module.exports = {submitModel}
     
  

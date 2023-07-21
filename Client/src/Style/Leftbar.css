@@ -1,12 +1,9 @@
 .sidebar {
   position:fixed;
   left: 0;
- 
- 
   bottom: 0;
   box-sizing: border-box;
- 
-  overflow-y: auto;
+ overflow-y: auto;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -18,20 +15,19 @@
   
 }
 .sidebar::-webkit-scrollbar {
-  display: none;
+  width: 2px;
+ 
+}
+ 
+.sidebar::-webkit-scrollbar-thumb {
+  background-color:#B1B1B1;
+  
 }
 
 .innerbox {
- 
-  height: 36px;
-   
- 
- 
+  
   margin: auto;
-  margin-top: 10px;
-  border-radius: 5px;
- line-height: 1;
- 
+  
   
 }
 

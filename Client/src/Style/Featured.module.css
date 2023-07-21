@@ -28,11 +28,14 @@
   display: grid;
 
   grid-template-columns: repeat(2, auto);
-  gap: 0;
+  grid-template-rows: repeat(2, auto);
+  gap: 0px;
   border-radius: 5px;
-  width: 63px;
-  padding: 5px 0px ;
-  margin: auto;
+  width:fit-content;
+  padding: 10px ;
+  min-height: 40px;
+  min-width: 40px;
+  height:fit-content;
   align-items: center;
   background: rgba(59, 137, 182, 0.1);;
   justify-content: center;

@@ -50,7 +50,7 @@ const getDataController = asyncHandler(async (req, res) => {
     if ( others_features) {
       query = { ...query, ...{   others_features: { $in:   others_features } } };
     }
-
+    console.log(query)
     let data = dataModel.find(query);
     let t=await dataModel.find(query).count()
 

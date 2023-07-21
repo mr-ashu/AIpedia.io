@@ -1,10 +1,10 @@
 import * as React from 'react';
 import chatgpt from "../Utils/ChatGPT.svg";
-import { Box, Button, Flex, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react"
+import { Box, Button, Flex, Stack, Text, useColorModeValue, } from "@chakra-ui/react"
 import style from "../Style/List.module.css";
-import { BsBoxArrowUpRight, BsFillShareFill } from 'react-icons/bs';
+import { BsBoxArrowUpRight, BsClockHistory, BsFillShareFill } from 'react-icons/bs';
 import visit from "../Utils/Visit.svg"
- 
+
 import Modal from '@mui/material/Modal';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Telement } from './Tool/Telement';
@@ -23,9 +23,19 @@ import mobile from "../Utils/Mobile app.svg"
 import slack from "../Utils/Slack.svg"
 import browser from "../Utils/Browser Extension.svg"
 import Wordpress from "../Utils/Wordpress.svg"
+import { useState } from 'react';
+import { AiFillDollarCircle, AiFillGift } from 'react-icons/ai';
 
 
-const ImageBackground = ({ imageUrl }) => {
+export const ImageBackground = ({ imageUrl }) => {
+    const [oWidth, setOriginalWidth] = useState(null);
+    const [oHeight, setOriginalHeight] = useState(null);
+
+    const handleImageLoad = (event) => {
+        const imgElement = event.target;
+        setOriginalWidth(imgElement.naturalWidth);
+        setOriginalHeight(imgElement.naturalHeight);
+    }
 
     const [dominantColor, setDominantColor] = React.useState('');
 
@@ -52,7 +62,7 @@ const ImageBackground = ({ imageUrl }) => {
                 colorCounts[color] = (colorCounts[color] || 0) + 1;
                 if (colorCounts[color] > maxCount) {
                     maxCount = colorCounts[color];
-                    dominantColor = `rgb(${color},.5)`;
+                    dominantColor = `rgb(${color},.2)`;
                 }
             }
 
@@ -63,17 +73,64 @@ const ImageBackground = ({ imageUrl }) => {
     }, [imageUrl]);
 
 
-
     return (
-        <Box display="flex" backgroundColor={dominantColor} h="80px" w="80px" borderRadius="5px" justifyContent="center" alignItems="center"   >
-            <img style={{ margin: "auto", display: "block", borderRadius: "5px" }} width="35px" height="35px" src={imageUrl} alt="Logo" />
 
-        </Box>
+        <>
+            {
+                oHeight < 80 && oWidth < 80 ? (
+                    <Box
+                        display="flex"
+                        backgroundColor={dominantColor}
+                        h="80px"
+                        w="80px"
+                        borderRadius="5px"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <img
+                            style={{ margin: "auto", display: "block", borderRadius: "5px" }}
+                            width="45px"
+                            height="45px"
+                            src={imageUrl}
+                            alt="Logo"
+                        />
+                    </Box>
+                ) : (
+                    <Box
+                        display="flex"
+                        h="80px"
+                        w="80px"
+                        borderRadius="5px"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <img
+                            onLoad={handleImageLoad}
+                            style={{ margin: "auto", display: "block", borderRadius: "5px" }}
+                            width="100%"
+                            src={imageUrl}
+                            alt="Logo"
+                        />
+                    </Box>
+
+                )}
+        </>
+
+
+
+
 
     );
 };
 
+
+
+
+
 export const ListModal = ({ el, i }) => {
+
+
+
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
@@ -91,123 +148,66 @@ export const ListModal = ({ el, i }) => {
     return (
         <>
 
-            <Box position="relative" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} borderRadius="3px" textAlign="left" mb="30px" py="10px" w="100%" >
+            <Box position="relative" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} borderRadius="10px" textAlign="left" mb="20px" py="10px" w="100%" >
 
 
 
-      
-                    <Flex ml="20px" w="100%" gap="10px" alignItems="center" height="100%" >
 
+                <Flex ml="20px" w="100%" gap="10px" alignItems="center" height="100%" >
 
-
+                    <Box>
                         <ImageBackground cursor={"pointer"} onClick={handleOpen} imageUrl={el.Logo} />
 
-                        <Stack w="100%" m="10px">
-                            <Flex justifyContent="space-between" alignItems="center">
-                                <Flex alignItems="center">
-                                    <Text fontWeight="bold" cursor={"pointer"} onClick={handleOpen}>{el.Title}</Text>
-                                    {
-                                        i === 0 || i === 1 || i === 2 && el.featured ?
-                                            <Text m="9px" textAlign="center" justifyContent="center" w="fit-content" px="5px" py="1px" bg="linear-gradient(134deg, #4283B0 8.39%, #F31F92 70.00%)" borderRadius="3px" fontSize="12px" color="#EEE" lineHight="23px" fontWeight="400">Featured</Text>
-
-                                            : ""
-
-                                    }
-                                </Flex>
+                    </Box>
 
 
-                                <Box className={style.shide}>
-                                    <Flex mr="30px" h="fit-content" w="fit-content" justifyContent="space-between" gap="70px" alignItems="center">
+                    <Stack w="100%" m="10px">
+                        <Flex justifyContent="space-between" alignItems="center">
+                            <Flex alignItems="center">
+                                <Text fontWeight="bold" cursor={"pointer"} onClick={handleOpen}>{el.Title}</Text>
+                                {
+                                    i === 0 || i === 1 || i === 2 ?
+                                        <Text m="9px" textAlign="center" justifyContent="center" w="fit-content" px="5px" py="1px" bg="linear-gradient(134deg, #4283B0 8.39%, #F31F92 70.00%)" borderRadius="3px" fontSize="12px" color="#EEE" lineHight="23px" fontWeight="400">Featured</Text>
 
-                                        <Box mr="5px" >
-                                            <ShareModel url={url} />
+                                        : ""
 
-                                        </Box>
-                                        <Link to={el.URL} target={'_blank'}>
-                                            <Button _hover={{ bg: "" }} color="white" className={style.savebtn} borderRadius="5px" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" bg="#3B89B6">
-                                                <img src={visit} alt="visit" /><Text> Visit</Text>
-                                            </Button>
-                                        </Link>
-
-                                    </Flex>
-                                </Box>
-
+                                }
                             </Flex>
 
+
                             <Box className={style.shide}>
-                                <Flex gap="10px" alignItems="center">
-                                    <Flex gap="7px">
-                                        {[...Array(5)].map((item, index) => {
-                                            const givenRating = index + 1;
-                                            return (
-                                                <Box>
-                                                    <FaStar
-                                                        value={givenRating}
-                                                        color={
-                                                            givenRating <= el.rating
-                                                                ? "#3B89B6"
-                                                                : "rgb(192,192,192)"
-                                                        }
-                                                    />
-                                                </Box>
+                                <Flex mr="30px" h="fit-content" w="fit-content" justifyContent="space-between" gap="70px" alignItems="center">
 
-                                            );
-                                        })}
-                                    </Flex>
+                                    <Box mr="5px" >
+                                        <ShareModel url={url} />
 
-                                    <Text lineHeight={"15px"} fontSize="13px">({el.rating})</Text>
+                                    </Box>
+                                    <Link to={el.URL} target={'_blank'}>
+                                        <Button _hover={{ bg: "" }} color="white" className={style.savebtn} borderRadius="5px" fontSize="14px" fontWeight="400" gap="5px" h="29.68px" bg="#3B89B6">
+                                            <img src={visit} alt="visit" /><Text> Visit</Text>
+                                        </Button>
+                                    </Link>
 
-                                    <Flex gap="7px" borderLeft="1px" borderRight="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} pl="8px" pr="8px" alignItems="center">
-                                        <MdOutlineVerified />
-                                        <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.Pricing}</Text>
-                                    </Flex>
-
-                                    <Flex gap="7px" w="fit-content">
-
-
-                                        {
-                                            el.works_with.map((e, i) => (
-                                                <>
-                                                    {
-
-                                                        e.includes("Spreadsheet") ? <img alt="icon" borderRadius="4px" boxSize="15px" src={excel} /> :
-                                                            e.includes("Chatgpt") ? <img alt="icon" boxSize="15px" src={chatgpt} /> :
-                                                                e.includes("VS Code") ? <img alt="icon" boxSize="15px" src={vscode} /> :
-                                                                    e.includes("Github") ? <img alt="icon" boxSize="15px" src={github} /> :
-                                                                        e.includes("Mobile app") ? <img alt="icon" boxSize="15px" src={mobile} /> :
-                                                                            e.includes("Wordpress") ? <img alt="icon" boxSize="15px" src={Wordpress} /> :
-                                                                                e.includes("Figma") ? <img alt="icon" boxSize="15px" src={figma} /> :
-                                                                                    e.includes("Browser Extension") ? <img alt="icon" boxSize="15px" src={browser} /> :
-                                                                                        e.includes("Slack") ? <img alt="icon" boxSize="15px" src={slack} /> :
-                                                                                        e.includes("Shopify") ? <img alt="icon" boxSize="15px" src={sopify} /> :
-                                                                                            ""
-                                                    }
-
-                                                </>
-                                            ))
-                                        }
-                                    </Flex>
                                 </Flex>
                             </Box>
 
-                            <Text className={style.dec} fontSize="15px" lineHeight="24px" textAlign="left" fontWeight="400"    >
-                                {el.Tagline}
-                            </Text>
+                        </Flex>
 
-
-
-                            <Box className={style.lhide}>
-                                <Flex gap="7px">
+                        <Box className={style.shide}>
+                            <Flex gap="10px" alignItems="center">
+                                <Flex gap="5px">
                                     {[...Array(5)].map((item, index) => {
                                         const givenRating = index + 1;
                                         return (
                                             <Box>
                                                 <FaStar
+
+                                                    size={13}
                                                     value={givenRating}
                                                     color={
                                                         givenRating <= el.rating
-                                                            ? "#3B89B6"
-                                                            : "rgb(192,192,192)"
+                                                            ? "#ECBA67"
+                                                            : "#E6E6E6"
                                                     }
                                                 />
                                             </Box>
@@ -215,54 +215,123 @@ export const ListModal = ({ el, i }) => {
                                         );
                                     })}
                                 </Flex>
-                            </Box>
-                            <Flex justifyContent="space-between" alignItems="center" w="100%" mt="15px">
-                                <Flex alignItems="center" gap="5px" fontSize="12px" fontWeight="400" lineHeight="20px">
 
+                                <Text lineHeight={"15px"} fontSize="13px">({el.rating})</Text>
 
-                                    <Text textAlign="center" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px"   >{el.Category[0]}</Text>
-                                    <Text display={el.Category.length > 1 ? "block" : "none"} fontSize="12px" fontWeight="400" lineHeight="20px" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px">
-                                        + {el.Category.length - 1}
-                                    </Text>
+                                <Box pr="8px" fontSize="13px" fontWeight="400" lineHeight="16px" w="fit-content" height="fit-content" borderLeft="1px" borderRight="1px" borderColor={useColorModeValue("#E6E6E6", "#444")}>
+                                    {
 
+                                        el.Pricing === "Free" ? <Flex gap="7px" pl="8px" alignItems="center"><AiFillGift size={13} /><Text>{el.Pricing}</Text></Flex> :
+                                            el.Pricing === "Free trial" ? <Flex gap="7px" pl="8px" alignItems="center"><BsClockHistory size={13} /><Text>{el.Pricing}</Text></Flex> :
+                                                el.Pricing === "Freemium" ? <Flex gap="7px" pl="8px" alignItems="center"><MdOutlineVerified size={13} /><Text>{el.Pricing}</Text></Flex> :
+                                                    el.Pricing === "Paid" ? <Flex gap="7px" pl="8px" alignItems="center"><AiFillDollarCircle size={13} /><Text>{el.Pricing}</Text></Flex> : ""
 
-                                </Flex>
+                                    }
 
-                                <Box className={style.shide}>
-                                    <Flex mr="30px" justifyContent="space-between" alignItems="center" w="fit-content" gap="70px"  >
-                                        <Save el={el} />
-                                        <Flex alignItems="center" gap="7px"> <Likes el={el} /> {el.likes}</Flex>
-                                    </Flex>
                                 </Box>
 
 
+                                <Flex gap="7px" w="fit-content">
+
+
+                                    {
+                                        el.works_with.map((e, i) => (
+                                            <>
+                                                {
+
+                                                    e.includes("Spreadsheet") ? <img alt="icon" borderRadius="4px" boxSize="15px" src={excel} /> :
+                                                        e.includes("Chatgpt") ? <img alt="icon" boxSize="15px" src={chatgpt} /> :
+                                                            e.includes("VS Code") ? <img alt="icon" boxSize="15px" src={vscode} /> :
+                                                                e.includes("Github") ? <img alt="icon" boxSize="15px" src={github} /> :
+                                                                    e.includes("Mobile app") ? <img alt="icon" boxSize="15px" src={mobile} /> :
+                                                                        e.includes("Wordpress") ? <img alt="icon" boxSize="15px" src={Wordpress} /> :
+                                                                            e.includes("Figma") ? <img alt="icon" boxSize="15px" src={figma} /> :
+                                                                                e.includes("Browser Extension") ? <img alt="icon" boxSize="15px" src={browser} /> :
+                                                                                    e.includes("Slack") ? <img alt="icon" boxSize="15px" src={slack} /> :
+                                                                                        e.includes("Shopify") ? <img alt="icon" boxSize="15px" src={sopify} /> :
+                                                                                            ""
+                                                }
+
+                                            </>
+                                        ))
+                                    }
+                                </Flex>
                             </Flex>
-
-                        </Stack>
-
-
-
-                        <Box className={style.lhide} borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} justifyContent="center" alignItems="center">
-
-                            <Flex height="160px" flexDirection="column" justifyContent="space-evenly" ml="30px" mr="30px">
-                                <BsBoxArrowUpRight />
-                                <BsFillShareFill />
-                            </Flex>
-
                         </Box>
 
-
-
-                    </Flex>
-                </Box>
-
-
+                        <Text className={style.dec} fontSize="15px" lineHeight="24px" textAlign="left" fontWeight="400"    >
+                            {el.Tagline}
+                        </Text>
 
 
 
+                        <Box className={style.lhide}>
+                            <Flex gap="7px">
+                                {[...Array(5)].map((item, index) => {
+                                    const givenRating = index + 1;
+                                    return (
+                                        <Box>
+                                            <FaStar
+                                                value={givenRating}
+                                                color={
+                                                    givenRating <= el.rating
+                                                        ? "#3B89B6"
+                                                        : "rgb(192,192,192)"
+                                                }
+                                            />
+                                        </Box>
+
+                                    );
+                                })}
+                            </Flex>
+                        </Box>
+                        <Flex justifyContent="space-between" alignItems="center" w="100%" mt="15px">
+                            <Flex alignItems="center" gap="5px" fontSize="12px" fontWeight="400" lineHeight="20px">
 
 
-        
+                                <Text textAlign="center" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px"   >{el.Category[0]}</Text>
+                                <Text display={el.Category.length > 1 ? "block" : "none"} fontSize="12px" fontWeight="400" lineHeight="20px" border="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} px="10px" borderRadius="12px">
+                                    + {el.Category.length - 1}
+                                </Text>
+
+
+                            </Flex>
+
+                            <Box className={style.shide}>
+                                <Flex mr="30px" justifyContent="space-between" alignItems="center" w="fit-content" gap="70px"  >
+                                    <Save el={el} />
+                                    <Flex alignItems="center" gap="7px"> <Likes el={el} /> {el.likes}</Flex>
+                                </Flex>
+                            </Box>
+
+
+                        </Flex>
+
+                    </Stack>
+
+
+
+                    <Box className={style.lhide} borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} justifyContent="center" alignItems="center">
+
+                        <Flex height="160px" flexDirection="column" justifyContent="space-evenly" ml="30px" mr="30px">
+                            <BsBoxArrowUpRight />
+                            <BsFillShareFill />
+                        </Flex>
+
+                    </Box>
+
+
+
+                </Flex>
+            </Box>
+
+
+
+
+
+
+
+
 
             <Modal
 

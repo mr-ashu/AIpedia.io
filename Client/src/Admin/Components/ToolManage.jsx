@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, CircularProgress, Flex, FormLabel, Image, Input, Menu, MenuButton, MenuItem, MenuList, Switch, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, CircularProgress, Flex, FormLabel, Image, Input, Menu, MenuButton, MenuItem, MenuList, Switch, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineCaretRight, AiOutlineDelete, AiOutlineEdit, AiOutlineMinus, AiOutlinePause, AiOutlinePlus, } from 'react-icons/ai'
@@ -8,16 +8,21 @@ import { MdOutlineFileUpload } from 'react-icons/md'
 import { FcUpload } from 'react-icons/fc'
 
 import { FaGripLinesVertical, FaWpforms } from 'react-icons/fa'
+import notification from '../../Components/Toast'
+import { useSelector } from 'react-redux'
 
 export const ToolManages = () => {
 
   let [click, setclick] = useState(false);
+  const userReducer = useSelector((store) => store)
 
+  const [values, setValues] = useState([]);
   let [data, setData] = useState([])
   let [page, setPage] = useState(1);
   let [total, setTotal] = useState("")
   let [show, setShow] = useState(false);
-
+  let verify = true
+  console.log(userReducer);
   const [showLoader, setShowLoader] = useState(true);
 
   const getData = async (page) => {
@@ -43,6 +48,35 @@ export const ToolManages = () => {
     } catch (err) {
 
       console.log(err);
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setValues(file);
+    }
+  };
+
+  const addData = async () => {
+
+
+    const formData = new FormData();
+    formData.append("csvFile", values);
+
+     
+   
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/data/add`,
+         formData
+      );
+
+      getData()
+      notification("success", data.msg);
+    } catch (err) {
+
+      notification("error", "Something went wrong");
     }
   };
 
@@ -323,7 +357,7 @@ export const ToolManages = () => {
           <Tbody color="black" fontWeight="500" >
 
             {
-              data?.map((el, i) => (
+              data?.filter((e) => e.verify).map((el, i) => (
                 <Tr key={i}>
                   <Td>{i + 1}</Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="Title" value={el.Title} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content" /></Td>
@@ -426,27 +460,33 @@ export const ToolManages = () => {
 
           {
             show ? <Flex gap="15px" alignItems="center" justifyContent="space-between">
-              <Flex gap="8px" alignItems="center">
-                <FcUpload size={22} />
+              <Flex gap="20px" alignItems="center">
+                <FcUpload size={22} onClick={addData} />
 
                 <FormLabel cursor="pointer" h="fit-content" m="auto" ml="0px" htmlFor="file">
                   CSV file
                 </FormLabel>
               </Flex>
-              <FaGripLinesVertical />
-              <FaWpforms />
+ 
+            
 
 
 
 
-              <AiOutlineCaretRight onClick={() => setShow(false)} />
+              <AiOutlineCaretRight  onClick={() => setShow(false)} />
             </Flex> :
               <AiOutlinePlus onClick={() => setShow(true)} />
           }
 
 
         </Button>
-        <Input id="file" type="file" display="none" />
+        <Input
+          onChange={handleFileChange}
+          id="file"
+          type="file"
+          accept=".csv"
+          name="csvFile"
+          display="none" />
 
         <Button _hover={{ bg: "red" }} onClick={updateData} mt="15px" borderRadius="100%" bg="red" w="fit-content" ><MdOutlineFileUpload /></Button>
       </Flex>

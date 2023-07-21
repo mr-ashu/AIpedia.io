@@ -1,18 +1,21 @@
 .subnav {
   position:fixed;
   left: 0;
- 
+  margin-top: 0px;
 
   width: 100%;
  
   align-items: content;
-  padding: 8px;
+  padding: 5px;
   font-family: "Segoe ui";
   z-index: 80;
-   ;
+ 
 
 }
-
+.smallbox {
+  display: none;
+  
+}
 .xscrollbox{
   max-width: 600px;
 }
@@ -28,7 +31,7 @@
 }
 
 .margin {
-  margin-right: 300px;
+  margin-right: 350px;
 }
 
 
@@ -69,5 +72,14 @@
 @media screen and (max-width: 450px) {
   .subnav {
     display: none;
+  }
+
+  .smallbox {
+    display: block;
+    margin-left: 20px;
+    margin-top: 5px;
+ 
+
+
   }
 }

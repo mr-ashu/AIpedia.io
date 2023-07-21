@@ -1,14 +1,9 @@
-import { Box, Button, Checkbox, CircularProgress, Flex, FormLabel, Image, Input, Menu, MenuButton, MenuItem, MenuList, Switch, Table, TableCaption, TableContainer, Tbody, Td, Text, Textarea, Th, Thead, Tr } from '@chakra-ui/react'
+import { Box, Button, CircularProgress, Flex,   Image, Input,   Switch, Table, TableCaption, TableContainer, Tbody, Td,  Textarea, Th, Thead, Tr } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineCaretRight, AiOutlineDelete, AiOutlineEdit, AiOutlineMinus, AiOutlinePause, AiOutlinePlus, } from 'react-icons/ai'
+import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineEdit, AiOutlinePlus } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
-import { UpDownIcon } from '@chakra-ui/icons'
 import { MdOutlineFileUpload } from 'react-icons/md'
-import { FcUpload } from 'react-icons/fc'
-import notification from '../../Components/Toast'
-import { CsvModal } from './csvModal'
-import { FaGripLinesVertical, FaWpforms } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 export const Submissioncomp = () => {
@@ -165,7 +160,7 @@ export const Submissioncomp = () => {
           <Tbody >
 
             {
-              data?.map((el, i) => (
+              data?.filter((e)=>e.verify===false).map((el, i) => (
                 <Tr key={i}>
                   <Td>{i + 1}</Td>
                   <Td><Input onChange={(event) => handleChange(event, el._id)} name="Title" value={el.Title} border="none" textAlign="left" borderRadius="3px" pl="0" w="fit-content"   /></Td>

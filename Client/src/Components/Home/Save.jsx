@@ -3,7 +3,7 @@ import style from "../../Style/Grid.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import notification from "../Toast";
-import { Avatar, Box, Button, Divider, Flex, FormControl, Input, Menu, MenuItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Button, Divider, Flex, Input, Modal, ModalBody, ModalContent, ModalOverlay, Text, Textarea, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { setMyspaceName } from "../../Redux/action";
 import { CheckIcon } from "@chakra-ui/icons";
 import { HiOutlineBookmark } from "react-icons/hi";
@@ -13,10 +13,13 @@ const Save = ({ id, el }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [inputName, setInputName] = useState(false);
     const [newLibrary, setNewLibrary] = useState("");
+    const [tagline, setTagline] = useState("")
     const [allLibrary, setAllLibrary] = useState([]);
     const userData = useSelector((state) => state.userReducer.loginData);
     const [reload, setreload] = useState(true);
     const dispatch = useDispatch();
+
+
 
 
 
@@ -27,7 +30,12 @@ const Save = ({ id, el }) => {
             let token = userData.data;
             const payload = {
                 space_name: newLibrary,
+                tool: [el.Logo],
+                description: tagline,
             };
+
+
+            console.log(payload);
 
             const url = `${process.env.REACT_APP_API}/space/create`;
             const { data: res } = await axios.post(url, payload, {
@@ -37,6 +45,7 @@ const Save = ({ id, el }) => {
 
             setNewLibrary("");
             notification("success", res.msg);
+            setInputName(false)
         } catch (err) {
             notification("error", err.response.data.errors);
         }
@@ -60,27 +69,44 @@ const Save = ({ id, el }) => {
             getData();
         }
 
+
+        console.log(allLibrary);
+
     }, [reload]);
 
     const handleLibrarySubmit = async (lid) => {
-
         try {
+            let token = userData.data;
+
+
             const payload = {
                 videoID: id,
                 spaceID: lid,
             };
-
-            let token = userData.data;
             const res = await axios.post(
                 `${process.env.REACT_APP_API}/myspace/add`,
                 payload,
                 { headers: { token } }
             );
             notification("success", res.data.msg);
+
+
+            const spacePayload = {
+                tool: [el.Logo],
+            };
+            const url = `${process.env.REACT_APP_API}/space/update/${lid}`;
+            const { data: spaceRes } = await axios.patch(url, spacePayload, {
+                headers: { token },
+            });
+
+            setreload(!reload);
+            setNewLibrary("");
+            notification("success", spaceRes.msg);
         } catch (err) {
             notification("error", err.response.data.errors);
         }
     };
+
 
 
 
@@ -107,7 +133,7 @@ const Save = ({ id, el }) => {
 
                                     <Box cursor="pointer" onClick={() => handleLibrarySubmit(ele._id)} mt="15px" key={i} value={ele._id}>
                                         <Text fontSize="16px" lineHeight="24px"> {ele.space_name}</Text>
-                                        <Text fontSize="14px" lineHeight="24px">Personal best of video editing</Text>
+                                        <Text fontSize="14px" lineHeight="24px">{ele.description}</Text>
                                     </Box>
 
                                 ))}
@@ -128,6 +154,16 @@ const Save = ({ id, el }) => {
                                         name="playlist"
                                         value={newLibrary}
                                         onChange={(e) => setNewLibrary(e.target.value)}
+                                    />
+
+                                    <Textarea
+                                        row={3}
+                                        mt="15px"
+                                        type="text"
+                                        placeholder="Enter Description "
+                                        name="description"
+                                        value={tagline}
+                                        onChange={(e) => setTagline(e.target.value)}
                                     />
 
                                     <Button color="white" mt="10px" onClick={handleCreate} borderRadius="4px" bg="#3B89B6" _hover={{ bg: "" }}>  <CheckIcon /></Button>

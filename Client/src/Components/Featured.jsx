@@ -1,34 +1,11 @@
-import { Avatar, Box, Button, Divider, Flex, Image, Input, Text, useColorModeValue } from '@chakra-ui/react'
+import {  Box, Button, Divider, Flex, Image, Input, Text, useColorModeValue } from '@chakra-ui/react'
 
 import React, { useEffect, useState } from 'react'
 import style from "../Style/Featured.module.css";
- 
-import fimg from "../Utils/micon.svg";
- 
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-
 import { RiShareBoxFill } from 'react-icons/ri';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
  
-let fdata = [
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    },
-    {
-        icon: fimg,
-        title: "The Collect Button",
-        desc: "Transform anything on your website intCXXCX"
-    }
- 
-]
 
 
 
@@ -36,90 +13,37 @@ let fdata = [
 
 export const Featured = () => {
     
-    const [deleteLoading, setDeleteLoading] = useState(false);
+    
     let [data, setData] = useState([]);
-
-    let [page, setPage] = useState(1);
-    let [higligeted, sethigligeted] = useState([]);
-
-    const [pageName, setPageName] = useState("");
-    const [FilterLoader, setFilterLoader] = useState(false);
-    const [sort, setSort] = useState("");
-    const [sortLoader, setSortLoader] = useState();
-
-    const [showLoader, setShowLoader] = useState(false);
-
- 
-
-
-
+   
+   
     const getData = async (page) => {
-        setShowLoader(true);
+       
 
 
         try {
             let res = await axios.post(
-                `${process.env.REACT_APP_API}/data/get?sort=${sort}&page=${page}`,
+                `${process.env.REACT_APP_API}/data/get`,
 
             );
 
-            setData((prev) => [...prev, ...res.data.data]);
-            setShowLoader(false);
+            setData(res.data.data);
+       
         } catch (err) {
-            setShowLoader(false);
+         
             console.log(err);
         }
     };
 
-
-
  
 
-
-
-
     useEffect(() => {
-       
-        if (pageName === "filter") {
-            setData([]);
-            setPageName("");
-        }
-        if (pageName === "sort") {
-            setData([]);
-            setPageName("");
-        }
+           getData();
+      
 
-        if (deleteLoading) {
-            setDeleteLoading(false);
-            window.location.reload();
-        }
-
-        if (pageName === "") {
-
-            getData(page);
-        }
-
- 
-       
-
-    }, [page, pageName, deleteLoading, FilterLoader, sortLoader]);
-
-    const infinitScroll = async () => {
-        try {
-            if (
-                window.innerHeight + document.documentElement.scrollTop + 1 >=
-                document.documentElement.scrollHeight
-            ) {
-                setPage((prev) => prev + 1);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("scroll", infinitScroll);
-        return () => window.removeEventListener("scroll", infinitScroll);
     }, []);
+
+ 
     
 
   
@@ -129,7 +53,7 @@ export const Featured = () => {
             <Box>
                     <Text textTransform="uppercase"     fontWeight="600" lineHeight="20px" fontSize="12px">Highlighted tools</Text>
                     {
-                        data?.filter((e)=>e.highlighted===true).map((el, i) => (
+                        data?.filter((e)=>e.highlighted).map((el, i) => (
                             <Box key={i} mt="30px" >
 
                                 <Flex alignItems="center" gap="10px"  >
@@ -137,7 +61,7 @@ export const Featured = () => {
 
                                     <Box>
 
-                                        <Flex w="90%" alignItems="center" gap={"20px"} justifyContent="space-between">
+                                        <Flex w="100%" alignItems="center" gap={"20px"} justifyContent="space-between">
                                        <Link to={`/tool/${el._id}`}> <Text fontSize="13px" fontWeight="600" color="#22222" lineHeight="24px">{el.Title}</Text> </Link>
                                         <Link to={el.URL}><RiShareBoxFill size={14}/></Link>
                                          </Flex>
@@ -164,8 +88,7 @@ export const Featured = () => {
                    
                     <Input mt="15px" fontSize="13px" placeholder='Your email' border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} />
                     <Button mt="15px" w="100%" bg="#3B89B6" color="#F8F8F8" fontSize="14px" fontWeight="600"  >Subscribe to the newsletter</Button>
-
-                    <Text mt="15px" fontSize="12px" fontWeight="400" >Read the latest issue <ArrowForwardIcon m="auto" /> </Text>
+ 
 
                 </Box>
                 <Divider border="1px" borderColor={useColorModeValue("#E6E6E6","#444")} mt="30px" />

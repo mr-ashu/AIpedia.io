@@ -3,7 +3,7 @@ const {getCarouselController} = require("../controller/carousel/getCarousel.cont
 const {addCarouselController} = require("../controller/carousel/addCarousel.controller");
 const {deleteCarouselController} = require("../controller/carousel/deleteCarousel.controller")
 
-carouselRouter.route("/add").patch(addCarouselController);
+carouselRouter.route("/add").post(addCarouselController);
 carouselRouter.route("/get").get(getCarouselController);
 carouselRouter.route("/delete/:id").delete(deleteCarouselController);
 

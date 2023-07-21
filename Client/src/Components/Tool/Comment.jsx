@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Divider, Flex, FormLabel, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, Select, Text, Textarea, css, useColorModeValue, useDisclosure } from '@chakra-ui/react'
+import { Avatar, Box, Button,  Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Radio, Select, Text, Textarea, css, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { AiFillLike } from "react-icons/ai"
@@ -11,7 +11,7 @@ import style from "../../Style/Tool.module.css"
 
 
 
-export const Comment = ({ el, id }) => {
+export const Comment = ({ el, id,setreview }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [rate, setRate] = useState(0);
     const [inputvalue, setinput] = useState("")
@@ -20,6 +20,7 @@ export const Comment = ({ el, id }) => {
     const [loader, setLoader] = useState(true);
     let [flag, setFlag] = useState(true);
 
+    setreview(reviewData.length)
 
     const getReview = async () => {
         try {
@@ -63,7 +64,7 @@ export const Comment = ({ el, id }) => {
 
     };
 
-    console.log(reviewData);
+    
 
     const handleLike = async (id) => {
         let token = userData.data;
@@ -85,6 +86,8 @@ export const Comment = ({ el, id }) => {
 
     useEffect(() => {
         getReview();
+
+        
     }, []);
 
 

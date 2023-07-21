@@ -1,7 +1,6 @@
 import React from 'react'
 import { BiShareAlt } from 'react-icons/bi';
-
-import Style from "../Style/Share.module.css";
+ 
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -14,7 +13,7 @@ import {
   TwitterIcon,
   TelegramIcon,
 } from "react-share";
-import { Box, Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import {   Center, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 
 
 

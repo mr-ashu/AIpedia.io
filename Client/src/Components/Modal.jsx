@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Box, Button, Flex, Image, Text, useColorModeValue } from "@chakra-ui/react"
 import style from "../Style/Grid.module.css";
-
+import nocover from "../Utils/NO COVER .png"
 import visit from "../Utils/Visit.svg"
 
 import Modal from '@mui/material/Modal';
@@ -27,6 +27,8 @@ import slack from "../Utils/Slack.svg"
 import browser from "../Utils/Browser Extension.svg"
 import Wordpress from "../Utils/Wordpress.svg"
 import sopify from "../Utils/sopify.svg"
+import { AiFillDollarCircle, AiFillGift } from 'react-icons/ai';
+import { BsClockHistory } from 'react-icons/bs';
 
 
 export const Modalcomp = ({ el, i }) => {
@@ -40,7 +42,7 @@ export const Modalcomp = ({ el, i }) => {
 
 
     let url = window.location.href + `tool/${el._id}`;
-    console.log(el);
+
     return (
         <>
 
@@ -51,12 +53,17 @@ export const Modalcomp = ({ el, i }) => {
 
                 <Box position="relative"     >
                     <Box >
-                        <Image w="100%" h="146px" style={{ cursor: "pointer" }} onClick={handleOpen} src={el.Cover_image} alt="img" />
+
+                        {
+                            el.Cover_image ? <Image w="100%" h="146px" style={{ cursor: "pointer" }} onClick={handleOpen} src={el.Cover_image} alt="img" /> :
+                                <Image w="100%" h="146px" style={{ cursor: "pointer" }} onClick={handleOpen} src={nocover} alt="img" />
+                        }
+
 
                     </Box>
 
                     {
-                        i === 0 || i === 1 || i === 2 && el.featured ? <Box position="absolute" top="0px" left="0"  >
+                        i === 0 || i === 1 || i === 2 ? <Box position="absolute" top="0px" left="0"  >
                             <Text m="9px" textAlign="center" justifyContent="center" w="fit-content" px="5px" py="1px" bg="linear-gradient(134deg, #4283B0 8.39%, #F31F92 70.00%)" borderRadius="3px" fontSize="12px" color="#EEE" lineHight="23px" fontWeight="400">Featured</Text>
 
                         </Box> : ""
@@ -80,8 +87,9 @@ export const Modalcomp = ({ el, i }) => {
                                                             e.includes("Wordpress") ? <Image boxSize="18px" src={Wordpress} /> :
                                                                 e.includes("Figma") ? <Image boxSize="18px" src={figma} /> :
                                                                     e.includes("Browser Extension") ? <Image boxSize="18px" src={browser} /> :
-                                                                        e.includes("Shopify") ? <Image  boxSize="18px" src={sopify} /> :
-                                                                            ""
+                                                                        e.includes("Shopify") ? <Image boxSize="18px" src={sopify} /> :
+                                                                            e.includes("Slack") ? <Image boxSize="18px" src={slack} /> :
+                                                                                ""
                                     }
 
                                 </>
@@ -141,10 +149,20 @@ export const Modalcomp = ({ el, i }) => {
                         </Flex>
 
                         <Text lineHeight={"15px"} fontSize="13px">({el.rating})</Text>
-                        <Flex gap="7px" borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")} pl="8px" alignItems="center">
-                            <MdOutlineVerified />
-                            <Text fontSize="13px" fontWeight="400" lineHeight="16px"  >{el.Pricing}</Text>
-                        </Flex>
+                 
+
+                        <Box fontSize="13px" fontWeight="400" lineHeight="16px"  w="fit-content" height="fit-content" borderLeft="1px" borderColor={useColorModeValue("#E6E6E6", "#444")}>
+                            {
+
+                                el.Pricing === "Free" ? <Flex gap="7px" pl="8px" alignItems="center"><AiFillGift /><Text>{el.Pricing}</Text></Flex> :
+                                    el.Pricing === "Free trial" ? <Flex gap="7px"  pl="8px" alignItems="center"><BsClockHistory /><Text>{el.Pricing}</Text></Flex> :
+                                        el.Pricing === "Freemium" ? <Flex gap="7px"  pl="8px" alignItems="center"><MdOutlineVerified /><Text>{el.Pricing}</Text></Flex> :
+                                            el.Pricing === "Paid" ? <Flex gap="7px"  pl="8px" alignItems="center"><AiFillDollarCircle /><Text>{el.Pricing}</Text></Flex> : ""
+
+                            }
+
+                        </Box>
+
                     </Flex>
 
                     <Text className={style.dec} mt="16px" fontSize="15px" lineHeight="24px" fontWeight="400"  >

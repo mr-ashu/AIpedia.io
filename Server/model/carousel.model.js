@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
 const carouselSchema = mongoose.Schema({
- first : {
+ img : {
+    type : String,
+   
+ },
+ url : {
     type : String,
  },
- second : {
-    type : String,
- },
- third : {
-    type : String
- }
+ 
 },{
     timestamps : true,
     versionKey : false

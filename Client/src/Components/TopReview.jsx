@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, useColorModeValue, } from '@chakra-ui/react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
 
 import React, { useEffect, useState } from 'react'
 import style from "../Style/Featured.module.css";
@@ -11,40 +11,25 @@ import { Link } from 'react-router-dom';
 
 
 export const TopReview = () => {
-
-
-    const [deleteLoading, setDeleteLoading] = useState(false);
+ 
     let [data, setData] = useState([]);
 
     let [page, setPage] = useState(1);
-
-
-    const [pageName, setPageName] = useState("");
-    const [FilterLoader, setFilterLoader] = useState(false);
-    const [sort, setSort] = useState("mostlike");
-    const [sortLoader, setSortLoader] = useState();
-
-    const [showLoader, setShowLoader] = useState(false);
-
-
-
-
-
-
+ 
     const getData = async (page) => {
-        setShowLoader(true);
+    
 
 
         try {
             let res = await axios.post(
-                `${process.env.REACT_APP_API}/data/get?sort=${sort}&page=${page}`,
+                `${process.env.REACT_APP_API}/data/get?sort=mostlike&page=${page}`,
 
             );
 
             setData((prev) => [...prev, ...res.data.data]);
-            setShowLoader(false);
+         
         } catch (err) {
-            setShowLoader(false);
+          
             console.log(err);
         }
     };
@@ -57,28 +42,9 @@ export const TopReview = () => {
 
 
     useEffect(() => {
-        if (pageName === "filter") {
-            setData([]);
-            setPageName("");
-        }
-        if (pageName === "sort") {
-            setData([]);
-            setPageName("");
-        }
-
-        if (deleteLoading) {
-            setDeleteLoading(false);
-            window.location.reload();
-        }
-
-        if (pageName === "") {
-
-            getData(page);
-        }
-
-
-
-    }, [page, pageName, deleteLoading, FilterLoader, sortLoader]);
+       getData(page);
+  
+    }, [page]);
 
     const infinitScroll = async () => {
         try {
@@ -115,7 +81,7 @@ export const TopReview = () => {
 
                                     <Box>
 
-                                        <Flex alignItems="center" w="90%" justifyContent="space-between" mt="0px">
+                                        <Flex alignItems="center" w="100%" justifyContent="space-between" mt="0px">
                                             <Link to={`/tool/${el._id}`}><Text fontSize="13px" fontWeight="600" color="#22222" lineHeight="24px" >{el.Title}</Text> </Link>
 
                                             <Link to={el.URL}> <RiShareBoxFill size={14} /></Link>
